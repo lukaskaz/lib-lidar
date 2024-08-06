@@ -1,7 +1,6 @@
 #pragma once
 
 #include "interfaces/scan.hpp"
-#include "serial.hpp"
 
 #include <memory>
 

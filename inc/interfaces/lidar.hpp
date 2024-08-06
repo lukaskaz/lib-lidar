@@ -44,7 +44,7 @@ class LidarInfoIf
     virtual ~LidarInfoIf()
     {}
 
-    virtual seriesid getseries(std::shared_ptr<serial>) = 0;
+    virtual seriesid getseries() = 0;
     virtual std::string getname() = 0;
     virtual std::tuple<std::string, std::string, std::string, std::string>
         getfwinfo() = 0;

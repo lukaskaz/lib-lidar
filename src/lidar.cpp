@@ -25,38 +25,9 @@ bool Lidar::setup(const std::string& device)
     return false;
 }
 
-seriesid Lidar::getseries(std::shared_ptr<serial> serialIf)
+seriesid Lidar::getseries()
 {
-    seriesid series{seriesid::unknown};
-    serialIf->write({SCANSTARTFLAG, SCANGETINFOCMD});
-    std::vector<uint8_t> resp;
-    if (serialIf->read(resp, 27))
-    {
-        uint8_t modelid = resp[7];
-        uint8_t majormodelid = (modelid >> 4) & 0x0F;
-
-        if (majormodelid >= (uint8_t)seriesid::mmodel)
-        {
-            series = seriesid::mmodel;
-        }
-        else if (majormodelid >= (uint8_t)seriesid::tmodel)
-        {
-            series = seriesid::tmodel;
-        }
-        else if (majormodelid >= (uint8_t)seriesid::smodel)
-        {
-            series = seriesid::smodel;
-        }
-        else if (majormodelid >= (uint8_t)seriesid::cmodel)
-        {
-            series = seriesid::cmodel;
-        }
-        else
-        {
-            series = seriesid::amodel;
-        }
-    }
-    return series;
+    getseries(serialIf);
 }
 
 std::string Lidar::getname()
@@ -241,6 +212,40 @@ std::pair<std::string, std::string> Lidar::getscaninfo(scan_t type) const
 Lidar::Lidar(seriesid series, speed_t baud, scansinitfunc&& initscans) :
     series{series}, baud{baud}, initscans{std::move(initscans)}
 {}
+
+seriesid Lidar::getseries(std::shared_ptr<serial> serialIf)
+{
+    seriesid series{seriesid::unknown};
+    serialIf->write({SCANSTARTFLAG, SCANGETINFOCMD});
+    std::vector<uint8_t> resp;
+    if (serialIf->read(resp, 27))
+    {
+        uint8_t modelid = resp[7];
+        uint8_t majormodelid = (modelid >> 4) & 0x0F;
+
+        if (majormodelid >= (uint8_t)seriesid::mmodel)
+        {
+            series = seriesid::mmodel;
+        }
+        else if (majormodelid >= (uint8_t)seriesid::tmodel)
+        {
+            series = seriesid::tmodel;
+        }
+        else if (majormodelid >= (uint8_t)seriesid::smodel)
+        {
+            series = seriesid::smodel;
+        }
+        else if (majormodelid >= (uint8_t)seriesid::cmodel)
+        {
+            series = seriesid::cmodel;
+        }
+        else
+        {
+            series = seriesid::amodel;
+        }
+    }
+    return series;
+}
 
 void Lidar::getpacket(std::vector<uint8_t>&& req, std::vector<uint8_t>& resp,
                       uint8_t size, bool chsum = false)

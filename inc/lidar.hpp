@@ -7,7 +7,7 @@ class Lidar : public LidarIf
   public:
     bool setup(const std::string&) override;
 
-    seriesid getseries(std::shared_ptr<serial>) override;
+    seriesid getseries() override;
     std::string getname() override;
     std::tuple<std::string, std::string, std::string, std::string>
         getfwinfo() override;
@@ -34,6 +34,7 @@ class Lidar : public LidarIf
     friend class LidarFactory;
     Lidar(seriesid, speed_t, scansinitfunc&&);
 
+    seriesid getseries(std::shared_ptr<serial>);
     void getpacket(std::vector<uint8_t>&&, std::vector<uint8_t>&, uint8_t,
                    bool);
     std::shared_ptr<ScanIf> getscan(scan_t) const;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "interfaces/lidar.hpp"
+#include "serial.hpp"
 
 class Lidar : public LidarIf
 {

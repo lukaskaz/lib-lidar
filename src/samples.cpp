@@ -3,76 +3,88 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <ranges>
+#include <stdexcept>
 
 #define MAXANGLEPERSCAN 360
 
-Sample::Sample(int32_t angle,
-               std::shared_ptr<std::vector<NotifyFunc>> notifiers) :
-    angle{angle},
-    distance{getinvalid()}, notifiers{notifiers}
+Sample::Sample(int32_t angle, double distance) :
+    angle{angle}, distance{getverified(distance)}
 {}
-
-void Sample::reset()
-{
-    distance = getinvalid();
-}
-
-void Sample::update(double value)
-{
-    distance = value < invaliddistance ? getinvalid() : value;
-    if (isvalid())
-    {
-        std::ranges::for_each(
-            *notifiers, [this](NotifyFunc& notifier) { notifier(get()); });
-    }
-}
 
 SampleData Sample::get() const
 {
     return {angle, distance};
 }
 
-const double Sample::invaliddistance{1.0};
-
 bool Sample::isvalid() const
 {
     return !std::isnan(distance);
 }
 
-double Sample::getinvalid() const
+double Sample::getverified(double distance) const
 {
-    return std::numeric_limits<decltype(distance)>::quiet_NaN();
+    static const double invaliddistance{1.f};
+    static const auto invalid =
+        std::numeric_limits<decltype(distance)>::quiet_NaN();
+    return distance < invaliddistance ? invalid : distance;
 }
 
-SampleMonitor::SampleMonitor(int32_t angle) :
-    SampleMonitor(angle, defaultsupportnum)
+SamplesGroup::SamplesGroup(int32_t angle) : SamplesGroup(angle, supportangles)
 {}
 
-const int32_t SampleMonitor::defaultsupportnum{2};
+const int32_t SamplesGroup::supportangles{2};
 
-SampleMonitor::SampleMonitor(int32_t angle, int32_t supportnum)
+SamplesGroup::SamplesGroup(int32_t mainangle, int32_t supportangles)
 {
-    samples.emplace_back(angle, notifiers);
-    for (int32_t num{1}; num < supportnum; num += 2)
+    int32_t prio{1};
+    angleswithprio.emplace(mainangle, prio++);
+    for (int32_t num{1}; num <= supportangles / 2; num++)
     {
-        auto prev =
-            angle - num < 0 ? MAXANGLEPERSCAN + angle - num : angle - num;
-        auto next = angle + num >= MAXANGLEPERSCAN
-                        ? angle + num - MAXANGLEPERSCAN
-                        : angle + num;
-        samples.emplace_back(prev, notifiers);
-        samples.emplace_back(next, notifiers);
+        auto prevsuppangle = mainangle - num < 0
+                                 ? MAXANGLEPERSCAN + mainangle - num
+                                 : mainangle - num;
+        auto nextsuppangle = mainangle + num >= MAXANGLEPERSCAN
+                                 ? mainangle + num - MAXANGLEPERSCAN
+                                 : mainangle + num;
+        angleswithprio.emplace(prevsuppangle, prio++);
+        angleswithprio.emplace(nextsuppangle, prio++);
     }
 }
 
-void SampleMonitor::addnotifier(NotifyFunc&& func)
+void SamplesGroup::addnotifier(NotifyFunc&& func)
 {
-    notifiers->push_back(std::move(func));
+    notifiers.push_back(std::move(func));
 }
 
-std::vector<Sample>& SampleMonitor::get()
+bool SamplesGroup::addsampletonotify(int32_t angle, double distance)
 {
-    return samples;
+    Sample sample{angle, distance};
+    if (sample.isvalid())
+    {
+        auto prio = angleswithprio.at(angle);
+        auto [_, isemplaced] = samplestonotify.emplace(prio, sample);
+        return isemplaced;
+    }
+    return false;
+}
+
+void SamplesGroup::notifyandcleanup()
+{
+    if (!samplestonotify.empty())
+    {
+        const auto& primesample = samplestonotify.begin()->second;
+        std::ranges::for_each(notifiers, [&primesample](auto& notifier) {
+            notifier(primesample.get());
+        });
+        samplestonotify.clear();
+    }
+}
+
+std::vector<int32_t> SamplesGroup::getangles() const
+{
+    auto angles = std::views::keys(angleswithprio);
+    return {angles.begin(), angles.end()};
 }
 
 Observer::Observer()
@@ -80,23 +92,42 @@ Observer::Observer()
 
 void Observer::event(int32_t angle, NotifyFunc func)
 {
-    auto [it, ret] = samples.emplace(angle, SampleMonitor(angle));
-    it->second.addnotifier(std::move(func));
-    if (ret)
+    if (registeredangles.contains(angle))
     {
-        std::ranges::for_each(it->second.get(), [this](auto& sample) {
-            updater.try_emplace(std::get<int32_t>(sample.get()),
-                                std::bind(&Sample::update, std::ref(sample),
-                                          std::placeholders::_1));
+        auto group = registeredangles.at(angle);
+        group->addnotifier(std::move(func));
+    }
+    else
+    {
+        auto group = std::make_shared<SamplesGroup>(angle);
+        std::ranges::for_each(group->getangles(), [this, group](auto angle) {
+            if (registeredangles.contains(angle))
+            {
+                std::runtime_error("Trying to add already registered angle");
+            }
+            registeredangles.emplace(angle, group);
         });
+        group->addnotifier(std::move(func));
     }
 }
 
 void Observer::update(const SampleData& data)
 {
     auto [angle, distance] = data;
-    if (updater.contains(angle))
+    if (registeredangles.contains(angle))
     {
-        updater.at(angle)(distance);
+        auto group = registeredangles.at(angle);
+        if (group->addsampletonotify(angle, distance))
+        {
+            notifyqueue.put(group);
+        }
+    }
+    else
+    {
+        while (!notifyqueue.empty())
+        {
+            auto group = notifyqueue.get();
+            group->notifyandcleanup();
+        }
     }
 }

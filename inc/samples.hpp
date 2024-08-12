@@ -10,7 +10,7 @@
 class Sample
 {
   public:
-    explicit Sample(int32_t, double);
+    explicit Sample(SampleData);
 
     bool isvalid() const;
     SampleData get() const;
@@ -29,7 +29,7 @@ class SamplesGroup
     SamplesGroup(int32_t, int32_t);
 
     void addnotifier(NotifyFunc&& func);
-    bool addsampletonotify(int32_t, double);
+    bool addsampletonotify(SampleData);
     void notifyandcleanup();
     std::vector<int32_t> getangles() const;
 
@@ -43,8 +43,6 @@ class SamplesGroup
 class Observer
 {
   public:
-    Observer();
-
     void event(int32_t, NotifyFunc);
     void update(const SampleData& data);
 

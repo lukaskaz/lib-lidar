@@ -8,8 +8,8 @@
 
 #define MAXANGLEPERSCAN 360
 
-Sample::Sample(int32_t angle, double distance) :
-    angle{angle}, distance{getverified(distance)}
+Sample::Sample(SampleData data) :
+    angle{data.first}, distance{getverified(data.second)}
 {}
 
 SampleData Sample::get() const
@@ -57,11 +57,12 @@ void SamplesGroup::addnotifier(NotifyFunc&& func)
     notifiers.push_back(std::move(func));
 }
 
-bool SamplesGroup::addsampletonotify(int32_t angle, double distance)
+bool SamplesGroup::addsampletonotify(SampleData data)
 {
-    Sample sample{angle, distance};
+    Sample sample{data};
     if (sample.isvalid())
     {
+        auto angle = sample.get().first;
         auto prio = angleswithprio.at(angle);
         auto [_, isemplaced] = samplestonotify.emplace(prio, sample);
         return isemplaced;
@@ -87,9 +88,6 @@ std::vector<int32_t> SamplesGroup::getangles() const
     return {angles.begin(), angles.end()};
 }
 
-Observer::Observer()
-{}
-
 void Observer::event(int32_t angle, NotifyFunc func)
 {
     if (registeredangles.contains(angle))
@@ -103,7 +101,8 @@ void Observer::event(int32_t angle, NotifyFunc func)
         std::ranges::for_each(group->getangles(), [this, group](auto angle) {
             if (registeredangles.contains(angle))
             {
-                std::runtime_error("Trying to add already registered angle");
+                throw std::runtime_error(
+                    "Trying to add already registered angle");
             }
             registeredangles.emplace(angle, group);
         });
@@ -113,11 +112,11 @@ void Observer::event(int32_t angle, NotifyFunc func)
 
 void Observer::update(const SampleData& data)
 {
-    auto [angle, distance] = data;
+    auto [angle, _] = data;
     if (registeredangles.contains(angle))
     {
         auto group = registeredangles.at(angle);
-        if (group->addsampletonotify(angle, distance))
+        if (group->addsampletonotify(data))
         {
             notifyqueue.put(group);
         }

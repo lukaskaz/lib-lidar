@@ -11,7 +11,8 @@ class TestSample : public testing::Test
     const int32_t angle{30};
     const double validdistance{55.f};
     const double invaliddistance{.5f};
-    double notifiedvalue{};
+    const SampleData validdata{angle, validdistance};
+    const SampleData invaliddata{angle, invaliddistance};
 
     void SetUp() override
     {}
@@ -27,27 +28,23 @@ class TestSample : public testing::Test
 
 TEST_F(TestSample, IsValidCreatedWithValidDistance)
 {
-    Sample sample{angle, validdistance};
-    EXPECT_TRUE(sample.isvalid());
+    EXPECT_TRUE(Sample(validdata).isvalid());
 }
 
 TEST_F(TestSample, IsValidCreatedWithInvalidDistance)
 {
-    Sample sample{angle, invaliddistance};
-    EXPECT_FALSE(sample.isvalid());
+    EXPECT_FALSE(Sample(invaliddata).isvalid());
 }
 
 TEST_F(TestSample, IsGetDataProperWithValidDistance)
 {
-    Sample sample{angle, validdistance};
-    EXPECT_EQ(sample.get(), SampleData(angle, validdistance));
+    EXPECT_EQ(Sample(validdata).get(), validdata);
 }
 
 TEST_F(TestSample, IsGetDataProperWithInvalidDistance)
 {
-    Sample sample{angle, invaliddistance};
-    auto data = sample.get();
-    ASSERT_NE(data, SampleData(angle, invaliddistance));
+    auto data = Sample(invaliddata).get();
+    ASSERT_NE(data, invaliddata);
     EXPECT_EQ(data.first, angle);
     EXPECT_TRUE(std::isnan(data.second));
 }

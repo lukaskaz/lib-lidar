@@ -29,7 +29,7 @@ class TestObserver : public testing::Test
     }};
 };
 
-TEST_F(TestObserver, AreTwoDistantAnglesWhenAddedNoThrow)
+TEST_F(TestObserver, AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow)
 {
     EXPECT_NO_THROW(({
         observer.event(angle, defaultnotifier);
@@ -37,7 +37,7 @@ TEST_F(TestObserver, AreTwoDistantAnglesWhenAddedNoThrow)
     }));
 }
 
-TEST_F(TestObserver, AreTwoTooCloseAnglesWhenAddedThrow)
+TEST_F(TestObserver, AddedTwoEventsForOverlappingAngles_ObserverThrows)
 {
     EXPECT_THROW(({
                      observer.event(angle, defaultnotifier);
@@ -46,7 +46,7 @@ TEST_F(TestObserver, AreTwoTooCloseAnglesWhenAddedThrow)
                  std::runtime_error);
 }
 
-TEST_F(TestObserver, IsSingleEventProperlyCalledAndHandled)
+TEST_F(TestObserver, AddedSingleEventForSingleGroupAndUpdated_EventCalled)
 {
     auto updatetrigger = SampleData{angle + 2, 0.f};
     observer.event(angle, defaultnotifier);
@@ -56,7 +56,7 @@ TEST_F(TestObserver, IsSingleEventProperlyCalledAndHandled)
     EXPECT_EQ(notifieddata, validdata);
 }
 
-TEST_F(TestObserver, AreTwoEventsProperlyCalledAndHandled)
+TEST_F(TestObserver, AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled)
 {
     int32_t notifycountersecond{};
     auto updatetrigger = SampleData{angle + 2, 0.f};
@@ -77,7 +77,7 @@ TEST_F(TestObserver, AreTwoEventsProperlyCalledAndHandled)
     EXPECT_EQ(expected, received);
 }
 
-TEST_F(TestObserver, IsSingleEventNotAddedToQueueWhenNoUpdate)
+TEST_F(TestObserver, AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled)
 {
     auto updatetrigger = SampleData{angle + 2, 0.f};
     observer.event(angle, defaultnotifier);
@@ -86,7 +86,8 @@ TEST_F(TestObserver, IsSingleEventNotAddedToQueueWhenNoUpdate)
     EXPECT_EQ(notifycounter, 0);
 }
 
-TEST_F(TestObserver, IsSingleEventAddedToQueueOnceOnTwiceUpdate)
+TEST_F(TestObserver,
+       AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce)
 {
     SampleData datafirst{50, 20.5f}, datasecond{51, 57.2f};
     auto [mainangle, _] = datafirst;
@@ -99,4 +100,22 @@ TEST_F(TestObserver, IsSingleEventAddedToQueueOnceOnTwiceUpdate)
     ASSERT_EQ(notifycounter, 0);
     observer.update(updatetrigger);
     EXPECT_EQ(notifycounter, 1);
+}
+
+TEST_F(TestObserver,
+       AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled)
+{
+    SampleData datafirst{50, 20.5f}, datasecond{53, 57.2f};
+    auto [firstangle, _1] = datafirst;
+    auto [secondangle, _2] = datasecond;
+    auto updatetrigger = SampleData{secondangle + 2, 0.f};
+
+    observer.event(firstangle, defaultnotifier);
+    observer.event(secondangle, defaultnotifier);
+    observer.update(datafirst);
+    observer.update(datasecond);
+
+    ASSERT_EQ(notifycounter, 0);
+    observer.update(updatetrigger);
+    EXPECT_EQ(notifycounter, 2);
 }

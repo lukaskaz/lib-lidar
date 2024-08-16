@@ -32,7 +32,7 @@ class TestSamplesGroup : public testing::Test
     }};
 };
 
-TEST_F(TestSamplesGroup, IsDefaultAnglesProperlyCreated)
+TEST_F(TestSamplesGroup, DefaultAnglesGroupCreated_AllAnglesPresent)
 {
     std::vector<int32_t> expectedangles = {
         angle - 1,
@@ -42,7 +42,7 @@ TEST_F(TestSamplesGroup, IsDefaultAnglesProperlyCreated)
     EXPECT_EQ(expectedangles, samplesgroup->getangles());
 }
 
-TEST_F(TestSamplesGroup, AreValidSamplesProperlyOnceNotified)
+TEST_F(TestSamplesGroup, UpdatedThreeValidSamplesOfGroup_NotifierCalledOnce)
 {
     SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
     SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
@@ -54,7 +54,7 @@ TEST_F(TestSamplesGroup, AreValidSamplesProperlyOnceNotified)
     EXPECT_EQ(notifycounter, 1);
 }
 
-TEST_F(TestSamplesGroup, AreInvalidSamplesProperlyIgnored)
+TEST_F(TestSamplesGroup, UpdatedThreeInvalidSamplesOfGroup_NotifierNotCalled)
 {
     SampleData datasuppprev(invaliddata.first - 1, invaliddata.second);
     SampleData datasuppnext(invaliddata.first + 1, invaliddata.second);
@@ -65,19 +65,21 @@ TEST_F(TestSamplesGroup, AreInvalidSamplesProperlyIgnored)
     EXPECT_EQ(notifycounter, 0);
 }
 
-TEST_F(TestSamplesGroup, IsHighestPrioMainSampleProperlyNotified)
+TEST_F(TestSamplesGroup,
+       UpdatedThreeValidSamplesOfGroup_NotifierCalledForHighestPrio)
 {
     SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
     SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
     samplesgroup->addsampletonotify(datasuppnext);
-    samplesgroup->addsampletonotify(datasuppprev);
     samplesgroup->addsampletonotify(validdata);
+    samplesgroup->addsampletonotify(datasuppprev);
     ASSERT_NE(notifieddata, validdata);
     samplesgroup->notifyandcleanup();
     EXPECT_EQ(notifieddata, validdata);
 }
 
-TEST_F(TestSamplesGroup, IsHighestPrioFirstSuppSampleProperlyNotified)
+TEST_F(TestSamplesGroup,
+       UpdatedTwoValidSupporingSamplesOfGroup_NotifierCalledForHighestPrio)
 {
     SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
     SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
@@ -88,7 +90,8 @@ TEST_F(TestSamplesGroup, IsHighestPrioFirstSuppSampleProperlyNotified)
     EXPECT_EQ(notifieddata, datasuppprev);
 }
 
-TEST_F(TestSamplesGroup, IsHighestPrioSecondSuppSampleProperlyNotified)
+TEST_F(TestSamplesGroup,
+       UpdatedOneValidSupporingSampleOfGroup_NotifierCalledForHighestPrio)
 {
     SampleData datasuppnext(validdata.first + 1, validdata.second + 5);
     samplesgroup->addsampletonotify(datasuppnext);
@@ -97,7 +100,7 @@ TEST_F(TestSamplesGroup, IsHighestPrioSecondSuppSampleProperlyNotified)
     EXPECT_EQ(notifieddata, datasuppnext);
 }
 
-TEST_F(TestSamplesGroup, AreSeveralNotifiersProperlyCalled)
+TEST_F(TestSamplesGroup, AddedSeveralNotifiersForGroup_AllNotifiersCalled)
 {
     int32_t notifycountersecond{}, notifycounterthird{};
     samplesgroup->addnotifier(

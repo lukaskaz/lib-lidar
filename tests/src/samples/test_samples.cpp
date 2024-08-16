@@ -26,22 +26,22 @@ class TestSample : public testing::Test
     }
 };
 
-TEST_F(TestSample, IsValidCreatedWithValidDistance)
+TEST_F(TestSample, SampleCreatedWithValidDistance_MarkedAsValid)
 {
     EXPECT_TRUE(Sample(validdata).isvalid());
 }
 
-TEST_F(TestSample, IsValidCreatedWithInvalidDistance)
+TEST_F(TestSample, SampleCreatedWithInvalidDistance_MarkedAsInvalid)
 {
     EXPECT_FALSE(Sample(invaliddata).isvalid());
 }
 
-TEST_F(TestSample, IsGetDataProperWithValidDistance)
+TEST_F(TestSample, GetDataFromSampleWithValidDistance_GivesValidData)
 {
     EXPECT_EQ(Sample(validdata).get(), validdata);
 }
 
-TEST_F(TestSample, IsGetDataProperWithInvalidDistance)
+TEST_F(TestSample, GetDataFromSampleWithInvalidDistance_GivesNanDistance)
 {
     auto data = Sample(invaliddata).get();
     ASSERT_NE(data, invaliddata);

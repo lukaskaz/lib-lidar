@@ -27,7 +27,12 @@ bool Lidar::setup(const std::string& device)
 
 seriesid Lidar::getseries()
 {
-    return getseries(serialIf);
+    return series;
+}
+
+int32_t Lidar::getspeed()
+{
+    return baud;
 }
 
 std::string Lidar::getname()

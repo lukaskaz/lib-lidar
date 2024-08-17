@@ -21,9 +21,9 @@ class TestLidarFactory : public testing::Test
 
     void simulateSeries(seriesid series)
     {
-        std::vector<uint8_t> rawfwinfo(27);
+        std::vector<uint8_t> rawfwinfo(27, 0);
         rawfwinfo[7] = (uint8_t)series << 4;
-        ON_CALL(*serialMock, read(_, _, _))
+        ON_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .WillByDefault(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
     }
 };
@@ -39,13 +39,14 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)
 {
     simulateSeries(seriesid::amodel);
     auto lidar = LidarFactory::createAseries();
-    lidar->setup(serialMock);
 
+    ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
         firstscaninfo = lidar->getscaninfo(scan_t::normal),
         secondscaninfo = lidar->getscaninfo(scan_t::express);
     }));
+
     EXPECT_EQ(firstscaninfo, std::make_pair("normal"s, ""s));
     EXPECT_EQ(secondscaninfo, std::make_pair("express"s, "legacy"s));
 }
@@ -61,13 +62,14 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesScansSucceeded)
 {
     simulateSeries(seriesid::cmodel);
     auto lidar = LidarFactory::createCseries();
-    lidar->setup(serialMock);
 
+    ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
         firstscaninfo = lidar->getscaninfo(scan_t::normal),
         secondscaninfo = lidar->getscaninfo(scan_t::express);
     }));
+
     EXPECT_EQ(firstscaninfo, std::make_pair("normal"s, ""s));
     EXPECT_EQ(secondscaninfo, std::make_pair("express"s, "dense"s));
 }

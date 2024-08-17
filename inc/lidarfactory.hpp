@@ -2,7 +2,6 @@
 
 #include "interfaces/lidar.hpp"
 
-#include <memory>
 #include <string>
 
 class LidarFactory
@@ -15,5 +14,5 @@ class LidarFactory
 class LidarFinder
 {
   public:
-    static std::shared_ptr<LidarIf> run(const std::string&);
+    static std::shared_ptr<LidarIf> run(std::shared_ptr<serial>);
 };

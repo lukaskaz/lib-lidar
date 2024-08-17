@@ -13,12 +13,12 @@ constexpr auto SCANGETSTATCMD = 0x52;
 constexpr auto SCANGETSRATECMD = 0x59;
 constexpr auto SCANGETCONFCMD = 0x84;
 
-bool Lidar::setup(const std::string& device)
+bool Lidar::setup(std::shared_ptr<serial> tmpserial)
 {
-    auto tmpSerialIf = std::make_shared<usb>(device, baud);
-    if (series == getseries(tmpSerialIf))
+    tmpserial->setBaud(getspeed());
+    if (series == getseries(tmpserial))
     {
-        serialIf = tmpSerialIf;
+        serialIf = tmpserial;
         scans = initscans(serialIf);
         return true;
     }
@@ -30,7 +30,7 @@ seriesid Lidar::getseries()
     return series;
 }
 
-int32_t Lidar::getspeed()
+speed_t Lidar::getspeed()
 {
     return baud;
 }

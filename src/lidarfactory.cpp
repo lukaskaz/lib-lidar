@@ -26,13 +26,13 @@ std::shared_ptr<LidarIf> LidarFactory::createCseries()
                   }));
 }
 
-std::shared_ptr<LidarIf> LidarFinder::run(const std::string& device)
+std::shared_ptr<LidarIf> LidarFinder::run(std::shared_ptr<serial> serial)
 {
     static const std::vector<std::shared_ptr<LidarIf>> lidars = {
         LidarFactory::createAseries(), LidarFactory::createCseries()};
 
     if (auto found = std::ranges::find_if(
-            lidars, [&device](auto lidar) { return lidar->setup(device); });
+            lidars, [&serial](auto lidar) { return lidar->setup(serial); });
         found != lidars.end())
     {
         return *found;

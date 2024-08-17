@@ -1,6 +1,7 @@
 #pragma once
 
 #include "interfaces/scan.hpp"
+#include "serial.hpp"
 
 #include <memory>
 
@@ -44,7 +45,7 @@ class LidarInfoIf
     {}
 
     virtual seriesid getseries() = 0;
-    virtual int32_t getspeed() = 0;
+    virtual speed_t getspeed() = 0;
     virtual std::string getname() = 0;
     virtual std::tuple<std::string, std::string, std::string, std::string>
         getfwinfo() = 0;
@@ -72,5 +73,5 @@ class LidarIf : public LidarInfoIf, public LidarScanIf
     virtual ~LidarIf()
     {}
 
-    virtual bool setup(const std::string&) = 0;
+    virtual bool setup(std::shared_ptr<serial>) = 0;
 };

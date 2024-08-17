@@ -8,7 +8,8 @@ int main()
     try
     {
         const auto device{"/dev/ttyUSB0"};
-        auto lidar = LidarFinder::run(device);
+        auto serial = std::make_shared<usb>(device);
+        auto lidar = LidarFinder::run(serial);
         lidar->watchangle(0, [](const SampleData& data) {
             if ((int)std::get<1>(data) < 30)
             {

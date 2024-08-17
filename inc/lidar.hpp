@@ -6,10 +6,10 @@
 class Lidar : public LidarIf
 {
   public:
-    bool setup(const std::string&) override;
+    bool setup(std::shared_ptr<serial>) override;
 
     seriesid getseries() override;
-    int32_t getspeed() override;
+    speed_t getspeed() override;
     std::string getname() override;
     std::tuple<std::string, std::string, std::string, std::string>
         getfwinfo() override;

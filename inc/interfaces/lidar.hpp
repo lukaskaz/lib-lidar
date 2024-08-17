@@ -44,6 +44,7 @@ class LidarInfoIf
     {}
 
     virtual seriesid getseries() = 0;
+    virtual int32_t getspeed() = 0;
     virtual std::string getname() = 0;
     virtual std::tuple<std::string, std::string, std::string, std::string>
         getfwinfo() = 0;

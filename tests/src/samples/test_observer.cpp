@@ -1,7 +1,5 @@
 #include "samples.hpp"
 
-#include <memory>
-
 #include "gtest/gtest.h"
 
 class TestObserver : public testing::Test

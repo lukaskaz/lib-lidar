@@ -157,6 +157,10 @@ Configuration Lidar::getconfiguration()
                    0, mode, 0},
                   resp, resppacketsize + 200, true);
         std::string name(resp.begin() + 11, resp.end());
+        if (auto pos = name.rfind('\0'); pos != std::string::npos)
+        {
+            name.erase(pos);
+        }
 
         resp.clear();
         getpacket({SCANSTARTFLAG, SCANGETCONFCMD, reqdatasize + 2, 0x71, 0, 0,

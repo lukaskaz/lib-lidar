@@ -32,10 +32,13 @@ struct Configuration
         uint32_t maxsamplerate;
         uint32_t maxdistance;
         uint32_t answercmdtype;
+        bool operator==(const Mode&) const = default;
     };
+
     uint32_t modecnt;
     uint32_t typical;
     std::vector<Mode> modes;
+    bool operator==(const Configuration&) const = default;
 };
 
 class LidarInfoIf

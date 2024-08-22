@@ -5,6 +5,7 @@
 #include "serial.hpp"
 
 #include <cstdint>
+#include <exception>
 #include <future>
 #include <memory>
 #include <vector>

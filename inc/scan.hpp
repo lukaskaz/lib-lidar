@@ -5,6 +5,7 @@
 #include "serial.hpp"
 
 #include <cstdint>
+#include <exception>
 #include <future>
 #include <memory>
 #include <vector>
@@ -35,6 +36,7 @@ class Scan : public ScanIf
     const scansub_t subtype;
     std::atomic<bool> running{false};
     std::shared_ptr<serial> serialIf;
+    std::exception_ptr exceptptr;
     std::shared_ptr<std::future<void>> scanning;
 
     virtual void requestscan() = 0;

@@ -138,6 +138,10 @@ Configuration Lidar::getconfiguration()
 {
     static constexpr uint8_t reqdatasize = 4, respdatasize = reqdatasize,
                              resppacketsize = respdatasize + 7;
+    static constexpr auto removenull = [](auto& vect) {
+        if (!vect.empty() && vect.back() == 0x00)
+            vect.pop_back();
+    };
     Configuration config;
     std::vector<uint8_t> resp;
 
@@ -156,11 +160,8 @@ Configuration Lidar::getconfiguration()
         getpacket({SCANSTARTFLAG, SCANGETCONFCMD, reqdatasize + 2, 0x7F, 0, 0,
                    0, mode, 0},
                   resp, resppacketsize + 200, true);
+        removenull(resp);
         std::string name(resp.begin() + 11, resp.end());
-        if (auto pos = name.rfind('\0'); pos != std::string::npos)
-        {
-            name.erase(pos);
-        }
 
         resp.clear();
         getpacket({SCANSTARTFLAG, SCANGETCONFCMD, reqdatasize + 2, 0x71, 0, 0,

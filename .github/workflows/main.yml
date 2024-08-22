@@ -75,5 +75,4 @@ jobs:
         cd tests && mkdir build && cd build && cmake .. && make
     - name: Running coverage checker
       run: |
-        cd tests/coverage-checker && ./run.sh ../build \
-        || echo "Tests coverage WIP"
+        cd tests/coverage-checker && ./run.sh ../build

@@ -12,13 +12,13 @@
 
 using Measurement = std::pair<bool, SampleData>;
 
-class Scan : public ScanIf
+class Scan : public ScanIf, public std::enable_shared_from_this<Scan>
 {
   public:
     Scan(std::shared_ptr<serial>, scan_t, scansub_t);
     ~Scan();
 
-    void run() = 0;
+    void run() override;
     void stop() override;
     void addangle(int32_t, const NotifyFunc&) override;
     void delangle(int32_t) override;
@@ -39,15 +39,13 @@ class Scan : public ScanIf
     std::exception_ptr exceptptr;
     std::shared_ptr<std::future<void>> scanning;
 
+    virtual void asyncroutine() = 0;
     virtual void requestscan() = 0;
     virtual void releasescan();
 };
 
-class ScanNormal : public Scan, public std::enable_shared_from_this<ScanNormal>
+class ScanNormal : public Scan
 {
-  public:
-    void run() override;
-
   private:
     friend class ScanFactory;
     ScanNormal(std::shared_ptr<serial> serialIf) :
@@ -55,6 +53,7 @@ class ScanNormal : public Scan, public std::enable_shared_from_this<ScanNormal>
     {}
     void requestscan() override;
     Measurement getdata(bool);
+    void asyncroutine() override;
 };
 
 class ScanExpress : public Scan
@@ -64,20 +63,13 @@ class ScanExpress : public Scan
         Scan(serialIf, scan_t::express, subtype)
     {}
 
-    void run() = 0;
-
   protected:
     void requestscan() override;
     virtual std::pair<double, std::vector<uint8_t>> getbasedata(bool);
 };
 
-class ScanExpressLegacy :
-    public ScanExpress,
-    public std::enable_shared_from_this<ScanExpressLegacy>
+class ScanExpressLegacy : public ScanExpress
 {
-  public:
-    void run() override;
-
   private:
     friend class ScanFactory;
     ScanExpressLegacy(std::shared_ptr<serial> serialIf) :
@@ -85,19 +77,16 @@ class ScanExpressLegacy :
     {}
     std::array<Measurement, 2> getcabindata(std::vector<uint8_t>&&, double,
                                             double, uint8_t);
+    void asyncroutine() override;
 };
 
-class ScanExpressDense :
-    public ScanExpress,
-    public std::enable_shared_from_this<ScanExpressDense>
+class ScanExpressDense : public ScanExpress
 {
-  public:
-    void run() override;
-
   private:
     friend class ScanFactory;
     ScanExpressDense(std::shared_ptr<serial> serialIf) :
         ScanExpress(serialIf, scansub_t::dense)
     {}
     Measurement getcabindata(std::vector<uint8_t>&&, double, double, uint8_t);
+    void asyncroutine() override;
 };

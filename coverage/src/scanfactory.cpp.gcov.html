@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-08-22 03:19:43</td>
+            <td class="headerValue">2024-08-23 02:51:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -65,21 +65,21 @@
 <a name="3"><span class="lineNum">       3 </span>            : #include &quot;scan.hpp&quot;</a>
 <a name="4"><span class="lineNum">       4 </span>            : </a>
 <a name="5"><span class="lineNum">       5 </span>            : std::shared_ptr&lt;ScanIf&gt;</a>
-<a name="6"><span class="lineNum">       6 </span><span class="lineCov">         15 :     ScanFactory::createNormal(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
+<a name="6"><span class="lineNum">       6 </span><span class="lineCov">         19 :     ScanFactory::createNormal(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
 <a name="7"><span class="lineNum">       7 </span>            : {</a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         15 :     return std::shared_ptr&lt;ScanNormal&gt;(new ScanNormal(serialIf));</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         19 :     return std::shared_ptr&lt;ScanNormal&gt;(new ScanNormal(serialIf));</span></a>
 <a name="9"><span class="lineNum">       9 </span>            : }</a>
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <a name="11"><span class="lineNum">      11 </span>            : std::shared_ptr&lt;ScanIf&gt;</a>
-<a name="12"><span class="lineNum">      12 </span><span class="lineCov">         11 :     ScanFactory::createExpressLegacy(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">         13 :     ScanFactory::createExpressLegacy(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
 <a name="13"><span class="lineNum">      13 </span>            : {</a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         11 :     return std::shared_ptr&lt;ScanExpressLegacy&gt;(new ScanExpressLegacy(serialIf));</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         13 :     return std::shared_ptr&lt;ScanExpressLegacy&gt;(new ScanExpressLegacy(serialIf));</span></a>
 <a name="15"><span class="lineNum">      15 </span>            : }</a>
 <a name="16"><span class="lineNum">      16 </span>            : </a>
 <a name="17"><span class="lineNum">      17 </span>            : std::shared_ptr&lt;ScanIf&gt;</a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          6 :     ScanFactory::createExpressDense(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          8 :     ScanFactory::createExpressDense(std::shared_ptr&lt;serial&gt; serialIf)</span></a>
 <a name="19"><span class="lineNum">      19 </span>            : {</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          6 :     return std::shared_ptr&lt;ScanExpressDense&gt;(new ScanExpressDense(serialIf));</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          8 :     return std::shared_ptr&lt;ScanExpressDense&gt;(new ScanExpressDense(serialIf));</span></a>
 <a name="21"><span class="lineNum">      21 </span>            : }</a>
 </pre>
       </td>

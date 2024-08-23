@@ -22,6 +22,29 @@ Scan::~Scan()
     stop();
 }
 
+void Scan::run()
+{
+    if (!isrunning())
+    {
+        running = true;
+        scanning = std::make_shared<std::future<void>>(
+            std::async(std::launch::async, [weak = weak_from_this()] {
+                if (auto self = weak.lock())
+                {
+                    try
+                    {
+                        self->asyncroutine();
+                    }
+                    catch (...)
+                    {
+                        self->exceptptr = std::current_exception();
+                    }
+                    self->releasescan();
+                }
+            }));
+    }
+}
+
 void Scan::stop()
 {
     if (isrunning())
@@ -134,35 +157,17 @@ Measurement ScanNormal::getdata(bool firstread = false)
     }
 }
 
-void ScanNormal::run()
+void ScanNormal::asyncroutine()
 {
-    if (!isrunning())
+    requestscan();
+    auto [isvalid, data] = getdata(true);
+    while (isrunning())
     {
-        running = true;
-        scanning = std::make_shared<std::future<void>>(
-            std::async(std::launch::async, [weak = weak_from_this()] {
-                if (auto self = weak.lock())
-                {
-                    try
-                    {
-                        self->requestscan();
-                        auto [isvalid, data] = self->getdata(true);
-                        while (self->isrunning())
-                        {
-                            if (isvalid)
-                            {
-                                self->observer.update(data);
-                            }
-                            std::tie(isvalid, data) = self->getdata();
-                        }
-                        self->releasescan();
-                    }
-                    catch (...)
-                    {
-                        self->exceptptr = std::current_exception();
-                    }
-                }
-            }));
+        if (isvalid)
+        {
+            observer.update(data);
+        }
+        std::tie(isvalid, data) = getdata();
     }
 }
 
@@ -275,55 +280,39 @@ std::array<Measurement, 2>
              {issecondvalid, {anglesecond, distancesecond / 10.}}}};
 }
 
-void ScanExpressLegacy::run()
+void ScanExpressLegacy::asyncroutine()
 {
-    if (!isrunning())
+    requestscan();
+    [[maybe_unused]] bool newscan{false};
+    auto [startangleprev, cabindataprev] = getbasedata(true);
+    while (isrunning())
     {
-        running = true;
-        scanning = std::make_shared<std::future<void>>(
-            std::async(std::launch::async, [weak = weak_from_this()] {
-                if (auto self = weak.lock())
-                {
-                    self->requestscan();
-                    [[maybe_unused]] bool newscan{false};
-                    auto [startangleprev, cabindataprev] =
-                        self->getbasedata(true);
-                    while (self->isrunning())
-                    {
-                        auto [startanglecurr, cabindatacurr] =
-                            self->getbasedata();
-                        auto angledelta = startanglecurr - startangleprev;
-                        if (angledelta < 0)
-                        {
-                            angledelta += MAXANGLEPERSCAN;
-                            newscan = true;
-                        }
+        auto [startanglecurr, cabindatacurr] = getbasedata();
+        auto angledelta = startanglecurr - startangleprev;
+        if (angledelta < 0)
+        {
+            angledelta += MAXANGLEPERSCAN;
+            newscan = true;
+        }
 
-                        static constexpr uint8_t bytespercabin{5};
-                        for (auto it = cabindataprev.cbegin();
-                             it != cabindataprev.cend();
-                             std::advance(it, bytespercabin))
-                        {
-                            auto cabinnum = static_cast<uint8_t>(
-                                std::distance(cabindataprev.cbegin(), it) /
-                                bytespercabin);
-                            auto measurements = self->getcabindata(
-                                {it, it + bytespercabin}, startangleprev,
-                                angledelta, cabinnum);
+        static constexpr uint8_t bytespercabin{5};
+        for (auto it = cabindataprev.cbegin(); it != cabindataprev.cend();
+             std::advance(it, bytespercabin))
+        {
+            auto cabinnum = static_cast<uint8_t>(
+                std::distance(cabindataprev.cbegin(), it) / bytespercabin);
+            auto measurements = getcabindata(
+                {it, it + bytespercabin}, startangleprev, angledelta, cabinnum);
 
-                            std::ranges::for_each(
-                                measurements, [self](Measurement& measurement) {
-                                    auto [isvalid, data] = measurement;
-                                    if (isvalid)
-                                        self->observer.update(data);
-                                });
-                        }
-                        startangleprev = startanglecurr;
-                        cabindataprev = cabindatacurr;
-                    }
-                    self->releasescan();
-                }
-            }));
+            std::ranges::for_each(measurements,
+                                  [this](Measurement& measurement) {
+                                      auto [isvalid, data] = measurement;
+                                      if (isvalid)
+                                          observer.update(data);
+                                  });
+        }
+        startangleprev = startanglecurr;
+        cabindataprev = cabindatacurr;
     }
 }
 
@@ -349,52 +338,36 @@ Measurement ScanExpressDense::getcabindata(std::vector<uint8_t>&& cabin,
     return {isvalid, {angle, distance / 10.}};
 }
 
-void ScanExpressDense::run()
+void ScanExpressDense::asyncroutine()
 {
-    if (!isrunning())
+    requestscan();
+    [[maybe_unused]] bool newscan{false};
+    auto [startangleprev, cabindataprev] = getbasedata(true);
+
+    while (isrunning())
     {
-        running = true;
-        scanning = std::make_shared<std::future<void>>(
-            std::async(std::launch::async, [weak = weak_from_this()] {
-                if (auto self = weak.lock())
-                {
-                    self->requestscan();
-                    [[maybe_unused]] bool newscan{false};
-                    auto [startangleprev, cabindataprev] =
-                        self->getbasedata(true);
+        auto [startanglecurr, cabindatacurr] = getbasedata(false);
+        auto angledelta = startanglecurr - startangleprev;
+        if (angledelta <= 0)
+        {
+            angledelta += MAXANGLEPERSCAN;
+            newscan = true;
+        }
 
-                    while (self->isrunning())
-                    {
-                        auto [startanglecurr, cabindatacurr] =
-                            self->getbasedata(false);
-                        auto angledelta = startanglecurr - startangleprev;
-                        if (angledelta <= 0)
-                        {
-                            angledelta += MAXANGLEPERSCAN;
-                            newscan = true;
-                        }
-
-                        static constexpr uint8_t bytespercabin{2};
-                        for (auto it = cabindataprev.cbegin();
-                             it != cabindataprev.cend();
-                             std::advance(it, bytespercabin))
-                        {
-                            auto cabinnum = static_cast<uint8_t>(
-                                std::distance(cabindataprev.cbegin(), it) /
-                                bytespercabin);
-                            auto [isvalid, data] = self->getcabindata(
-                                {it, it + bytespercabin}, startangleprev,
-                                angledelta, cabinnum);
-                            if (isvalid)
-                            {
-                                self->observer.update(data);
-                            }
-                        }
-                        startangleprev = startanglecurr;
-                        cabindataprev = cabindatacurr;
-                    }
-                    self->releasescan();
-                }
-            }));
+        static constexpr uint8_t bytespercabin{2};
+        for (auto it = cabindataprev.cbegin(); it != cabindataprev.cend();
+             std::advance(it, bytespercabin))
+        {
+            auto cabinnum = static_cast<uint8_t>(
+                std::distance(cabindataprev.cbegin(), it) / bytespercabin);
+            auto [isvalid, data] = getcabindata(
+                {it, it + bytespercabin}, startangleprev, angledelta, cabinnum);
+            if (isvalid)
+            {
+                observer.update(data);
+            }
+        }
+        startangleprev = startanglecurr;
+        cabindataprev = cabindatacurr;
     }
 }

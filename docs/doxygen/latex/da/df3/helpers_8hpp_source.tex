@@ -1,0 +1,51 @@
+\hypertarget{helpers_8hpp_source}{}\doxysection{helpers.\+hpp}
+\label{helpers_8hpp_source}\index{inc/helpers.hpp@{inc/helpers.hpp}}
+\mbox{\hyperlink{helpers_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <unordered\_set>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 std::string \mbox{\hyperlink{helpers_8hpp_a77cada5de6ebbd749f79068fbafd8214}{gettimestr}}();}
+\DoxyCodeLine{10 uint8\_t \mbox{\hyperlink{helpers_8hpp_aee7c15695f40af491e5fc17f714c2146}{getchecksum}}(\textcolor{keyword}{const} std::vector<uint8\_t>\&);}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{classUniqueQueue}{UniqueQueue}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15   \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} \mbox{\hyperlink{classUniqueQueue_a99e223062d88d9f4fa46c7d5a543a1e8}{put}}(T value)}
+\DoxyCodeLine{17     \{}
+\DoxyCodeLine{18         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classUniqueQueue_a17a3831f94ab2160643465bb9d3d5e04}{set}}.contains(value))}
+\DoxyCodeLine{19         \{}
+\DoxyCodeLine{20             \mbox{\hyperlink{classUniqueQueue_a17a3831f94ab2160643465bb9d3d5e04}{set}}.insert(value);}
+\DoxyCodeLine{21             \mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}}.push(value);}
+\DoxyCodeLine{22         \}}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     T \mbox{\hyperlink{classUniqueQueue_aaf45796e7a6a60e81a75208a531a2513}{get}}()}
+\DoxyCodeLine{26     \{}
+\DoxyCodeLine{27         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}}.empty())}
+\DoxyCodeLine{28         \{}
+\DoxyCodeLine{29             T value = \mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}}.front();}
+\DoxyCodeLine{30             \mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}}.pop();}
+\DoxyCodeLine{31             \mbox{\hyperlink{classUniqueQueue_a17a3831f94ab2160643465bb9d3d5e04}{set}}.erase(value);}
+\DoxyCodeLine{32             \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34         \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"{}Trying to get element from empty queue"{}});}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classUniqueQueue_af4cfcbfc8e87bbb41f52ea3fb3791390}{empty}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{38 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{39         \textcolor{keywordflow}{return} \mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}}.empty();}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42   \textcolor{keyword}{private}:}
+\DoxyCodeLine{43     std::unordered\_set<T> \mbox{\hyperlink{classUniqueQueue_a17a3831f94ab2160643465bb9d3d5e04}{set}};}
+\DoxyCodeLine{44     std::queue<T> \mbox{\hyperlink{classUniqueQueue_a5f707bb914448710d5085f0a498a59dd}{queue}};}
+\DoxyCodeLine{45 \};}
+
+\end{DoxyCode}

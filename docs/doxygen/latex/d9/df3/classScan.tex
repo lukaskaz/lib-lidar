@@ -1,0 +1,262 @@
+\hypertarget{classScan}{}\doxysection{Scan Class Reference}
+\label{classScan}\index{Scan@{Scan}}
+
+
+{\ttfamily \#include $<$scan.\+hpp$>$}
+
+
+
+Inheritance diagram for Scan\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{de/d55/classScan__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scan\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/d51/classScan__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classScan_a0ee1cf682b8f2adc87e1d3c8785147dc}{Scan}} (std\+::shared\+\_\+ptr$<$ serial $>$, \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}})
+\item 
+\mbox{\hyperlink{classScan_a716764da76d1f5c172dbbf3391cfbad1}{$\sim$\+Scan}} ()
+\item 
+void \mbox{\hyperlink{classScan_a64e5801e5b50d190c9d5aecfa7d3fedd}{run}} () override
+\item 
+void \mbox{\hyperlink{classScan_a25dd3b1b8cbb94c0a43b83e4d7dfba75}{stop}} () override
+\item 
+void \mbox{\hyperlink{classScan_a714813b99f8fd2f7b8882fcaac774f03}{addangle}} (int32\+\_\+t, const \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}} \&) override
+\item 
+void \mbox{\hyperlink{classScan_a8d0f073c9888e4d683cd9ba0736bf0b7}{delangle}} (int32\+\_\+t) override
+\item 
+\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}} \mbox{\hyperlink{classScan_ac5fbd028a57fee914618cafaa5b0be7c}{gettype}} () const override
+\item 
+\mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}} \mbox{\hyperlink{classScan_aab9974ba42cf9e677d40c683a3b0e1a1}{getsubtype}} () const override
+\item 
+std\+::string \mbox{\hyperlink{classScan_a88bc8e282f5cd951af7d7e46b5421843}{gettypename}} () const override
+\item 
+std\+::string \mbox{\hyperlink{classScan_a9102f291fcc345b09a6fd4c92b7bd4c4}{getsubtypename}} () const override
+\item 
+bool \mbox{\hyperlink{classScan_abb157c6b0bf755c2aa3fdad1720078e4}{isrunning}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classScan_ac7d73b3cc73b88c56527518ac6cebcfe}{processscan}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classScan_a2df58116c384cad1ab2a554dacf84d60}{requestscan}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classScan_ac39c4f307f714f76710bfcceb00bb0c8}{releasescan}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classObserver}{Observer}} \mbox{\hyperlink{classScan_a7a78844e882d19fc226d6cff5ffed882}{observer}}
+\item 
+const \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}} \mbox{\hyperlink{classScan_a1975aa7d6e3ceee4713dd70f9a83a17f}{type}}
+\item 
+const \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}} \mbox{\hyperlink{classScan_aac81378cd566304305365751290c4be3}{subtype}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classScan_a94036c35c9a077f0e898681143bd617d}{running}} \{false\}
+\item 
+std\+::shared\+\_\+ptr$<$ serial $>$ \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serial\+If}}
+\item 
+std\+::exception\+\_\+ptr \mbox{\hyperlink{classScan_a2b6dba67230fbd10d3d7849b77a8b336}{exceptptr}}
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::future$<$ void $>$ $>$ \mbox{\hyperlink{classScan_a8548c37f37bbf06ca6a592b039cca903}{scanning}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classScan_a0ee1cf682b8f2adc87e1d3c8785147dc}\label{classScan_a0ee1cf682b8f2adc87e1d3c8785147dc}} 
+\index{Scan@{Scan}!Scan@{Scan}}
+\index{Scan@{Scan}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{Scan()}{Scan()}}
+{\footnotesize\ttfamily Scan\+::\+Scan (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ serial $>$}]{serial\+If,  }\item[{\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}}}]{subtype }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classScan_a716764da76d1f5c172dbbf3391cfbad1}\label{classScan_a716764da76d1f5c172dbbf3391cfbad1}} 
+\index{Scan@{Scan}!````~Scan@{$\sim$Scan}}
+\index{````~Scan@{$\sim$Scan}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{$\sim$Scan()}{~Scan()}}
+{\footnotesize\ttfamily Scan\+::$\sim$\+Scan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classScan_a714813b99f8fd2f7b8882fcaac774f03}\label{classScan_a714813b99f8fd2f7b8882fcaac774f03}} 
+\index{Scan@{Scan}!addangle@{addangle}}
+\index{addangle@{addangle}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{addangle()}{addangle()}}
+{\footnotesize\ttfamily void Scan\+::addangle (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle,  }\item[{const \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}} \&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a8a11df5b39778cc275af03b685feaafb}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_a8d0f073c9888e4d683cd9ba0736bf0b7}\label{classScan_a8d0f073c9888e4d683cd9ba0736bf0b7}} 
+\index{Scan@{Scan}!delangle@{delangle}}
+\index{delangle@{delangle}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{delangle()}{delangle()}}
+{\footnotesize\ttfamily void Scan\+::delangle (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_aa71d063f06f2edf7baf20037e7fa28b0}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_aab9974ba42cf9e677d40c683a3b0e1a1}\label{classScan_aab9974ba42cf9e677d40c683a3b0e1a1}} 
+\index{Scan@{Scan}!getsubtype@{getsubtype}}
+\index{getsubtype@{getsubtype}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{getsubtype()}{getsubtype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}} Scan\+::getsubtype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a8784427b74dd3061c97177343f49966b}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_a9102f291fcc345b09a6fd4c92b7bd4c4}\label{classScan_a9102f291fcc345b09a6fd4c92b7bd4c4}} 
+\index{Scan@{Scan}!getsubtypename@{getsubtypename}}
+\index{getsubtypename@{getsubtypename}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{getsubtypename()}{getsubtypename()}}
+{\footnotesize\ttfamily std\+::string Scan\+::getsubtypename (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a008aaf82abe00bdd9b0f0c7886269e2d}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_ac5fbd028a57fee914618cafaa5b0be7c}\label{classScan_ac5fbd028a57fee914618cafaa5b0be7c}} 
+\index{Scan@{Scan}!gettype@{gettype}}
+\index{gettype@{gettype}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{gettype()}{gettype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}} Scan\+::gettype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a66a60bbc9a844531d016124158d36b2e}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_a88bc8e282f5cd951af7d7e46b5421843}\label{classScan_a88bc8e282f5cd951af7d7e46b5421843}} 
+\index{Scan@{Scan}!gettypename@{gettypename}}
+\index{gettypename@{gettypename}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{gettypename()}{gettypename()}}
+{\footnotesize\ttfamily std\+::string Scan\+::gettypename (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_ade6a063ba725e911e9a3f65294f1e95d}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_abb157c6b0bf755c2aa3fdad1720078e4}\label{classScan_abb157c6b0bf755c2aa3fdad1720078e4}} 
+\index{Scan@{Scan}!isrunning@{isrunning}}
+\index{isrunning@{isrunning}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{isrunning()}{isrunning()}}
+{\footnotesize\ttfamily bool Scan\+::isrunning (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_acd140edeb9b335a3aecfedc61ce7b478}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_ac7d73b3cc73b88c56527518ac6cebcfe}\label{classScan_ac7d73b3cc73b88c56527518ac6cebcfe}} 
+\index{Scan@{Scan}!processscan@{processscan}}
+\index{processscan@{processscan}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{processscan()}{processscan()}}
+{\footnotesize\ttfamily virtual void Scan\+::processscan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classScanNormal_a69ed61556efb168046188fcfa68152ec}{Scan\+Normal}}, \mbox{\hyperlink{classScanExpressLegacy_ab3255355162bf6d9e14cecb9c1edabea}{Scan\+Express\+Legacy}}, and \mbox{\hyperlink{classScanExpressDense_ae525dc74970a6e56625dc1898c837687}{Scan\+Express\+Dense}}.
+
+\mbox{\Hypertarget{classScan_ac39c4f307f714f76710bfcceb00bb0c8}\label{classScan_ac39c4f307f714f76710bfcceb00bb0c8}} 
+\index{Scan@{Scan}!releasescan@{releasescan}}
+\index{releasescan@{releasescan}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{releasescan()}{releasescan()}}
+{\footnotesize\ttfamily void Scan\+::releasescan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classScan_a2df58116c384cad1ab2a554dacf84d60}\label{classScan_a2df58116c384cad1ab2a554dacf84d60}} 
+\index{Scan@{Scan}!requestscan@{requestscan}}
+\index{requestscan@{requestscan}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{requestscan()}{requestscan()}}
+{\footnotesize\ttfamily virtual void Scan\+::requestscan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classScanNormal_a4b03c357ddfeb7e53edc735b0167c157}{Scan\+Normal}}, and \mbox{\hyperlink{classScanExpress_a7cc0b4a5757481a8eabc5ed67bdc4643}{Scan\+Express}}.
+
+\mbox{\Hypertarget{classScan_a64e5801e5b50d190c9d5aecfa7d3fedd}\label{classScan_a64e5801e5b50d190c9d5aecfa7d3fedd}} 
+\index{Scan@{Scan}!run@{run}}
+\index{run@{run}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Scan\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a61c0f089ed82d893a106e29df34a97fd}{Scan\+If}}.
+
+\mbox{\Hypertarget{classScan_a25dd3b1b8cbb94c0a43b83e4d7dfba75}\label{classScan_a25dd3b1b8cbb94c0a43b83e4d7dfba75}} 
+\index{Scan@{Scan}!stop@{stop}}
+\index{stop@{stop}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void Scan\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScanIf_a8d5686a1ee829b0c77d1dae067581ab3}{Scan\+If}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classScan_a2b6dba67230fbd10d3d7849b77a8b336}\label{classScan_a2b6dba67230fbd10d3d7849b77a8b336}} 
+\index{Scan@{Scan}!exceptptr@{exceptptr}}
+\index{exceptptr@{exceptptr}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{exceptptr}{exceptptr}}
+{\footnotesize\ttfamily std\+::exception\+\_\+ptr Scan\+::exceptptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_a7a78844e882d19fc226d6cff5ffed882}\label{classScan_a7a78844e882d19fc226d6cff5ffed882}} 
+\index{Scan@{Scan}!observer@{observer}}
+\index{observer@{observer}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{observer}{observer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classObserver}{Observer}} Scan\+::observer\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_a94036c35c9a077f0e898681143bd617d}\label{classScan_a94036c35c9a077f0e898681143bd617d}} 
+\index{Scan@{Scan}!running@{running}}
+\index{running@{running}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{running}{running}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ Scan\+::running \{false\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_a8548c37f37bbf06ca6a592b039cca903}\label{classScan_a8548c37f37bbf06ca6a592b039cca903}} 
+\index{Scan@{Scan}!scanning@{scanning}}
+\index{scanning@{scanning}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{scanning}{scanning}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$std\+::future$<$void$>$ $>$ Scan\+::scanning\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}\label{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}} 
+\index{Scan@{Scan}!serialIf@{serialIf}}
+\index{serialIf@{serialIf}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{serialIf}{serialIf}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$serial$>$ Scan\+::serial\+If\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_aac81378cd566304305365751290c4be3}\label{classScan_aac81378cd566304305365751290c4be3}} 
+\index{Scan@{Scan}!subtype@{subtype}}
+\index{subtype@{subtype}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{subtype}{subtype}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}} Scan\+::subtype\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classScan_a1975aa7d6e3ceee4713dd70f9a83a17f}\label{classScan_a1975aa7d6e3ceee4713dd70f9a83a17f}} 
+\index{Scan@{Scan}!type@{type}}
+\index{type@{type}!Scan@{Scan}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}} Scan\+::type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{scan_8hpp}{scan.\+hpp}}\item 
+src/\mbox{\hyperlink{scan_8cpp}{scan.\+cpp}}\end{DoxyCompactItemize}

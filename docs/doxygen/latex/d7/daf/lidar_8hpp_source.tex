@@ -1,0 +1,49 @@
+\hypertarget{lidar_8hpp_source}{}\doxysection{lidar.\+hpp}
+\label{lidar_8hpp_source}\index{inc/lidar.hpp@{inc/lidar.hpp}}
+\mbox{\hyperlink{lidar_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2lidar_8hpp}{interfaces/lidar.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}serial.hpp"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{classLidar}{Lidar}} : \textcolor{keyword}{public} \mbox{\hyperlink{classLidarIf}{LidarIf}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8   \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classLidar_a88d128d6732d4c26e5992d3aff51bf3f}{setup}}(std::shared\_ptr<serial>) \textcolor{keyword}{override};}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}} \mbox{\hyperlink{classLidar_a02d1e41cf43115c97a1609f60acfa3be}{getseries}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{12     speed\_t \mbox{\hyperlink{classLidar_aa45af0cb3bc5b53d4eca8aa09da342df}{getspeed}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{13     std::string \mbox{\hyperlink{classLidar_a6cda068f06d08c6b383db285636edad4}{getname}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{14     std::tuple<std::string, std::string, std::string, std::string>}
+\DoxyCodeLine{15         \mbox{\hyperlink{classLidar_ad43eaaa42952f90128c5552a3fd74be2}{getfwinfo}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{16     std::pair<state, std::string> \mbox{\hyperlink{classLidar_aff3036795eeab1b946346b73b5e47fff}{getstate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{17     std::pair<uint16\_t, uint16\_t> \mbox{\hyperlink{classLidar_a9e8faa3838feb84919c6df2089d73285}{getsamplerate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{18     \mbox{\hyperlink{structConfiguration}{Configuration}} \mbox{\hyperlink{classLidar_ad2eddb185097cac0787942b590f0ba0b}{getconfiguration}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{19     std::pair<std::string, std::string> \mbox{\hyperlink{classLidar_a7bd7ee2c2fe618dcaa2ebc764baf07ef}{getconninfo}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLidar_a9d2c87fd094d98a358e21ae6a38d4683}{watchangle}}(int32\_t, \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLidar_abba135f6ee7c732c46513e884fbf9b01}{runscan}}(\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLidar_a1f41ec53f3da90bcd4d4eb6bd8b486fe}{stopscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{24     std::pair<std::string, std::string> \mbox{\hyperlink{classLidar_a7af7c2b02049d37666d7bd3f0f7af67e}{getscaninfo}}(\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}) \textcolor{keyword}{const override};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26   \textcolor{keyword}{protected}:}
+\DoxyCodeLine{27     \textcolor{keyword}{using }\mbox{\hyperlink{classLidar_aac908b52dd8bc74bc0788300de86ed22}{scansinittype}} = std::vector<std::shared\_ptr<ScanIf>>;}
+\DoxyCodeLine{28     \textcolor{keyword}{using }\mbox{\hyperlink{classLidar_ae9312855659329897d3e1f0e1bbaa26c}{scansinitfunc}} = std::function<\mbox{\hyperlink{classLidar_aac908b52dd8bc74bc0788300de86ed22}{scansinittype}}(std::shared\_ptr<serial>)>;}
+\DoxyCodeLine{29     \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}} \mbox{\hyperlink{classLidar_ab69b7f4bbae4b0dfe7c40c46b2dbf0fe}{series}};}
+\DoxyCodeLine{30     \textcolor{keyword}{const} speed\_t \mbox{\hyperlink{classLidar_a60634bf296293dff35f90139780cbc5d}{baud}};}
+\DoxyCodeLine{31     \textcolor{keyword}{const} \mbox{\hyperlink{classLidar_ae9312855659329897d3e1f0e1bbaa26c}{scansinitfunc}} \mbox{\hyperlink{classLidar_a8fbe507bde3f614d65386636ce5d2967}{initscans}};}
+\DoxyCodeLine{32     std::shared\_ptr<serial> \mbox{\hyperlink{classLidar_a56d535aff6f7afb03b7b2830e9413df2}{serialIf}};}
+\DoxyCodeLine{33     std::vector<std::shared\_ptr<ScanIf>> \mbox{\hyperlink{classLidar_a6bda8cb2f37d6371e19a38c658fa8eee}{scans}};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35   \textcolor{keyword}{private}:}
+\DoxyCodeLine{36     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classLidarFactory}{LidarFactory}};}
+\DoxyCodeLine{37     \mbox{\hyperlink{classLidar_a1e97fe390c60ed6ee2647cd164b365cc}{Lidar}}(\mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}}, speed\_t, \mbox{\hyperlink{classLidar_ae9312855659329897d3e1f0e1bbaa26c}{scansinitfunc}}\&\&);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}} \mbox{\hyperlink{classLidar_a02d1e41cf43115c97a1609f60acfa3be}{getseries}}(std::shared\_ptr<serial>);}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLidar_a2ba5e1163a3b4e3a1dea37de013d8272}{getpacket}}(std::vector<uint8\_t>\&\&, std::vector<uint8\_t>\&, uint8\_t,}
+\DoxyCodeLine{41                    \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{42     std::shared\_ptr<ScanIf> \mbox{\hyperlink{classLidar_ac610dc5102ba2327ccc8689b440f76f5}{getscan}}(\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{43 \};}
+
+\end{DoxyCode}

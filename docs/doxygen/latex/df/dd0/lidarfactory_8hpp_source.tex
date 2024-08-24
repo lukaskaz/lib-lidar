@@ -1,0 +1,24 @@
+\hypertarget{lidarfactory_8hpp_source}{}\doxysection{lidarfactory.\+hpp}
+\label{lidarfactory_8hpp_source}\index{inc/lidarfactory.hpp@{inc/lidarfactory.hpp}}
+\mbox{\hyperlink{lidarfactory_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2lidar_8hpp}{interfaces/lidar.hpp}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{classLidarFactory}{LidarFactory}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9   \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \textcolor{keyword}{static} std::shared\_ptr<LidarIf> \mbox{\hyperlink{classLidarFactory_a179beff796b3eb834c208d712636232d}{createAseries}}();}
+\DoxyCodeLine{11     \textcolor{keyword}{static} std::shared\_ptr<LidarIf> \mbox{\hyperlink{classLidarFactory_abf3b3593e773d1241595256be66de451}{createCseries}}();}
+\DoxyCodeLine{12 \};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classLidarFinder}{LidarFinder}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16   \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \textcolor{keyword}{static} std::shared\_ptr<LidarIf> \mbox{\hyperlink{classLidarFinder_af7c56c2c3b9f71f341b66887b18fe6fd}{run}}(std::shared\_ptr<serial>);}
+\DoxyCodeLine{18 \};}
+
+\end{DoxyCode}

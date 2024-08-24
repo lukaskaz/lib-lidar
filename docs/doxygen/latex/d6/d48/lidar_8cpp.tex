@@ -1,0 +1,62 @@
+\hypertarget{lidar_8cpp}{}\doxysection{src/lidar.cpp File Reference}
+\label{lidar_8cpp}\index{src/lidar.cpp@{src/lidar.cpp}}
+{\ttfamily \#include \char`\"{}lidar.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}helpers.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for lidar.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dd2/lidar_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{lidar_8cpp_ad05fc4f08cf377ed9ff5d3796d6d6576}{SCANSTARTFLAG}} = 0x\+A5
+\item 
+constexpr auto \mbox{\hyperlink{lidar_8cpp_a759125ccb8217475ae649067914a6d2e}{SCANGETINFOCMD}} = 0x50
+\item 
+constexpr auto \mbox{\hyperlink{lidar_8cpp_ab39db5ee47d2b35c8c95e35f9fa465ce}{SCANGETSTATCMD}} = 0x52
+\item 
+constexpr auto \mbox{\hyperlink{lidar_8cpp_a77ded8510e30ecb44c18271f866a5c68}{SCANGETSRATECMD}} = 0x59
+\item 
+constexpr auto \mbox{\hyperlink{lidar_8cpp_acde056897b8e99220f9ca9ebc133d1a8}{SCANGETCONFCMD}} = 0x84
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{lidar_8cpp_acde056897b8e99220f9ca9ebc133d1a8}\label{lidar_8cpp_acde056897b8e99220f9ca9ebc133d1a8}} 
+\index{lidar.cpp@{lidar.cpp}!SCANGETCONFCMD@{SCANGETCONFCMD}}
+\index{SCANGETCONFCMD@{SCANGETCONFCMD}!lidar.cpp@{lidar.cpp}}
+\doxysubsubsection{\texorpdfstring{SCANGETCONFCMD}{SCANGETCONFCMD}}
+{\footnotesize\ttfamily constexpr auto SCANGETCONFCMD = 0x84\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{lidar_8cpp_a759125ccb8217475ae649067914a6d2e}\label{lidar_8cpp_a759125ccb8217475ae649067914a6d2e}} 
+\index{lidar.cpp@{lidar.cpp}!SCANGETINFOCMD@{SCANGETINFOCMD}}
+\index{SCANGETINFOCMD@{SCANGETINFOCMD}!lidar.cpp@{lidar.cpp}}
+\doxysubsubsection{\texorpdfstring{SCANGETINFOCMD}{SCANGETINFOCMD}}
+{\footnotesize\ttfamily constexpr auto SCANGETINFOCMD = 0x50\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{lidar_8cpp_a77ded8510e30ecb44c18271f866a5c68}\label{lidar_8cpp_a77ded8510e30ecb44c18271f866a5c68}} 
+\index{lidar.cpp@{lidar.cpp}!SCANGETSRATECMD@{SCANGETSRATECMD}}
+\index{SCANGETSRATECMD@{SCANGETSRATECMD}!lidar.cpp@{lidar.cpp}}
+\doxysubsubsection{\texorpdfstring{SCANGETSRATECMD}{SCANGETSRATECMD}}
+{\footnotesize\ttfamily constexpr auto SCANGETSRATECMD = 0x59\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{lidar_8cpp_ab39db5ee47d2b35c8c95e35f9fa465ce}\label{lidar_8cpp_ab39db5ee47d2b35c8c95e35f9fa465ce}} 
+\index{lidar.cpp@{lidar.cpp}!SCANGETSTATCMD@{SCANGETSTATCMD}}
+\index{SCANGETSTATCMD@{SCANGETSTATCMD}!lidar.cpp@{lidar.cpp}}
+\doxysubsubsection{\texorpdfstring{SCANGETSTATCMD}{SCANGETSTATCMD}}
+{\footnotesize\ttfamily constexpr auto SCANGETSTATCMD = 0x52\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{lidar_8cpp_ad05fc4f08cf377ed9ff5d3796d6d6576}\label{lidar_8cpp_ad05fc4f08cf377ed9ff5d3796d6d6576}} 
+\index{lidar.cpp@{lidar.cpp}!SCANSTARTFLAG@{SCANSTARTFLAG}}
+\index{SCANSTARTFLAG@{SCANSTARTFLAG}!lidar.cpp@{lidar.cpp}}
+\doxysubsubsection{\texorpdfstring{SCANSTARTFLAG}{SCANSTARTFLAG}}
+{\footnotesize\ttfamily constexpr auto SCANSTARTFLAG = 0x\+A5\hspace{0.3cm}{\ttfamily [constexpr]}}
+

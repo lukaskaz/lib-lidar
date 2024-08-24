@@ -1,0 +1,120 @@
+\hypertarget{classSamplesGroup}{}\doxysection{Samples\+Group Class Reference}
+\label{classSamplesGroup}\index{SamplesGroup@{SamplesGroup}}
+
+
+{\ttfamily \#include $<$samples.\+hpp$>$}
+
+
+
+Collaboration diagram for Samples\+Group\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d70/classSamplesGroup__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSamplesGroup_af363b7fe11d082cacdd0117c974566b0}{Samples\+Group}} (int32\+\_\+t)
+\item 
+\mbox{\hyperlink{classSamplesGroup_a7fa3924f840a3f073152955859d69652}{Samples\+Group}} (int32\+\_\+t, int32\+\_\+t)
+\item 
+void \mbox{\hyperlink{classSamplesGroup_a2744c78019ee5b07ecbef84cf6cf27c2}{addnotifier}} (\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}} \&\&func)
+\item 
+bool \mbox{\hyperlink{classSamplesGroup_ae218745ef01d4f34e21d9aefd3698351}{addsampletonotify}} (\mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}})
+\item 
+void \mbox{\hyperlink{classSamplesGroup_a4cd31be8dcac913443a71b16a77bd0d2}{notifyandcleanup}} ()
+\item 
+std\+::vector$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classSamplesGroup_a5b28e258d32cbc400dbf01774d39aca0}{getangles}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int32\+\_\+t, int32\+\_\+t $>$ \mbox{\hyperlink{classSamplesGroup_a67a8ea83ebaa38844793a1a3fbed7b82}{angleswithprio}}
+\item 
+std\+::map$<$ int32\+\_\+t, \mbox{\hyperlink{classSample}{Sample}} $>$ \mbox{\hyperlink{classSamplesGroup_ad30f4388714994acaa62cafac2308377}{samplestonotify}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}} $>$ \mbox{\hyperlink{classSamplesGroup_a32801220ceff417c3936799f0671ae1e}{notifiers}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int32\+\_\+t \mbox{\hyperlink{classSamplesGroup_a3aaeeae4fec5a407c5501717d29acef0}{supportangles}} \{2\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSamplesGroup_af363b7fe11d082cacdd0117c974566b0}\label{classSamplesGroup_af363b7fe11d082cacdd0117c974566b0}} 
+\index{SamplesGroup@{SamplesGroup}!SamplesGroup@{SamplesGroup}}
+\index{SamplesGroup@{SamplesGroup}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{SamplesGroup()}{SamplesGroup()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Samples\+Group\+::\+Samples\+Group (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSamplesGroup_a7fa3924f840a3f073152955859d69652}\label{classSamplesGroup_a7fa3924f840a3f073152955859d69652}} 
+\index{SamplesGroup@{SamplesGroup}!SamplesGroup@{SamplesGroup}}
+\index{SamplesGroup@{SamplesGroup}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{SamplesGroup()}{SamplesGroup()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Samples\+Group\+::\+Samples\+Group (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{mainangle,  }\item[{int32\+\_\+t}]{supportangles }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSamplesGroup_a2744c78019ee5b07ecbef84cf6cf27c2}\label{classSamplesGroup_a2744c78019ee5b07ecbef84cf6cf27c2}} 
+\index{SamplesGroup@{SamplesGroup}!addnotifier@{addnotifier}}
+\index{addnotifier@{addnotifier}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{addnotifier()}{addnotifier()}}
+{\footnotesize\ttfamily void Samples\+Group\+::addnotifier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}} \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSamplesGroup_ae218745ef01d4f34e21d9aefd3698351}\label{classSamplesGroup_ae218745ef01d4f34e21d9aefd3698351}} 
+\index{SamplesGroup@{SamplesGroup}!addsampletonotify@{addsampletonotify}}
+\index{addsampletonotify@{addsampletonotify}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{addsampletonotify()}{addsampletonotify()}}
+{\footnotesize\ttfamily bool Samples\+Group\+::addsampletonotify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}}}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSamplesGroup_a5b28e258d32cbc400dbf01774d39aca0}\label{classSamplesGroup_a5b28e258d32cbc400dbf01774d39aca0}} 
+\index{SamplesGroup@{SamplesGroup}!getangles@{getangles}}
+\index{getangles@{getangles}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{getangles()}{getangles()}}
+{\footnotesize\ttfamily std\+::vector$<$ int32\+\_\+t $>$ Samples\+Group\+::getangles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classSamplesGroup_a4cd31be8dcac913443a71b16a77bd0d2}\label{classSamplesGroup_a4cd31be8dcac913443a71b16a77bd0d2}} 
+\index{SamplesGroup@{SamplesGroup}!notifyandcleanup@{notifyandcleanup}}
+\index{notifyandcleanup@{notifyandcleanup}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{notifyandcleanup()}{notifyandcleanup()}}
+{\footnotesize\ttfamily void Samples\+Group\+::notifyandcleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSamplesGroup_a67a8ea83ebaa38844793a1a3fbed7b82}\label{classSamplesGroup_a67a8ea83ebaa38844793a1a3fbed7b82}} 
+\index{SamplesGroup@{SamplesGroup}!angleswithprio@{angleswithprio}}
+\index{angleswithprio@{angleswithprio}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{angleswithprio}{angleswithprio}}
+{\footnotesize\ttfamily std\+::map$<$int32\+\_\+t, int32\+\_\+t$>$ Samples\+Group\+::angleswithprio\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSamplesGroup_a32801220ceff417c3936799f0671ae1e}\label{classSamplesGroup_a32801220ceff417c3936799f0671ae1e}} 
+\index{SamplesGroup@{SamplesGroup}!notifiers@{notifiers}}
+\index{notifiers@{notifiers}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{notifiers}{notifiers}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}}$>$ Samples\+Group\+::notifiers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSamplesGroup_ad30f4388714994acaa62cafac2308377}\label{classSamplesGroup_ad30f4388714994acaa62cafac2308377}} 
+\index{SamplesGroup@{SamplesGroup}!samplestonotify@{samplestonotify}}
+\index{samplestonotify@{samplestonotify}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{samplestonotify}{samplestonotify}}
+{\footnotesize\ttfamily std\+::map$<$int32\+\_\+t, \mbox{\hyperlink{classSample}{Sample}}$>$ Samples\+Group\+::samplestonotify\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSamplesGroup_a3aaeeae4fec5a407c5501717d29acef0}\label{classSamplesGroup_a3aaeeae4fec5a407c5501717d29acef0}} 
+\index{SamplesGroup@{SamplesGroup}!supportangles@{supportangles}}
+\index{supportangles@{supportangles}!SamplesGroup@{SamplesGroup}}
+\doxysubsubsection{\texorpdfstring{supportangles}{supportangles}}
+{\footnotesize\ttfamily const int32\+\_\+t Samples\+Group\+::supportangles \{2\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{samples_8hpp}{samples.\+hpp}}\item 
+src/\mbox{\hyperlink{samples_8cpp}{samples.\+cpp}}\end{DoxyCompactItemize}

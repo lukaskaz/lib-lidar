@@ -1,0 +1,107 @@
+\hypertarget{interfaces_2lidar_8hpp}{}\doxysection{inc/interfaces/lidar.hpp File Reference}
+\label{interfaces_2lidar_8hpp}\index{inc/interfaces/lidar.hpp@{inc/interfaces/lidar.hpp}}
+{\ttfamily \#include \char`\"{}interfaces/scan.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}serial.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+Include dependency graph for lidar.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d45/interfaces_2lidar_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d2a/interfaces_2lidar_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structConfiguration}{Configuration}}
+\item 
+struct \mbox{\hyperlink{structConfiguration_1_1Mode}{Configuration\+::\+Mode}}
+\item 
+class \mbox{\hyperlink{classLidarInfoIf}{Lidar\+Info\+If}}
+\item 
+class \mbox{\hyperlink{classLidarScanIf}{Lidar\+Scan\+If}}
+\item 
+class \mbox{\hyperlink{classLidarIf}{Lidar\+If}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90}{state}} \{ \mbox{\hyperlink{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a755f85c2723bb39381c7379a604160d8}{good}}
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a1ea4c3ab05ee0c6d4de30740443769cb}{warn}}
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a56bd7107802ebe56c6918992f0608ec6}{err}}
+ \}
+\item 
+enum class \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}} \{ \newline
+\mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a7cccb37086702c7d4ff90d3db74e1af6}{amodel}} = 0
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aed26428052d696c50a3b581e4d710a80}{cmodel}} = 4
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a491eae731ff6e15183f669c0b71c7d09}{smodel}} = 6
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a57eb0acd68989a392f34ccc785cc5dfe}{tmodel}} = 9
+, \newline
+\mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a5f1d9979289ab41180db639b8566631e}{mmodel}} = 12
+, \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aad921d60486366258809553a3db49a4a}{unknown}} = 255
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}} 
+\index{lidar.hpp@{lidar.hpp}!seriesid@{seriesid}}
+\index{seriesid@{seriesid}!lidar.hpp@{lidar.hpp}}
+\doxysubsubsection{\texorpdfstring{seriesid}{seriesid}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61}{seriesid}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{amodel@{amodel}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!amodel@{amodel}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a7cccb37086702c7d4ff90d3db74e1af6}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a7cccb37086702c7d4ff90d3db74e1af6}} 
+amodel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{cmodel@{cmodel}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!cmodel@{cmodel}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aed26428052d696c50a3b581e4d710a80}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aed26428052d696c50a3b581e4d710a80}} 
+cmodel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{smodel@{smodel}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!smodel@{smodel}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a491eae731ff6e15183f669c0b71c7d09}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a491eae731ff6e15183f669c0b71c7d09}} 
+smodel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{tmodel@{tmodel}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!tmodel@{tmodel}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a57eb0acd68989a392f34ccc785cc5dfe}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a57eb0acd68989a392f34ccc785cc5dfe}} 
+tmodel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmodel@{mmodel}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!mmodel@{mmodel}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a5f1d9979289ab41180db639b8566631e}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61a5f1d9979289ab41180db639b8566631e}} 
+mmodel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{unknown@{unknown}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!unknown@{unknown}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aad921d60486366258809553a3db49a4a}\label{interfaces_2lidar_8hpp_a2a476dd273923b8a086b11f7fe03be61aad921d60486366258809553a3db49a4a}} 
+unknown&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90}\label{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90}} 
+\index{lidar.hpp@{lidar.hpp}!state@{state}}
+\index{state@{state}!lidar.hpp@{lidar.hpp}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90}{state}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{good@{good}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!good@{good}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a755f85c2723bb39381c7379a604160d8}\label{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a755f85c2723bb39381c7379a604160d8}} 
+good&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{warn@{warn}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!warn@{warn}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a1ea4c3ab05ee0c6d4de30740443769cb}\label{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a1ea4c3ab05ee0c6d4de30740443769cb}} 
+warn&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{err@{err}!lidar.hpp@{lidar.hpp}}\index{lidar.hpp@{lidar.hpp}!err@{err}}}\mbox{\Hypertarget{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a56bd7107802ebe56c6918992f0608ec6}\label{interfaces_2lidar_8hpp_adc6e5733fc3c22f0a7b2914188c49c90a56bd7107802ebe56c6918992f0608ec6}} 
+err&\\
+\hline
+
+\end{DoxyEnumFields}

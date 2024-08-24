@@ -1,0 +1,98 @@
+\hypertarget{scan_8hpp_source}{}\doxysection{scan.\+hpp}
+\label{scan_8hpp_source}\index{inc/scan.hpp@{inc/scan.hpp}}
+\mbox{\hyperlink{scan_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2scan_8hpp}{interfaces/scan.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{samples_8hpp}{samples.hpp}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}serial.hpp"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <exception>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <future>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{using }\mbox{\hyperlink{scan_8hpp_a55f8d28128e7f55c7aeadd82d6ca2d24}{Measurement}} = std::pair<bool, SampleData>;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{classScan}{Scan}} : \textcolor{keyword}{public} \mbox{\hyperlink{classScanIf}{ScanIf}}, \textcolor{keyword}{public} std::enable\_shared\_from\_this<Scan>}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17   \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{classScan_a0ee1cf682b8f2adc87e1d3c8785147dc}{Scan}}(std::shared\_ptr<serial>, \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}});}
+\DoxyCodeLine{19     \mbox{\hyperlink{classScan_a716764da76d1f5c172dbbf3391cfbad1}{\string~Scan}}();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a64e5801e5b50d190c9d5aecfa7d3fedd}{run}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a25dd3b1b8cbb94c0a43b83e4d7dfba75}{stop}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a714813b99f8fd2f7b8882fcaac774f03}{addangle}}(int32\_t, \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a8d0f073c9888e4d683cd9ba0736bf0b7}{delangle}}(int32\_t) \textcolor{keyword}{override};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScan_ac5fbd028a57fee914618cafaa5b0be7c}{gettype}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{27     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScan_aab9974ba42cf9e677d40c683a3b0e1a1}{getsubtype}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{28     std::string \mbox{\hyperlink{classScan_a88bc8e282f5cd951af7d7e46b5421843}{gettypename}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{29     std::string \mbox{\hyperlink{classScan_a9102f291fcc345b09a6fd4c92b7bd4c4}{getsubtypename}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classScan_abb157c6b0bf755c2aa3fdad1720078e4}{isrunning}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33   \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{classObserver}{Observer}} \mbox{\hyperlink{classScan_a7a78844e882d19fc226d6cff5ffed882}{observer}};}
+\DoxyCodeLine{35     \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScan_a1975aa7d6e3ceee4713dd70f9a83a17f}{type}};}
+\DoxyCodeLine{36     \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScan_aac81378cd566304305365751290c4be3}{subtype}};}
+\DoxyCodeLine{37     std::atomic<bool> \mbox{\hyperlink{classScan_a94036c35c9a077f0e898681143bd617d}{running}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{38     std::shared\_ptr<serial> \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}};}
+\DoxyCodeLine{39     std::exception\_ptr \mbox{\hyperlink{classScan_a2b6dba67230fbd10d3d7849b77a8b336}{exceptptr}};}
+\DoxyCodeLine{40     std::shared\_ptr<std::future<void>> \mbox{\hyperlink{classScan_a8548c37f37bbf06ca6a592b039cca903}{scanning}};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_ac7d73b3cc73b88c56527518ac6cebcfe}{processscan}}() = 0;}
+\DoxyCodeLine{43     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a2df58116c384cad1ab2a554dacf84d60}{requestscan}}() = 0;}
+\DoxyCodeLine{44     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_ac39c4f307f714f76710bfcceb00bb0c8}{releasescan}}();}
+\DoxyCodeLine{45 \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{class }\mbox{\hyperlink{classScanNormal}{ScanNormal}} : \textcolor{keyword}{public} \mbox{\hyperlink{classScan}{Scan}}}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49   \textcolor{keyword}{private}:}
+\DoxyCodeLine{50     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classScanFactory}{ScanFactory}};}
+\DoxyCodeLine{51     \mbox{\hyperlink{classScanNormal_afe4d15a28c6d63e48a5adcd0d2875da5}{ScanNormal}}(std::shared\_ptr<serial> \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}) :}
+\DoxyCodeLine{52         \mbox{\hyperlink{classScan}{Scan}}(\mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}::\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}{normal}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}}::\mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}{none}})}
+\DoxyCodeLine{53     \{\}}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanNormal_a4b03c357ddfeb7e53edc735b0167c157}{requestscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{55     \mbox{\hyperlink{scan_8hpp_a55f8d28128e7f55c7aeadd82d6ca2d24}{Measurement}} \mbox{\hyperlink{classScanNormal_ab400fbbf93efe0109e17cd24c1ad860d}{getdata}}(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanNormal_a69ed61556efb168046188fcfa68152ec}{processscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{57 \};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{class }\mbox{\hyperlink{classScanExpress}{ScanExpress}} : \textcolor{keyword}{public} \mbox{\hyperlink{classScan}{Scan}}}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61   \textcolor{keyword}{public}:}
+\DoxyCodeLine{62     \mbox{\hyperlink{classScanExpress_afe4dff0367be21cecf11d3a95fea51ab}{ScanExpress}}(std::shared\_ptr<serial> \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScan_aac81378cd566304305365751290c4be3}{subtype}}) :}
+\DoxyCodeLine{63         \mbox{\hyperlink{classScan}{Scan}}(\mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}::\mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}{express}}, \mbox{\hyperlink{classScan_aac81378cd566304305365751290c4be3}{subtype}})}
+\DoxyCodeLine{64     \{\}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \textcolor{keyword}{protected}:}
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanExpress_a7cc0b4a5757481a8eabc5ed67bdc4643}{requestscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{68     \textcolor{keyword}{virtual} std::pair<double, std::vector<uint8\_t>> \mbox{\hyperlink{classScanExpress_abbf7ce913901f22420d11c03d9191474}{getbasedata}}(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{69 \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{keyword}{class }\mbox{\hyperlink{classScanExpressLegacy}{ScanExpressLegacy}} : \textcolor{keyword}{public} \mbox{\hyperlink{classScanExpress}{ScanExpress}}}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73   \textcolor{keyword}{private}:}
+\DoxyCodeLine{74     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classScanFactory}{ScanFactory}};}
+\DoxyCodeLine{75     \mbox{\hyperlink{classScanExpressLegacy_ada1555858916664c52fdbded3d3bcf51}{ScanExpressLegacy}}(std::shared\_ptr<serial> \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}) :}
+\DoxyCodeLine{76         \mbox{\hyperlink{classScanExpress}{ScanExpress}}(\mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}}::\mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}{legacy}})}
+\DoxyCodeLine{77     \{\}}
+\DoxyCodeLine{78     std::array<Measurement, 2> \mbox{\hyperlink{classScanExpressLegacy_a719d0e89de0ef6bc38a79300fb5b7ccb}{getcabindata}}(std::vector<uint8\_t>\&\&, \textcolor{keywordtype}{double},}
+\DoxyCodeLine{79                                             \textcolor{keywordtype}{double}, uint8\_t);}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanExpressLegacy_ab3255355162bf6d9e14cecb9c1edabea}{processscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{81 \};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{class }\mbox{\hyperlink{classScanExpressDense}{ScanExpressDense}} : \textcolor{keyword}{public} \mbox{\hyperlink{classScanExpress}{ScanExpress}}}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85   \textcolor{keyword}{private}:}
+\DoxyCodeLine{86     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classScanFactory}{ScanFactory}};}
+\DoxyCodeLine{87     \mbox{\hyperlink{classScanExpressDense_a0f4852af55bea999f67b6e64d4617c40}{ScanExpressDense}}(std::shared\_ptr<serial> \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}) :}
+\DoxyCodeLine{88         \mbox{\hyperlink{classScanExpress}{ScanExpress}}(\mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serialIf}}, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}}::\mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}{dense}})}
+\DoxyCodeLine{89     \{\}}
+\DoxyCodeLine{90     \mbox{\hyperlink{scan_8hpp_a55f8d28128e7f55c7aeadd82d6ca2d24}{Measurement}} \mbox{\hyperlink{classScanExpressDense_a52a1a5df5a068bc584d73ed41c9d585d}{getcabindata}}(std::vector<uint8\_t>\&\&, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, uint8\_t);}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanExpressDense_ae525dc74970a6e56625dc1898c837687}{processscan}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{92 \};}
+
+\end{DoxyCode}

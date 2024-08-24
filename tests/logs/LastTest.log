@@ -1,0 +1,153 @@
+Start testing: Aug 24 14:26 CEST
+----------------------------------------------------------
+1/1 Testing: lidar-ut
+1/1 Test: lidar-ut
+Command: "/home/lukasz/git/lib-lidar/tests/build/lidar-ut"
+Directory: /home/lukasz/git/lib-lidar/tests/build
+"lidar-ut" start time: Aug 24 14:26 CEST
+Output:
+----------------------------------------------------------
+[==========] Running 50 tests from 10 test suites.
+[----------] Global test environment set-up.
+[----------] 4 tests from TestLidarFactory
+[ RUN      ] TestLidarFactory.CreatedAseries_GettingAseriesIdSucceeded
+[       OK ] TestLidarFactory.CreatedAseries_GettingAseriesIdSucceeded (0 ms)
+[ RUN      ] TestLidarFactory.CreatedCseries_GettingAseriesScansSucceeded
+[       OK ] TestLidarFactory.CreatedCseries_GettingAseriesScansSucceeded (0 ms)
+[ RUN      ] TestLidarFactory.CreatedCseries_GettingCseriesIdSucceeded
+[       OK ] TestLidarFactory.CreatedCseries_GettingCseriesIdSucceeded (0 ms)
+[ RUN      ] TestLidarFactory.CreatedCseries_GettingCseriesScansSucceeded
+[       OK ] TestLidarFactory.CreatedCseries_GettingCseriesScansSucceeded (0 ms)
+[----------] 4 tests from TestLidarFactory (0 ms total)
+
+[----------] 3 tests from TestLidarFinder
+[ RUN      ] TestLidarFinder.FindingAvailableLidar_GettingAseriesLidarSucceeded
+[       OK ] TestLidarFinder.FindingAvailableLidar_GettingAseriesLidarSucceeded (0 ms)
+[ RUN      ] TestLidarFinder.FindingAvailableLidar_GettingCseriesLidarSucceeded
+[       OK ] TestLidarFinder.FindingAvailableLidar_GettingCseriesLidarSucceeded (0 ms)
+[ RUN      ] TestLidarFinder.FindingAvailableLidar_NotGettingLidarThrows
+[       OK ] TestLidarFinder.FindingAvailableLidar_NotGettingLidarThrows (0 ms)
+[----------] 3 tests from TestLidarFinder (0 ms total)
+
+[----------] 6 tests from TestScanFactory
+[ RUN      ] TestScanFactory.CreatedNormalScan_ReturnsNormalIdByType
+[       OK ] TestScanFactory.CreatedNormalScan_ReturnsNormalIdByType (0 ms)
+[ RUN      ] TestScanFactory.CreatedNormalScan_ReturnsNormalIdByString
+[       OK ] TestScanFactory.CreatedNormalScan_ReturnsNormalIdByString (0 ms)
+[ RUN      ] TestScanFactory.CreatedExpressLegacyScan_ReturnsExpressLegacyIdByType
+[       OK ] TestScanFactory.CreatedExpressLegacyScan_ReturnsExpressLegacyIdByType (0 ms)
+[ RUN      ] TestScanFactory.CreatedExpressLegacyScan_ReturnsExpressLegacyIdByString
+[       OK ] TestScanFactory.CreatedExpressLegacyScan_ReturnsExpressLegacyIdByString (0 ms)
+[ RUN      ] TestScanFactory.CreatedExpressDenseScan_ReturnsExpressDenseIdByType
+[       OK ] TestScanFactory.CreatedExpressDenseScan_ReturnsExpressDenseIdByType (0 ms)
+[ RUN      ] TestScanFactory.CreatedExpressDenseScan_ReturnsExpressDenseIdByString
+[       OK ] TestScanFactory.CreatedExpressDenseScan_ReturnsExpressDenseIdByString (0 ms)
+[----------] 6 tests from TestScanFactory (0 ms total)
+
+[----------] 7 tests from TestObserver
+[ RUN      ] TestObserver.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow
+[       OK ] TestObserver.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow (0 ms)
+[ RUN      ] TestObserver.AddedTwoEventsForOverlappingAngles_ObserverThrows
+[       OK ] TestObserver.AddedTwoEventsForOverlappingAngles_ObserverThrows (0 ms)
+[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndUpdated_EventCalled
+[       OK ] TestObserver.AddedSingleEventForSingleGroupAndUpdated_EventCalled (0 ms)
+[ RUN      ] TestObserver.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled
+[       OK ] TestObserver.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled (0 ms)
+[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled
+[       OK ] TestObserver.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled (0 ms)
+[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce
+[       OK ] TestObserver.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce (0 ms)
+[ RUN      ] TestObserver.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled
+[       OK ] TestObserver.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled (0 ms)
+[----------] 7 tests from TestObserver (0 ms total)
+
+[----------] 4 tests from TestSample
+[ RUN      ] TestSample.SampleCreatedWithValidDistance_MarkedAsValid
+[       OK ] TestSample.SampleCreatedWithValidDistance_MarkedAsValid (0 ms)
+[ RUN      ] TestSample.SampleCreatedWithInvalidDistance_MarkedAsInvalid
+[       OK ] TestSample.SampleCreatedWithInvalidDistance_MarkedAsInvalid (0 ms)
+[ RUN      ] TestSample.GetDataFromSampleWithValidDistance_GivesValidData
+[       OK ] TestSample.GetDataFromSampleWithValidDistance_GivesValidData (0 ms)
+[ RUN      ] TestSample.GetDataFromSampleWithInvalidDistance_GivesNanDistance
+[       OK ] TestSample.GetDataFromSampleWithInvalidDistance_GivesNanDistance (0 ms)
+[----------] 4 tests from TestSample (0 ms total)
+
+[----------] 7 tests from TestSamplesGroup
+[ RUN      ] TestSamplesGroup.DefaultAnglesGroupCreated_AllAnglesPresent
+[       OK ] TestSamplesGroup.DefaultAnglesGroupCreated_AllAnglesPresent (0 ms)
+[ RUN      ] TestSamplesGroup.UpdatedThreeValidSamplesOfGroup_NotifierCalledOnce
+[       OK ] TestSamplesGroup.UpdatedThreeValidSamplesOfGroup_NotifierCalledOnce (0 ms)
+[ RUN      ] TestSamplesGroup.UpdatedThreeInvalidSamplesOfGroup_NotifierNotCalled
+[       OK ] TestSamplesGroup.UpdatedThreeInvalidSamplesOfGroup_NotifierNotCalled (0 ms)
+[ RUN      ] TestSamplesGroup.UpdatedThreeValidSamplesOfGroup_NotifierCalledForHighestPrio
+[       OK ] TestSamplesGroup.UpdatedThreeValidSamplesOfGroup_NotifierCalledForHighestPrio (0 ms)
+[ RUN      ] TestSamplesGroup.UpdatedTwoValidSupporingSamplesOfGroup_NotifierCalledForHighestPrio
+[       OK ] TestSamplesGroup.UpdatedTwoValidSupporingSamplesOfGroup_NotifierCalledForHighestPrio (0 ms)
+[ RUN      ] TestSamplesGroup.UpdatedOneValidSupporingSampleOfGroup_NotifierCalledForHighestPrio
+[       OK ] TestSamplesGroup.UpdatedOneValidSupporingSampleOfGroup_NotifierCalledForHighestPrio (0 ms)
+[ RUN      ] TestSamplesGroup.AddedSeveralNotifiersForGroup_AllNotifiersCalled
+[       OK ] TestSamplesGroup.AddedSeveralNotifiersForGroup_AllNotifiersCalled (0 ms)
+[----------] 7 tests from TestSamplesGroup (0 ms total)
+
+[----------] 6 tests from TestHelpers
+[ RUN      ] TestHelpers.RequestTimeAndDayDetails_ProvidedStringNotEmpty
+[       OK ] TestHelpers.RequestTimeAndDayDetails_ProvidedStringNotEmpty (0 ms)
+[ RUN      ] TestHelpers.CreatedDataPacketNeedingChecksum_ProvidedChecksumCorrect
+[       OK ] TestHelpers.CreatedDataPacketNeedingChecksum_ProvidedChecksumCorrect (0 ms)
+[ RUN      ] TestHelpers.CreatedUniqueQueueAndTryGetFromEmpty_QueueThrows
+[       OK ] TestHelpers.CreatedUniqueQueueAndTryGetFromEmpty_QueueThrows (0 ms)
+[ RUN      ] TestHelpers.CreatedUniqueQueueAndPutGetOneElem_ElemPutAndRetrieved
+[       OK ] TestHelpers.CreatedUniqueQueueAndPutGetOneElem_ElemPutAndRetrieved (0 ms)
+[ RUN      ] TestHelpers.CreatedUniqueQueueAndPutGetSeveralElems_ElemsPutAndRetrieved
+[       OK ] TestHelpers.CreatedUniqueQueueAndPutGetSeveralElems_ElemsPutAndRetrieved (0 ms)
+[ RUN      ] TestHelpers.CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue
+[       OK ] TestHelpers.CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue (0 ms)
+[----------] 6 tests from TestHelpers (0 ms total)
+
+[----------] 4 tests from TestLidarInfo
+[ RUN      ] TestLidarInfo.GettingNameFromLidar_ProperNameReturned
+[       OK ] TestLidarInfo.GettingNameFromLidar_ProperNameReturned (0 ms)
+[ RUN      ] TestLidarInfo.GettingFwInfoFromLidar_ProperFwInfoReturned
+[       OK ] TestLidarInfo.GettingFwInfoFromLidar_ProperFwInfoReturned (0 ms)
+[ RUN      ] TestLidarInfo.GettingSamplerateFromLidar_ProperSampleratesReturned
+[       OK ] TestLidarInfo.GettingSamplerateFromLidar_ProperSampleratesReturned (0 ms)
+[ RUN      ] TestLidarInfo.GettingConfigurationFromLidar_ProperConfigurationReturned
+[       OK ] TestLidarInfo.GettingConfigurationFromLidar_ProperConfigurationReturned (0 ms)
+[----------] 4 tests from TestLidarInfo (1 ms total)
+
+[----------] 6 tests from TestScan
+[ RUN      ] TestScan.RunningNormalScanWithProperData_NotifierCalledOnWatchedAngle
+[       OK ] TestScan.RunningNormalScanWithProperData_NotifierCalledOnWatchedAngle (10 ms)
+[ RUN      ] TestScan.RunningNormalScanWithPacketSizeMismatch_DataInterpreterThrows
+[       OK ] TestScan.RunningNormalScanWithPacketSizeMismatch_DataInterpreterThrows (10 ms)
+[ RUN      ] TestScan.RunningExpressLegacyScanWithProperData_NotifierCalledOnWatchedAngle
+[       OK ] TestScan.RunningExpressLegacyScanWithProperData_NotifierCalledOnWatchedAngle (10 ms)
+[ RUN      ] TestScan.RunningExpressLegacyScanWithPacketSizeMismatch_DataInterpreterThrows
+[       OK ] TestScan.RunningExpressLegacyScanWithPacketSizeMismatch_DataInterpreterThrows (10 ms)
+[ RUN      ] TestScan.RunningExpressDenseScanWithProperData_NotifierCalledOnWatchedAngle
+[       OK ] TestScan.RunningExpressDenseScanWithProperData_NotifierCalledOnWatchedAngle (10 ms)
+[ RUN      ] TestScan.RunningExpressDenseScanWithPacketSizeMismatch_DataInterpreterThrows
+[       OK ] TestScan.RunningExpressDenseScanWithPacketSizeMismatch_DataInterpreterThrows (10 ms)
+[----------] 6 tests from TestScan (64 ms total)
+
+[----------] 3 tests from _/TestLidarState
+[ RUN      ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/0
+[       OK ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/0 (0 ms)
+[ RUN      ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/1
+[       OK ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/1 (0 ms)
+[ RUN      ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/2
+[       OK ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/2 (0 ms)
+[----------] 3 tests from _/TestLidarState (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 50 tests from 10 test suites ran. (70 ms total)
+[  PASSED  ] 50 tests.
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"lidar-ut" end time: Aug 24 14:26 CEST
+"lidar-ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 24 14:26 CEST

@@ -1,0 +1,66 @@
+\hypertarget{classObserver}{}\doxysection{Observer Class Reference}
+\label{classObserver}\index{Observer@{Observer}}
+
+
+{\ttfamily \#include $<$samples.\+hpp$>$}
+
+
+
+Collaboration diagram for Observer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d9f/classObserver__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}{event}} (int32\+\_\+t, \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}})
+\item 
+void \mbox{\hyperlink{classObserver_aac799382a7809d8c9062df0126c88765}{update}} (const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ int32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classObserver_a531e3a05b65bfcbabf38af803375ffec}{registeredangles}}
+\item 
+\mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}{notifyqueue}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}\label{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}} 
+\index{Observer@{Observer}!event@{event}}
+\index{event@{event}!Observer@{Observer}}
+\doxysubsubsection{\texorpdfstring{event()}{event()}}
+{\footnotesize\ttfamily void Observer\+::event (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle,  }\item[{\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}}}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classObserver_aac799382a7809d8c9062df0126c88765}\label{classObserver_aac799382a7809d8c9062df0126c88765}} 
+\index{Observer@{Observer}!update@{update}}
+\index{update@{update}!Observer@{Observer}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Observer\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&}]{data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}\label{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}} 
+\index{Observer@{Observer}!notifyqueue@{notifyqueue}}
+\index{notifyqueue@{notifyqueue}!Observer@{Observer}}
+\doxysubsubsection{\texorpdfstring{notifyqueue}{notifyqueue}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Observer\+::notifyqueue\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classObserver_a531e3a05b65bfcbabf38af803375ffec}\label{classObserver_a531e3a05b65bfcbabf38af803375ffec}} 
+\index{Observer@{Observer}!registeredangles@{registeredangles}}
+\index{registeredangles@{registeredangles}!Observer@{Observer}}
+\doxysubsubsection{\texorpdfstring{registeredangles}{registeredangles}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$int32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Observer\+::registeredangles\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{samples_8hpp}{samples.\+hpp}}\item 
+src/\mbox{\hyperlink{samples_8cpp}{samples.\+cpp}}\end{DoxyCompactItemize}

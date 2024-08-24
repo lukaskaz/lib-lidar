@@ -433,106 +433,113 @@ class TestScan : public testing::Test
 
 TEST_F(TestScan, RunningNormalScanWithProperData_NotifierCalledOnWatchedAngle)
 {
-    int32_t angletocheck{225};
-    SampleData received;
+    int32_t observedangle{225};
+    SampleData receiveddata;
+    SampleData expecteddata{observedangle, 107.975};
     simulateProperNormalData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::normal);
     usleep(10 * 1000);
     lidar->stopscan();
-    EXPECT_EQ(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }
 
 TEST_F(TestScan, RunningNormalScanWithPacketSizeMismatch_DataInterpreterThrows)
 {
-    int32_t angletocheck{225};
+    int32_t observedangle{225};
+    SampleData receiveddata;
+    SampleData expecteddata{0, 0.f};
     SampleData received;
     simulateWrongSizeNormalData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::normal);
     usleep(10 * 1000);
     ASSERT_THROW(lidar->stopscan();, std::runtime_error);
-    EXPECT_NE(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }
 
 TEST_F(TestScan,
        RunningExpressLegacyScanWithProperData_NotifierCalledOnWatchedAngle)
 {
-    int32_t angletocheck{145};
-    SampleData received;
+    int32_t observedangle{145};
+    SampleData receiveddata;
+    SampleData expecteddata{observedangle, 412.6};
     simulateProperExpressLegacyData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
     usleep(10 * 1000);
     lidar->stopscan();
-    EXPECT_EQ(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }
 
 TEST_F(TestScan,
        RunningExpressLegacyScanWithPacketSizeMismatch_DataInterpreterThrows)
 {
-    int32_t angletocheck{145};
-    SampleData received;
+    int32_t observedangle{145};
+    SampleData receiveddata;
+    SampleData expecteddata{0, 0.f};
     simulateWrongSizeExpressLegacyData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
     usleep(10 * 1000);
     ASSERT_THROW(lidar->stopscan();, std::runtime_error);
-    EXPECT_NE(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }
 
 TEST_F(TestScan,
        RunningExpressDenseScanWithProperData_NotifierCalledOnWatchedAngle)
 {
-    int32_t angletocheck{37};
-    SampleData received;
+    int32_t observedangle{37};
+    SampleData receiveddata;
+    SampleData expecteddata{observedangle, 25.2};
     simulateProperExpressDenseData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(4);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
     usleep(10 * 1000);
     lidar->stopscan();
-    EXPECT_EQ(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }
 
 TEST_F(TestScan,
        RunningExpressDenseScanWithPacketSizeMismatch_DataInterpreterThrows)
 {
-    int32_t angletocheck{37};
-    SampleData received;
+    int32_t observedangle{37};
+    SampleData receiveddata;
+    SampleData expecteddata{0, 0.f};
     simulateWrongSizeExpressDenseData();
     EXPECT_CALL(*serialMock, write(_, _)).Times(4);
     auto lidar = LidarFinder::run(serialMock);
-    lidar->watchangle(angletocheck,
-                      [&received](auto data) { received = data; });
+    lidar->watchangle(observedangle,
+                      [&receiveddata](auto data) { receiveddata = data; });
 
-    ASSERT_NE(received.first, angletocheck);
+    ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
     usleep(10 * 1000);
     ASSERT_THROW(lidar->stopscan();, std::runtime_error);
-    EXPECT_NE(received.first, angletocheck);
+    EXPECT_THAT(receiveddata, Eq(expecteddata));
 }

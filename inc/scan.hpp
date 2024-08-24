@@ -39,7 +39,7 @@ class Scan : public ScanIf, public std::enable_shared_from_this<Scan>
     std::exception_ptr exceptptr;
     std::shared_ptr<std::future<void>> scanning;
 
-    virtual void asyncroutine() = 0;
+    virtual void processscan() = 0;
     virtual void requestscan() = 0;
     virtual void releasescan();
 };
@@ -53,7 +53,7 @@ class ScanNormal : public Scan
     {}
     void requestscan() override;
     Measurement getdata(bool);
-    void asyncroutine() override;
+    void processscan() override;
 };
 
 class ScanExpress : public Scan
@@ -77,7 +77,7 @@ class ScanExpressLegacy : public ScanExpress
     {}
     std::array<Measurement, 2> getcabindata(std::vector<uint8_t>&&, double,
                                             double, uint8_t);
-    void asyncroutine() override;
+    void processscan() override;
 };
 
 class ScanExpressDense : public ScanExpress
@@ -88,5 +88,5 @@ class ScanExpressDense : public ScanExpress
         ScanExpress(serialIf, scansub_t::dense)
     {}
     Measurement getcabindata(std::vector<uint8_t>&&, double, double, uint8_t);
-    void asyncroutine() override;
+    void processscan() override;
 };

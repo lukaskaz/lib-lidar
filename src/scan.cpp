@@ -33,7 +33,8 @@ void Scan::run()
                 {
                     try
                     {
-                        self->asyncroutine();
+                        self->requestscan();
+                        self->processscan();
                     }
                     catch (...)
                     {
@@ -157,9 +158,8 @@ Measurement ScanNormal::getdata(bool firstread = false)
     }
 }
 
-void ScanNormal::asyncroutine()
+void ScanNormal::processscan()
 {
-    requestscan();
     auto [isvalid, data] = getdata(true);
     while (isrunning())
     {
@@ -280,9 +280,8 @@ std::array<Measurement, 2>
              {issecondvalid, {anglesecond, distancesecond / 10.}}}};
 }
 
-void ScanExpressLegacy::asyncroutine()
+void ScanExpressLegacy::processscan()
 {
-    requestscan();
     [[maybe_unused]] bool newscan{false};
     auto [startangleprev, cabindataprev] = getbasedata(true);
     while (isrunning())
@@ -338,9 +337,8 @@ Measurement ScanExpressDense::getcabindata(std::vector<uint8_t>&& cabin,
     return {isvalid, {angle, distance / 10.}};
 }
 
-void ScanExpressDense::asyncroutine()
+void ScanExpressDense::processscan()
 {
-    requestscan();
     [[maybe_unused]] bool newscan{false};
     auto [startangleprev, cabindataprev] = getbasedata(true);
 

@@ -1,0 +1,84 @@
+\hypertarget{classScanExpressLegacy}{}\doxysection{Scan\+Express\+Legacy Class Reference}
+\label{classScanExpressLegacy}\index{ScanExpressLegacy@{ScanExpressLegacy}}
+
+
+{\ttfamily \#include $<$scan.\+hpp$>$}
+
+
+
+Inheritance diagram for Scan\+Express\+Legacy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d7/df5/classScanExpressLegacy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scan\+Express\+Legacy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d71/classScanExpressLegacy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classScanExpressLegacy_ada1555858916664c52fdbded3d3bcf51}{Scan\+Express\+Legacy}} (std\+::shared\+\_\+ptr$<$ serial $>$ \mbox{\hyperlink{classScan_a2f9e9481d9eaef702cffa6e0ce79dce9}{serial\+If}})
+\item 
+std\+::array$<$ \mbox{\hyperlink{scan_8hpp_a55f8d28128e7f55c7aeadd82d6ca2d24}{Measurement}}, 2 $>$ \mbox{\hyperlink{classScanExpressLegacy_a719d0e89de0ef6bc38a79300fb5b7ccb}{getcabindata}} (std\+::vector$<$ uint8\+\_\+t $>$ \&\&, double, double, uint8\+\_\+t)
+\item 
+void \mbox{\hyperlink{classScanExpressLegacy_ab3255355162bf6d9e14cecb9c1edabea}{processscan}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classScanExpressLegacy_a5a661e53a397c7b41428124ea1138b1f}{Scan\+Factory}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classScanExpressLegacy_ada1555858916664c52fdbded3d3bcf51}\label{classScanExpressLegacy_ada1555858916664c52fdbded3d3bcf51}} 
+\index{ScanExpressLegacy@{ScanExpressLegacy}!ScanExpressLegacy@{ScanExpressLegacy}}
+\index{ScanExpressLegacy@{ScanExpressLegacy}!ScanExpressLegacy@{ScanExpressLegacy}}
+\doxysubsubsection{\texorpdfstring{ScanExpressLegacy()}{ScanExpressLegacy()}}
+{\footnotesize\ttfamily Scan\+Express\+Legacy\+::\+Scan\+Express\+Legacy (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ serial $>$}]{serial\+If }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classScanExpressLegacy_a719d0e89de0ef6bc38a79300fb5b7ccb}\label{classScanExpressLegacy_a719d0e89de0ef6bc38a79300fb5b7ccb}} 
+\index{ScanExpressLegacy@{ScanExpressLegacy}!getcabindata@{getcabindata}}
+\index{getcabindata@{getcabindata}!ScanExpressLegacy@{ScanExpressLegacy}}
+\doxysubsubsection{\texorpdfstring{getcabindata()}{getcabindata()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{scan_8hpp_a55f8d28128e7f55c7aeadd82d6ca2d24}{Measurement}}, 2 $>$ Scan\+Express\+Legacy\+::getcabindata (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&\&}]{cabin,  }\item[{double}]{startangle,  }\item[{double}]{angledelta,  }\item[{uint8\+\_\+t}]{cabinnum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classScanExpressLegacy_ab3255355162bf6d9e14cecb9c1edabea}\label{classScanExpressLegacy_ab3255355162bf6d9e14cecb9c1edabea}} 
+\index{ScanExpressLegacy@{ScanExpressLegacy}!processscan@{processscan}}
+\index{processscan@{processscan}!ScanExpressLegacy@{ScanExpressLegacy}}
+\doxysubsubsection{\texorpdfstring{processscan()}{processscan()}}
+{\footnotesize\ttfamily void Scan\+Express\+Legacy\+::processscan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classScan_ac7d73b3cc73b88c56527518ac6cebcfe}{Scan}}.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classScanExpressLegacy_a5a661e53a397c7b41428124ea1138b1f}\label{classScanExpressLegacy_a5a661e53a397c7b41428124ea1138b1f}} 
+\index{ScanExpressLegacy@{ScanExpressLegacy}!ScanFactory@{ScanFactory}}
+\index{ScanFactory@{ScanFactory}!ScanExpressLegacy@{ScanExpressLegacy}}
+\doxysubsubsection{\texorpdfstring{ScanFactory}{ScanFactory}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classScanFactory}{Scan\+Factory}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{scan_8hpp}{scan.\+hpp}}\item 
+src/\mbox{\hyperlink{scan_8cpp}{scan.\+cpp}}\end{DoxyCompactItemize}

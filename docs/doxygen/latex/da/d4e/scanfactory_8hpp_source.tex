@@ -1,0 +1,20 @@
+\hypertarget{scanfactory_8hpp_source}{}\doxysection{scanfactory.\+hpp}
+\label{scanfactory_8hpp_source}\index{inc/scanfactory.hpp@{inc/scanfactory.hpp}}
+\mbox{\hyperlink{scanfactory_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2scan_8hpp}{interfaces/scan.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}serial.hpp"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{classScanFactory}{ScanFactory}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10   \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \textcolor{keyword}{static} std::shared\_ptr<ScanIf> \mbox{\hyperlink{classScanFactory_af3430697c065ab99bf87c9b44918ddf2}{createNormal}}(std::shared\_ptr<serial>);}
+\DoxyCodeLine{12     \textcolor{keyword}{static} std::shared\_ptr<ScanIf> \mbox{\hyperlink{classScanFactory_a9aa6cdf0051ee953553c78c32a4b0257}{createExpressLegacy}}(std::shared\_ptr<serial>);}
+\DoxyCodeLine{13     \textcolor{keyword}{static} std::shared\_ptr<ScanIf> \mbox{\hyperlink{classScanFactory_a709541409657090b54b8500021061515}{createExpressDense}}(std::shared\_ptr<serial>);}
+\DoxyCodeLine{14 \};}
+
+\end{DoxyCode}

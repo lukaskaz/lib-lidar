@@ -1,0 +1,77 @@
+\hypertarget{interfaces_2scan_8hpp}{}\doxysection{inc/interfaces/scan.hpp File Reference}
+\label{interfaces_2scan_8hpp}\index{inc/interfaces/scan.hpp@{inc/interfaces/scan.hpp}}
+{\ttfamily \#include \char`\"{}interfaces/samples.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for scan.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{db/d83/interfaces_2scan_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/de7/interfaces_2scan_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classScanIf}{Scan\+If}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}} \{ \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}{normal}}
+, \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}{express}}
+ \}
+\item 
+enum class \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}} \{ \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}{none}}
+, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}{legacy}}
+, \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}{dense}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}\label{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}} 
+\index{scan.hpp@{scan.hpp}!scan\_t@{scan\_t}}
+\index{scan\_t@{scan\_t}!scan.hpp@{scan.hpp}}
+\doxysubsubsection{\texorpdfstring{scan\_t}{scan\_t}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\+\_\+t}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{normal@{normal}!scan.hpp@{scan.hpp}}\index{scan.hpp@{scan.hpp}!normal@{normal}}}\mbox{\Hypertarget{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}\label{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}} 
+normal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{express@{express}!scan.hpp@{scan.hpp}}\index{scan.hpp@{scan.hpp}!express@{express}}}\mbox{\Hypertarget{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}\label{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}} 
+express&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}\label{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}} 
+\index{scan.hpp@{scan.hpp}!scansub\_t@{scansub\_t}}
+\index{scansub\_t@{scansub\_t}!scan.hpp@{scan.hpp}}
+\doxysubsubsection{\texorpdfstring{scansub\_t}{scansub\_t}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\+\_\+t}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{none@{none}!scan.hpp@{scan.hpp}}\index{scan.hpp@{scan.hpp}!none@{none}}}\mbox{\Hypertarget{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}\label{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}} 
+none&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{legacy@{legacy}!scan.hpp@{scan.hpp}}\index{scan.hpp@{scan.hpp}!legacy@{legacy}}}\mbox{\Hypertarget{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}\label{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}} 
+legacy&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dense@{dense}!scan.hpp@{scan.hpp}}\index{scan.hpp@{scan.hpp}!dense@{dense}}}\mbox{\Hypertarget{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}\label{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}} 
+dense&\\
+\hline
+
+\end{DoxyEnumFields}

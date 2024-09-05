@@ -52,11 +52,6 @@ SamplesGroup::SamplesGroup(int32_t mainangle, int32_t supportangles)
     }
 }
 
-void SamplesGroup::addnotifier(NotifyFunc&& func)
-{
-    notifiers.push_back(std::move(func));
-}
-
 bool SamplesGroup::addsampletonotify(SampleData data)
 {
     Sample sample{data};
@@ -74,10 +69,8 @@ void SamplesGroup::notifyandcleanup()
 {
     if (!samplestonotify.empty())
     {
-        const auto& primesample = samplestonotify.begin()->second;
-        std::ranges::for_each(notifiers, [&primesample](auto& notifier) {
-            notifier(primesample.get());
-        });
+        auto primesample = samplestonotify.begin()->second;
+        notify(primesample.get());
         samplestonotify.clear();
     }
 }
@@ -88,12 +81,13 @@ std::vector<int32_t> SamplesGroup::getangles() const
     return {angles.begin(), angles.end()};
 }
 
-void Observer::event(int32_t angle, NotifyFunc func)
+void SamplesManager::event(int32_t angle,
+                           std::shared_ptr<Observer<SampleData>> obs)
 {
     if (registeredangles.contains(angle))
     {
         auto group = registeredangles.at(angle);
-        group->addnotifier(std::move(func));
+        group->subscribe(obs);
     }
     else
     {
@@ -106,11 +100,11 @@ void Observer::event(int32_t angle, NotifyFunc func)
             }
             registeredangles.emplace(angle, group);
         });
-        group->addnotifier(std::move(func));
+        group->subscribe(obs);
     }
 }
 
-void Observer::update(const SampleData& data)
+void SamplesManager::update(const SampleData& data)
 {
     auto [angle, _] = data;
     if (registeredangles.contains(angle))

@@ -8,7 +8,7 @@ class TestSamplesGroup : public testing::Test
     void SetUp() override
     {
         samplesgroup = std::make_shared<SamplesGroup>(angle);
-        samplesgroup->addnotifier(std::move(defaultnotifier));
+        samplesgroup->subscribe(Observer<SampleData>::create(defaultfunc));
     }
 
     void TearDown() override
@@ -24,7 +24,7 @@ class TestSamplesGroup : public testing::Test
     int32_t notifycounter{};
     SampleData notifieddata{};
 
-    NotifyFunc defaultnotifier{[this](auto& data) {
+    Observer<SampleData>::Func defaultfunc{[this](auto& data) {
         notifycounter++;
         notifieddata = data;
     }};
@@ -101,14 +101,14 @@ TEST_F(TestSamplesGroup,
 TEST_F(TestSamplesGroup, AddedSeveralNotifiersForGroup_AllNotifiersCalled)
 {
     int32_t notifycountersecond{}, notifycounterthird{};
-    samplesgroup->addnotifier(
+    samplesgroup->subscribe(Observer<SampleData>::create(
         [&notifycountersecond]([[maybe_unused]] auto& data) {
             notifycountersecond++;
-        });
-    samplesgroup->addnotifier(
+        }));
+    samplesgroup->subscribe(Observer<SampleData>::create(
         [&notifycounterthird]([[maybe_unused]] auto& data) {
             notifycounterthird++;
-        });
+        }));
 
     samplesgroup->addsampletonotify(validdata);
     auto initial =

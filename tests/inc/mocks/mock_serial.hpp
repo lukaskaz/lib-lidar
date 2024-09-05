@@ -2,7 +2,7 @@
 
 #include "serial.hpp"
 
-#include <gmock/gmock.h>
+#include "gmock/gmock.h"
 
 class SerialMock : public serial
 {

@@ -18,7 +18,7 @@ class Lidar : public LidarIf
     Configuration getconfiguration() override;
     std::pair<std::string, std::string> getconninfo() override;
 
-    void watchangle(int32_t, const NotifyFunc&) override;
+    void watchangle(int32_t, std::shared_ptr<Observer<SampleData>>) override;
     void runscan(scan_t) override;
     void stopscan() override;
     std::pair<std::string, std::string> getscaninfo(scan_t) const override;

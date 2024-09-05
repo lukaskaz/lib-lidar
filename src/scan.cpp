@@ -59,9 +59,9 @@ void Scan::stop()
     }
 }
 
-void Scan::addangle(int32_t angle, const NotifyFunc& func)
+void Scan::addangle(int32_t angle, std::shared_ptr<Observer<SampleData>> obs)
 {
-    observer.event(angle, func);
+    samplesmanager.event(angle, obs);
 }
 
 void Scan::delangle([[maybe_unused]] int32_t angle)
@@ -165,7 +165,7 @@ void ScanNormal::processscan()
     {
         if (isvalid)
         {
-            observer.update(data);
+            samplesmanager.update(data);
         }
         std::tie(isvalid, data) = getdata();
     }
@@ -307,7 +307,7 @@ void ScanExpressLegacy::processscan()
                                   [this](Measurement& measurement) {
                                       auto [isvalid, data] = measurement;
                                       if (isvalid)
-                                          observer.update(data);
+                                          samplesmanager.update(data);
                                   });
         }
         startangleprev = startanglecurr;
@@ -362,7 +362,7 @@ void ScanExpressDense::processscan()
                 {it, it + bytespercabin}, startangleprev, angledelta, cabinnum);
             if (isvalid)
             {
-                observer.update(data);
+                samplesmanager.update(data);
             }
         }
         startangleprev = startanglecurr;

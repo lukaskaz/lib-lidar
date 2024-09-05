@@ -1,13 +1,13 @@
-Start testing: Aug 24 14:26 CEST
+Start testing: Sep 05 03:38 CEST
 ----------------------------------------------------------
 1/1 Testing: lidar-ut
 1/1 Test: lidar-ut
 Command: "/home/lukasz/git/lib-lidar/tests/build/lidar-ut"
 Directory: /home/lukasz/git/lib-lidar/tests/build
-"lidar-ut" start time: Aug 24 14:26 CEST
+"lidar-ut" start time: Sep 05 03:38 CEST
 Output:
 ----------------------------------------------------------
-[==========] Running 50 tests from 10 test suites.
+[==========] Running 57 tests from 11 test suites.
 [----------] Global test environment set-up.
 [----------] 4 tests from TestLidarFactory
 [ RUN      ] TestLidarFactory.CreatedAseries_GettingAseriesIdSucceeded
@@ -44,23 +44,6 @@ Output:
 [       OK ] TestScanFactory.CreatedExpressDenseScan_ReturnsExpressDenseIdByString (0 ms)
 [----------] 6 tests from TestScanFactory (0 ms total)
 
-[----------] 7 tests from TestObserver
-[ RUN      ] TestObserver.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow
-[       OK ] TestObserver.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow (0 ms)
-[ RUN      ] TestObserver.AddedTwoEventsForOverlappingAngles_ObserverThrows
-[       OK ] TestObserver.AddedTwoEventsForOverlappingAngles_ObserverThrows (0 ms)
-[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndUpdated_EventCalled
-[       OK ] TestObserver.AddedSingleEventForSingleGroupAndUpdated_EventCalled (0 ms)
-[ RUN      ] TestObserver.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled
-[       OK ] TestObserver.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled (0 ms)
-[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled
-[       OK ] TestObserver.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled (0 ms)
-[ RUN      ] TestObserver.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce
-[       OK ] TestObserver.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce (0 ms)
-[ RUN      ] TestObserver.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled
-[       OK ] TestObserver.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled (0 ms)
-[----------] 7 tests from TestObserver (0 ms total)
-
 [----------] 4 tests from TestSample
 [ RUN      ] TestSample.SampleCreatedWithValidDistance_MarkedAsValid
 [       OK ] TestSample.SampleCreatedWithValidDistance_MarkedAsValid (0 ms)
@@ -89,6 +72,23 @@ Output:
 [       OK ] TestSamplesGroup.AddedSeveralNotifiersForGroup_AllNotifiersCalled (0 ms)
 [----------] 7 tests from TestSamplesGroup (0 ms total)
 
+[----------] 7 tests from TestSamplesManager
+[ RUN      ] TestSamplesManager.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow
+[       OK ] TestSamplesManager.AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow (0 ms)
+[ RUN      ] TestSamplesManager.AddedTwoEventsForOverlappingAngles_ObserverThrows
+[       OK ] TestSamplesManager.AddedTwoEventsForOverlappingAngles_ObserverThrows (0 ms)
+[ RUN      ] TestSamplesManager.AddedSingleEventForSingleGroupAndUpdated_EventCalled
+[       OK ] TestSamplesManager.AddedSingleEventForSingleGroupAndUpdated_EventCalled (0 ms)
+[ RUN      ] TestSamplesManager.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled
+[       OK ] TestSamplesManager.AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled (0 ms)
+[ RUN      ] TestSamplesManager.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled
+[       OK ] TestSamplesManager.AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled (0 ms)
+[ RUN      ] TestSamplesManager.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce
+[       OK ] TestSamplesManager.AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce (0 ms)
+[ RUN      ] TestSamplesManager.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled
+[       OK ] TestSamplesManager.AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled (0 ms)
+[----------] 7 tests from TestSamplesManager (0 ms total)
+
 [----------] 6 tests from TestHelpers
 [ RUN      ] TestHelpers.RequestTimeAndDayDetails_ProvidedStringNotEmpty
 [       OK ] TestHelpers.RequestTimeAndDayDetails_ProvidedStringNotEmpty (0 ms)
@@ -103,6 +103,23 @@ Output:
 [ RUN      ] TestHelpers.CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue
 [       OK ] TestHelpers.CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue (0 ms)
 [----------] 6 tests from TestHelpers (0 ms total)
+
+[----------] 7 tests from TestHelpersObserver
+[ RUN      ] TestHelpersObserver.SubscribeTwiceSameObserver_ObservableThrows
+[       OK ] TestHelpersObserver.SubscribeTwiceSameObserver_ObservableThrows (0 ms)
+[ RUN      ] TestHelpersObserver.UnsubscribeAbsentObserver_ObservableThrows
+[       OK ] TestHelpersObserver.UnsubscribeAbsentObserver_ObservableThrows (0 ms)
+[ RUN      ] TestHelpersObserver.UnsubscribeTwiceSameObserver_ObservableThrows
+[       OK ] TestHelpersObserver.UnsubscribeTwiceSameObserver_ObservableThrows (0 ms)
+[ RUN      ] TestHelpersObserver.SubscribedObserverNotifiedByData_ObserverGotProperData
+[       OK ] TestHelpersObserver.SubscribedObserverNotifiedByData_ObserverGotProperData (0 ms)
+[ RUN      ] TestHelpersObserver.UnsubscribedObserverNotifiedOnce_ObserverIsNotCalledWhenUnsubscribed
+[       OK ] TestHelpersObserver.UnsubscribedObserverNotifiedOnce_ObserverIsNotCalledWhenUnsubscribed (0 ms)
+[ RUN      ] TestHelpersObserver.SubscribedObserverNotifiedOnce_ObserverIsCalledOnce
+[       OK ] TestHelpersObserver.SubscribedObserverNotifiedOnce_ObserverIsCalledOnce (0 ms)
+[ RUN      ] TestHelpersObserver.SubscribeObserverAndNotifyTwice_ObserverIsCalledTwice
+[       OK ] TestHelpersObserver.SubscribeObserverAndNotifyTwice_ObserverIsCalledTwice (0 ms)
+[----------] 7 tests from TestHelpersObserver (0 ms total)
 
 [----------] 4 tests from TestLidarInfo
 [ RUN      ] TestLidarInfo.GettingNameFromLidar_ProperNameReturned
@@ -140,14 +157,14 @@ Output:
 [----------] 3 tests from _/TestLidarState (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 50 tests from 10 test suites ran. (70 ms total)
-[  PASSED  ] 50 tests.
+[==========] 57 tests from 11 test suites ran. (69 ms total)
+[  PASSED  ] 57 tests.
 <end of output>
 Test time =   0.09 sec
 ----------------------------------------------------------
 Test Passed.
-"lidar-ut" end time: Aug 24 14:26 CEST
+"lidar-ut" end time: Sep 05 03:38 CEST
 "lidar-ut" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Aug 24 14:26 CEST
+End testing: Sep 05 03:38 CEST

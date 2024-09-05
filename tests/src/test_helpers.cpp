@@ -4,7 +4,10 @@
 #include <limits>
 #include <random>
 
+#include "gmock/gmock.h"
 #include "gtest/gtest.h"
+
+using namespace testing;
 
 class TestHelpers : public testing::Test
 {
@@ -90,4 +93,122 @@ TEST_F(TestHelpers,
     ASSERT_TRUE(testqueue.empty());
 
     EXPECT_EQ(userelem, recivedelem);
+}
+
+class TestHelpersObserver : public testing::Test
+{
+  protected:
+    void SetUp() override
+    {}
+
+    void TearDown() override
+    {}
+
+    struct Data : Observable<Data>
+    {
+        explicit Data() : Data({}, {})
+        {}
+        explicit Data(int32_t intval, double floatval) :
+            intval{intval}, floatval{floatval}
+        {}
+        int32_t intval{};
+        double floatval{};
+        bool operator==(const Data& other) const
+        {
+            return intval == other.intval && floatval == other.floatval;
+        };
+    };
+};
+
+TEST_F(TestHelpersObserver, SubscribeTwiceSameObserver_ObservableThrows)
+{
+    uint32_t counter{};
+    Data observed;
+    auto obs = Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto in) { counter++; });
+
+    ASSERT_NO_THROW(observed.subscribe(obs));
+    EXPECT_THROW(observed.subscribe(obs), std::runtime_error);
+}
+
+TEST_F(TestHelpersObserver, UnsubscribeAbsentObserver_ObservableThrows)
+{
+    uint32_t counter{};
+    Data observed;
+    auto obs = Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto in) { counter++; });
+
+    EXPECT_THROW(observed.unsubscribe(obs), std::runtime_error);
+}
+
+TEST_F(TestHelpersObserver, UnsubscribeTwiceSameObserver_ObservableThrows)
+{
+    uint32_t counter{};
+    Data observed;
+    auto obs = Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto in) { counter++; });
+
+    ASSERT_NO_THROW(({
+        observed.subscribe(obs);
+        observed.unsubscribe(obs);
+    }));
+    EXPECT_THROW(observed.unsubscribe(obs), std::runtime_error);
+}
+
+TEST_F(TestHelpersObserver,
+       SubscribedObserverNotifiedByData_ObserverGotProperData)
+{
+    Data observed, given(5, 1.7), received;
+    observed.subscribe(Observer<Data>::create(
+        [&received]([[maybe_unused]] auto in) { received = in; }));
+
+    ASSERT_THAT(given, Ne(received));
+    observed.notify(given);
+    EXPECT_THAT(given, Eq(received));
+}
+
+TEST_F(TestHelpersObserver,
+       UnsubscribedObserverNotifiedOnce_ObserverIsNotCalledWhenUnsubscribed)
+{
+    uint32_t counter{};
+    Data observed;
+    auto obs = Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto in) { counter++; });
+
+    observed.subscribe(obs);
+    ASSERT_THAT(counter, Eq(0));
+    observed.notify(observed);
+    ASSERT_THAT(counter, Eq(1));
+
+    observed.unsubscribe(obs);
+    ASSERT_THAT(counter, Eq(1));
+    observed.notify(observed);
+    EXPECT_THAT(counter, Eq(1));
+}
+
+TEST_F(TestHelpersObserver, SubscribedObserverNotifiedOnce_ObserverIsCalledOnce)
+{
+    uint32_t counter{};
+    Data observed;
+    observed.subscribe(Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto in) { counter++; }));
+
+    ASSERT_THAT(counter, Eq(0));
+    observed.notify(observed);
+    EXPECT_THAT(counter, Eq(1));
+}
+
+TEST_F(TestHelpersObserver,
+       SubscribeObserverAndNotifyTwice_ObserverIsCalledTwice)
+{
+    uint32_t counter{};
+    Data data;
+    data.subscribe(Observer<Data>::create(
+        [&counter]([[maybe_unused]] auto data) { counter++; }));
+
+    ASSERT_THAT(counter, Eq(0));
+    data.notify(data);
+    ASSERT_THAT(counter, Eq(1));
+    data.notify(data);
+    EXPECT_THAT(counter, Eq(2));
 }

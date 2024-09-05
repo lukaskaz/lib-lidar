@@ -1,66 +1,93 @@
-\hypertarget{classObserver}{}\doxysection{Observer Class Reference}
-\label{classObserver}\index{Observer@{Observer}}
+\hypertarget{classObserver}{}\doxysection{Observer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classObserver}\index{Observer$<$ T $>$@{Observer$<$ T $>$}}
 
 
-{\ttfamily \#include $<$samples.\+hpp$>$}
+{\ttfamily \#include $<$helpers.\+hpp$>$}
 
 
 
-Collaboration diagram for Observer\+:
+Collaboration diagram for Observer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{dc/d9f/classObserver__coll__graph}
+\includegraphics[width=199pt]{dc/d9f/classObserver__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} = std\+::function$<$ void(const T \&)$>$
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}{event}} (int32\+\_\+t, \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}})
+void \mbox{\hyperlink{classObserver_a118abb7413e4bf5a0d419e95b2161481}{operator()}} (const T \&param)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classObserver_aac799382a7809d8c9062df0126c88765}{update}} (const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&data)
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$ \mbox{\hyperlink{classObserver_a167350525d2a80e9f9a514d0da180390}{create}} (const \mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \&\mbox{\hyperlink{classObserver_af9b1212d4c16a8af261f529523e30a1f}{func}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classObserver_a42dfc6ca3372a5365950f51856675677}{Observer}} (const \mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \&\mbox{\hyperlink{classObserver_af9b1212d4c16a8af261f529523e30a1f}{func}})
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::unordered\+\_\+map$<$ int32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classObserver_a531e3a05b65bfcbabf38af803375ffec}{registeredangles}}
-\item 
-\mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}{notifyqueue}}
+\mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \mbox{\hyperlink{classObserver_af9b1212d4c16a8af261f529523e30a1f}{func}}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}\label{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}} 
-\index{Observer@{Observer}!event@{event}}
-\index{event@{event}!Observer@{Observer}}
-\doxysubsubsection{\texorpdfstring{event()}{event()}}
-{\footnotesize\ttfamily void Observer\+::event (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle,  }\item[{\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{Notify\+Func}}}]{func }\end{DoxyParamCaption})}
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classObserver_aa7ce9ca90b12a155b269848f229b1e79}\label{classObserver_aa7ce9ca90b12a155b269848f229b1e79}} 
+\index{Observer$<$ T $>$@{Observer$<$ T $>$}!Func@{Func}}
+\index{Func@{Func}!Observer$<$ T $>$@{Observer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Func}{Func}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$\+::\+Func =  std\+::function$<$void(const T\&)$>$}
 
-\mbox{\Hypertarget{classObserver_aac799382a7809d8c9062df0126c88765}\label{classObserver_aac799382a7809d8c9062df0126c88765}} 
-\index{Observer@{Observer}!update@{update}}
-\index{update@{update}!Observer@{Observer}}
-\doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void Observer\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&}]{data }\end{DoxyParamCaption})}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classObserver_a42dfc6ca3372a5365950f51856675677}\label{classObserver_a42dfc6ca3372a5365950f51856675677}} 
+\index{Observer$<$ T $>$@{Observer$<$ T $>$}!Observer@{Observer}}
+\index{Observer@{Observer}!Observer$<$ T $>$@{Observer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Observer()}{Observer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$\mbox{\hyperlink{classObserver}{\+::\+Observer}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classObserver_a167350525d2a80e9f9a514d0da180390}\label{classObserver_a167350525d2a80e9f9a514d0da180390}} 
+\index{Observer$<$ T $>$@{Observer$<$ T $>$}!create@{create}}
+\index{create@{create}!Observer$<$ T $>$@{Observer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$\+::create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{classObserver_a118abb7413e4bf5a0d419e95b2161481}\label{classObserver_a118abb7413e4bf5a0d419e95b2161481}} 
+\index{Observer$<$ T $>$@{Observer$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!Observer$<$ T $>$@{Observer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const T \&}]{param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}\label{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}} 
-\index{Observer@{Observer}!notifyqueue@{notifyqueue}}
-\index{notifyqueue@{notifyqueue}!Observer@{Observer}}
-\doxysubsubsection{\texorpdfstring{notifyqueue}{notifyqueue}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Observer\+::notifyqueue\hspace{0.3cm}{\ttfamily [private]}}
-
-\mbox{\Hypertarget{classObserver_a531e3a05b65bfcbabf38af803375ffec}\label{classObserver_a531e3a05b65bfcbabf38af803375ffec}} 
-\index{Observer@{Observer}!registeredangles@{registeredangles}}
-\index{registeredangles@{registeredangles}!Observer@{Observer}}
-\doxysubsubsection{\texorpdfstring{registeredangles}{registeredangles}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$int32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Observer\+::registeredangles\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classObserver_af9b1212d4c16a8af261f529523e30a1f}\label{classObserver_af9b1212d4c16a8af261f529523e30a1f}} 
+\index{Observer$<$ T $>$@{Observer$<$ T $>$}!func@{func}}
+\index{func@{func}!Observer$<$ T $>$@{Observer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{func}{func}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classObserver_aa7ce9ca90b12a155b269848f229b1e79}{Func}} \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$\+::func\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-inc/\mbox{\hyperlink{samples_8hpp}{samples.\+hpp}}\item 
-src/\mbox{\hyperlink{samples_8cpp}{samples.\+cpp}}\end{DoxyCompactItemize}
+inc/\mbox{\hyperlink{helpers_8hpp}{helpers.\+hpp}}\end{DoxyCompactItemize}

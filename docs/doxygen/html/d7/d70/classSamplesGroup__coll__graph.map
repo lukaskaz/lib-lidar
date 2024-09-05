@@ -1,7 +1,10 @@
 <map id="SamplesGroup" name="SamplesGroup">
-<area shape="rect" id="node1" title=" " alt="" coords="283,145,453,296"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,152,83"/>
-<area shape="rect" id="node3" title=" " alt="" coords="176,5,355,83"/>
-<area shape="rect" id="node4" title=" " alt="" coords="379,5,562,83"/>
-<area shape="rect" id="node5" title=" " alt="" coords="587,5,749,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="354,513,523,649"/>
+<area shape="rect" id="node2" href="$d9/db4/classObservable.html" title=" " alt="" coords="41,344,247,451"/>
+<area shape="rect" id="node3" href="$d2/d26/classstd_1_1unordered__set_3_01std_1_1shared__ptr_3_01Observer_3_01SampleData_01_4_01_4_01_4.html" title=" " alt="" coords="5,175,179,281"/>
+<area shape="rect" id="node4" href="$d9/db4/classObservable.html" title=" " alt="" coords="203,175,338,281"/>
+<area shape="rect" id="node5" title=" " alt="" coords="184,5,357,112"/>
+<area shape="rect" id="node6" title=" " alt="" coords="272,359,419,436"/>
+<area shape="rect" id="node7" title=" " alt="" coords="443,359,621,436"/>
+<area shape="rect" id="node8" title=" " alt="" coords="646,359,829,436"/>
 </map>

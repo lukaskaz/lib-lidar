@@ -24,7 +24,7 @@
 \DoxyCodeLine{20 }
 \DoxyCodeLine{21     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a64e5801e5b50d190c9d5aecfa7d3fedd}{run}}() \textcolor{keyword}{override};}
 \DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a25dd3b1b8cbb94c0a43b83e4d7dfba75}{stop}}() \textcolor{keyword}{override};}
-\DoxyCodeLine{23     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a714813b99f8fd2f7b8882fcaac774f03}{addangle}}(int32\_t, \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a708845f5eb15a709ffdef0a3ebb0cbd8}{addangle}}(int32\_t, std::shared\_ptr<\mbox{\hyperlink{classObserver}{Observer<SampleData>}}>) \textcolor{keyword}{override};}
 \DoxyCodeLine{24     \textcolor{keywordtype}{void} \mbox{\hyperlink{classScan_a8d0f073c9888e4d683cd9ba0736bf0b7}{delangle}}(int32\_t) \textcolor{keyword}{override};}
 \DoxyCodeLine{25 }
 \DoxyCodeLine{26     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScan_ac5fbd028a57fee914618cafaa5b0be7c}{gettype}}() \textcolor{keyword}{const override};}
@@ -35,7 +35,7 @@
 \DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classScan_abb157c6b0bf755c2aa3fdad1720078e4}{isrunning}}() \textcolor{keyword}{const override};}
 \DoxyCodeLine{32 }
 \DoxyCodeLine{33   \textcolor{keyword}{protected}:}
-\DoxyCodeLine{34     \mbox{\hyperlink{classObserver}{Observer}} \mbox{\hyperlink{classScan_a7a78844e882d19fc226d6cff5ffed882}{observer}};}
+\DoxyCodeLine{34     \mbox{\hyperlink{classSamplesManager}{SamplesManager}} \mbox{\hyperlink{classScan_aa8181d2c8e3e0a97102569daeb357ea6}{samplesmanager}};}
 \DoxyCodeLine{35     \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScan_a1975aa7d6e3ceee4713dd70f9a83a17f}{type}};}
 \DoxyCodeLine{36     \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScan_aac81378cd566304305365751290c4be3}{subtype}};}
 \DoxyCodeLine{37     std::atomic<bool> \mbox{\hyperlink{classScan_a94036c35c9a077f0e898681143bd617d}{running}}\{\textcolor{keyword}{false}\};}

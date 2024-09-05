@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue_0',['queue',['../d9/d64/classUniqueQueue.html#a5f707bb914448710d5085f0a498a59dd',1,'UniqueQueue']]]
+  ['observers_0',['observers',['../d9/db4/classObservable.html#a2744e20c7e7bad75662dcce1990c17a7',1,'Observable']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lidar Library Project: Observer Class Reference</title>
+<title>Lidar Library Project: Observer&lt; T &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -63,103 +63,169 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d1/d8b/classObserver-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Observer Class Reference</div></div>
+  <div class="headertitle"><div class="title">Observer&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="../../da/da9/samples_8hpp_source.html">samples.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../da/df3/helpers_8hpp_source.html">helpers.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for Observer:</div>
+Collaboration diagram for Observer&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../dc/d9f/classObserver__coll__graph.png" border="0" usemap="#aObserver_coll__map" alt="Collaboration graph"/></div>
-<map name="aObserver_coll__map" id="aObserver_coll__map">
-<area shape="rect" title=" " alt="" coords="181,513,273,605"/>
-<area shape="rect" title=" " alt="" coords="67,337,239,443"/>
-<area shape="rect" href="../../d9/d64/classUniqueQueue.html" title=" " alt="" coords="263,329,461,451"/>
-<area shape="rect" href="../../d8/d1b/classstd_1_1unordered__set_3_01std_1_1shared__ptr_3_01SamplesGroup_01_4_01_4.html" title=" " alt="" coords="5,153,244,245"/>
-<area shape="rect" href="../../de/d18/classstd_1_1queue_3_01std_1_1shared__ptr_3_01SamplesGroup_01_4_01_4.html" title=" " alt="" coords="269,153,455,245"/>
-<area shape="rect" href="../../d9/d64/classUniqueQueue.html" title=" " alt="" coords="480,145,628,252"/>
-<area shape="rect" title=" " alt="" coords="403,5,556,83"/>
-<area shape="rect" title=" " alt="" coords="580,5,680,83"/>
+<div class="center"><img src="../../dc/d9f/classObserver__coll__graph.png" border="0" usemap="#aObserver_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="aObserver_3_01T_01_4_coll__map" id="aObserver_3_01T_01_4_coll__map">
+<area shape="rect" title=" " alt="" coords="25,160,144,267"/>
+<area shape="rect" title=" " alt="" coords="5,5,164,97"/>
 </map>
 </div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa7ce9ca90b12a155b269848f229b1e79"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> = std::function&lt; void(const T &amp;)&gt;</td></tr>
+<tr class="separator:aa7ce9ca90b12a155b269848f229b1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7b2f5b3c9f5255b84cc33e89c8bedaf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a7b2f5b3c9f5255b84cc33e89c8bedaf5">event</a> (int32_t, <a class="el" href="../../d8/d61/interfaces_2samples_8hpp.html#a237c6fd1eca75ded98ac95ea062bc12c">NotifyFunc</a>)</td></tr>
-<tr class="separator:a7b2f5b3c9f5255b84cc33e89c8bedaf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac799382a7809d8c9062df0126c88765"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#aac799382a7809d8c9062df0126c88765">update</a> (const <a class="el" href="../../d8/d61/interfaces_2samples_8hpp.html#a64c6395fe8e42db83241eb3d1e6886ba">SampleData</a> &amp;data)</td></tr>
-<tr class="separator:aac799382a7809d8c9062df0126c88765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a118abb7413e4bf5a0d419e95b2161481"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a118abb7413e4bf5a0d419e95b2161481">operator()</a> (const T &amp;param)</td></tr>
+<tr class="separator:a118abb7413e4bf5a0d419e95b2161481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a167350525d2a80e9f9a514d0da180390"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a167350525d2a80e9f9a514d0da180390">create</a> (const <a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> &amp;<a class="el" href="../../de/dab/classObserver.html#af9b1212d4c16a8af261f529523e30a1f">func</a>)</td></tr>
+<tr class="separator:a167350525d2a80e9f9a514d0da180390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a42dfc6ca3372a5365950f51856675677"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a42dfc6ca3372a5365950f51856675677">Observer</a> (const <a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> &amp;<a class="el" href="../../de/dab/classObserver.html#af9b1212d4c16a8af261f529523e30a1f">func</a>)</td></tr>
+<tr class="separator:a42dfc6ca3372a5365950f51856675677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a531e3a05b65bfcbabf38af803375ffec"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; int32_t, std::shared_ptr&lt; <a class="el" href="../../d3/df5/classSamplesGroup.html">SamplesGroup</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a531e3a05b65bfcbabf38af803375ffec">registeredangles</a></td></tr>
-<tr class="separator:a531e3a05b65bfcbabf38af803375ffec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f3a02fea7d427c00af0d8b7b88f402a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d64/classUniqueQueue.html">UniqueQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="../../d3/df5/classSamplesGroup.html">SamplesGroup</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#a8f3a02fea7d427c00af0d8b7b88f402a">notifyqueue</a></td></tr>
-<tr class="separator:a8f3a02fea7d427c00af0d8b7b88f402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b1212d4c16a8af261f529523e30a1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dab/classObserver.html#af9b1212d4c16a8af261f529523e30a1f">func</a></td></tr>
+<tr class="separator:af9b1212d4c16a8af261f529523e30a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7b2f5b3c9f5255b84cc33e89c8bedaf5" name="a7b2f5b3c9f5255b84cc33e89c8bedaf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b2f5b3c9f5255b84cc33e89c8bedaf5">&#9670;&nbsp;</a></span>event()</h2>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aa7ce9ca90b12a155b269848f229b1e79" name="aa7ce9ca90b12a155b269848f229b1e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ce9ca90b12a155b269848f229b1e79">&#9670;&nbsp;</a></span>Func</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void Observer::event </td>
-          <td>(</td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>angle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d8/d61/interfaces_2samples_8hpp.html#a237c6fd1eca75ded98ac95ea062bc12c">NotifyFunc</a>&#160;</td>
-          <td class="paramname"><em>func</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">using <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt;::Func =  std::function&lt;void(const T&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aac799382a7809d8c9062df0126c88765" name="aac799382a7809d8c9062df0126c88765"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac799382a7809d8c9062df0126c88765">&#9670;&nbsp;</a></span>update()</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a42dfc6ca3372a5365950f51856675677" name="a42dfc6ca3372a5365950f51856675677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dfc6ca3372a5365950f51856675677">&#9670;&nbsp;</a></span>Observer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Observer::update </td>
+          <td class="memname"><a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt;<a class="el" href="../../de/dab/classObserver.html">::Observer</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d8/d61/interfaces_2samples_8hpp.html#a64c6395fe8e42db83241eb3d1e6886ba">SampleData</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> &amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a167350525d2a80e9f9a514d0da180390" name="a167350525d2a80e9f9a514d0da180390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a167350525d2a80e9f9a514d0da180390">&#9670;&nbsp;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::shared_ptr&lt; <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt; &gt; <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> &amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a118abb7413e4bf5a0d419e95b2161481" name="a118abb7413e4bf5a0d419e95b2161481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a118abb7413e4bf5a0d419e95b2161481">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8f3a02fea7d427c00af0d8b7b88f402a" name="a8f3a02fea7d427c00af0d8b7b88f402a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f3a02fea7d427c00af0d8b7b88f402a">&#9670;&nbsp;</a></span>notifyqueue</h2>
+<a id="af9b1212d4c16a8af261f529523e30a1f" name="af9b1212d4c16a8af261f529523e30a1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b1212d4c16a8af261f529523e30a1f">&#9670;&nbsp;</a></span>func</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d9/d64/classUniqueQueue.html">UniqueQueue</a>&lt;std::shared_ptr&lt;<a class="el" href="../../d3/df5/classSamplesGroup.html">SamplesGroup</a>&gt; &gt; Observer::notifyqueue</td>
+          <td class="memname"><a class="el" href="../../de/dab/classObserver.html#aa7ce9ca90b12a155b269848f229b1e79">Func</a> <a class="el" href="../../de/dab/classObserver.html">Observer</a>&lt; T &gt;::func</td>
         </tr>
       </table>
   </td>
@@ -171,31 +237,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a531e3a05b65bfcbabf38af803375ffec" name="a531e3a05b65bfcbabf38af803375ffec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a531e3a05b65bfcbabf38af803375ffec">&#9670;&nbsp;</a></span>registeredangles</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_map&lt;int32_t, std::shared_ptr&lt;<a class="el" href="../../d3/df5/classSamplesGroup.html">SamplesGroup</a>&gt; &gt; Observer::registeredangles</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>inc/<a class="el" href="../../da/da9/samples_8hpp_source.html">samples.hpp</a></li>
-<li>src/<a class="el" href="../../d8/d78/samples_8cpp.html">samples.cpp</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>inc/<a class="el" href="../../da/df3/helpers_8hpp_source.html">helpers.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

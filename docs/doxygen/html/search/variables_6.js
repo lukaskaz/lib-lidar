@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['name_0',['name',['../db/d28/structConfiguration_1_1Mode.html#af1ec9416379bc3d1b21155f48665ea0d',1,'Configuration::Mode']]],
-  ['notifiers_1',['notifiers',['../d3/df5/classSamplesGroup.html#a32801220ceff417c3936799f0671ae1e',1,'SamplesGroup']]],
-  ['notifyqueue_2',['notifyqueue',['../de/dab/classObserver.html#a8f3a02fea7d427c00af0d8b7b88f402a',1,'Observer']]]
+  ['maxangleperscan_0',['MAXANGLEPERSCAN',['../d0/df1/scan_8cpp.html#af32a3c01d8e31fc31b772057c1755615',1,'scan.cpp']]],
+  ['maxdistance_1',['maxdistance',['../db/d28/structConfiguration_1_1Mode.html#ae850ec781daf919b7f784febc8fca141',1,'Configuration::Mode']]],
+  ['maxsamplerate_2',['maxsamplerate',['../db/d28/structConfiguration_1_1Mode.html#a08085bd284e56bec35f79d7970fb7255',1,'Configuration::Mode']]],
+  ['modecnt_3',['modecnt',['../d4/d65/structConfiguration.html#a66b35a2c713a41ae24d38fe626a2aedf',1,'Configuration']]],
+  ['modes_4',['modes',['../d4/d65/structConfiguration.html#a6d4b5b8bd8784efaf5a693018d28b275',1,'Configuration']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['addangle_0',['addangle',['../d9/dbb/classScanIf.html#a8a11df5b39778cc275af03b685feaafb',1,'ScanIf::addangle()'],['../d9/df3/classScan.html#a714813b99f8fd2f7b8882fcaac774f03',1,'Scan::addangle()']]],
-  ['addnotifier_1',['addnotifier',['../d3/df5/classSamplesGroup.html#a2744c78019ee5b07ecbef84cf6cf27c2',1,'SamplesGroup']]],
-  ['addsampletonotify_2',['addsampletonotify',['../d3/df5/classSamplesGroup.html#ae218745ef01d4f34e21d9aefd3698351',1,'SamplesGroup']]]
+  ['addangle_0',['addangle',['../d9/dbb/classScanIf.html#a84e9ae46467db3cbe250f6ab3d4976a2',1,'ScanIf::addangle()'],['../d9/df3/classScan.html#a708845f5eb15a709ffdef0a3ebb0cbd8',1,'Scan::addangle()']]],
+  ['addsampletonotify_1',['addsampletonotify',['../d3/df5/classSamplesGroup.html#ae218745ef01d4f34e21d9aefd3698351',1,'SamplesGroup']]]
 ];

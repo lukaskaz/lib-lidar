@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['_7elidarif_0',['~LidarIf',['../d3/d8a/classLidarIf.html#a76d050393cddc4f3de59a1b5c2e6ee31',1,'LidarIf']]],
-  ['_7elidarinfoif_1',['~LidarInfoIf',['../d9/d18/classLidarInfoIf.html#a520bd4c8240c96362c733d9c67768516',1,'LidarInfoIf']]],
-  ['_7elidarscanif_2',['~LidarScanIf',['../db/d96/classLidarScanIf.html#ad3788ad9a72ef40184144784f473e7e6',1,'LidarScanIf']]],
-  ['_7escan_3',['~Scan',['../d9/df3/classScan.html#a716764da76d1f5c172dbbf3391cfbad1',1,'Scan']]],
-  ['_7escanif_4',['~ScanIf',['../d9/dbb/classScanIf.html#a61587a6cc88a26b39ec9983f63d88565',1,'ScanIf']]]
+  ['warn_0',['warn',['../d5/d20/interfaces_2lidar_8hpp.html#adc6e5733fc3c22f0a7b2914188c49c90a1ea4c3ab05ee0c6d4de30740443769cb',1,'lidar.hpp']]],
+  ['watchangle_1',['watchangle',['../db/d96/classLidarScanIf.html#a4689855a02a4466f863793c520863c43',1,'LidarScanIf::watchangle()'],['../d2/da5/classLidar.html#a77ca4f2c5942c79c960d50f37bfecea1',1,'Lidar::watchangle()']]]
 ];

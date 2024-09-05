@@ -1,0 +1,79 @@
+\hypertarget{classObservable}{}\doxysection{Observable\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classObservable}\index{Observable$<$ T $>$@{Observable$<$ T $>$}}
+
+
+{\ttfamily \#include $<$helpers.\+hpp$>$}
+
+
+
+Inheritance diagram for Observable\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{d7/d7e/classObservable__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Observable\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{df/da6/classObservable__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classObservable_a041ccfed288b3a16368c2589a2faa6fb}{notify}} (const T \&param)
+\item 
+void \mbox{\hyperlink{classObservable_a660f292d88422c8e43c9c6e4dde53ef8}{subscribe}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$ obs)
+\item 
+void \mbox{\hyperlink{classObservable_a68ca8d2c0d4a19daf9e08621b9592639}{unsubscribe}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$ obs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$ $>$ \mbox{\hyperlink{classObservable_a2744e20c7e7bad75662dcce1990c17a7}{observers}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classObservable_a041ccfed288b3a16368c2589a2faa6fb}\label{classObservable_a041ccfed288b3a16368c2589a2faa6fb}} 
+\index{Observable$<$ T $>$@{Observable$<$ T $>$}!notify@{notify}}
+\index{notify@{notify}!Observable$<$ T $>$@{Observable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classObservable}{Observable}}$<$ T $>$\+::notify (\begin{DoxyParamCaption}\item[{const T \&}]{param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObservable_a660f292d88422c8e43c9c6e4dde53ef8}\label{classObservable_a660f292d88422c8e43c9c6e4dde53ef8}} 
+\index{Observable$<$ T $>$@{Observable$<$ T $>$}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!Observable$<$ T $>$@{Observable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{subscribe()}{subscribe()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classObservable}{Observable}}$<$ T $>$\+::subscribe (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$}]{obs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObservable_a68ca8d2c0d4a19daf9e08621b9592639}\label{classObservable_a68ca8d2c0d4a19daf9e08621b9592639}} 
+\index{Observable$<$ T $>$@{Observable$<$ T $>$}!unsubscribe@{unsubscribe}}
+\index{unsubscribe@{unsubscribe}!Observable$<$ T $>$@{Observable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{unsubscribe()}{unsubscribe()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classObservable}{Observable}}$<$ T $>$\+::unsubscribe (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ T $>$ $>$}]{obs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classObservable_a2744e20c7e7bad75662dcce1990c17a7}\label{classObservable_a2744e20c7e7bad75662dcce1990c17a7}} 
+\index{Observable$<$ T $>$@{Observable$<$ T $>$}!observers@{observers}}
+\index{observers@{observers}!Observable$<$ T $>$@{Observable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{observers}{observers}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::unordered\+\_\+set$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classObserver}{Observer}}$<$T$>$ $>$ $>$ \mbox{\hyperlink{classObservable}{Observable}}$<$ T $>$\+::observers\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{helpers_8hpp}{helpers.\+hpp}}\end{DoxyCompactItemize}

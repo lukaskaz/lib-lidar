@@ -1,0 +1,66 @@
+\hypertarget{classSamplesManager}{}\doxysection{Samples\+Manager Class Reference}
+\label{classSamplesManager}\index{SamplesManager@{SamplesManager}}
+
+
+{\ttfamily \#include $<$samples.\+hpp$>$}
+
+
+
+Collaboration diagram for Samples\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/dc5/classSamplesManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSamplesManager_a9753cd30aa7252a00cd114e4109992ef}{event}} (int32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} $>$ $>$)
+\item 
+void \mbox{\hyperlink{classSamplesManager_ab60931056b93d1b2749b9dcd2313df49}{update}} (const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ int32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classSamplesManager_a3e162f85a0dfb4f59dbd345e0b2ab025}{registeredangles}}
+\item 
+\mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSamplesGroup}{Samples\+Group}} $>$ $>$ \mbox{\hyperlink{classSamplesManager_a7dbb0999493d7c4decfe9c926c5007e7}{notifyqueue}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSamplesManager_a9753cd30aa7252a00cd114e4109992ef}\label{classSamplesManager_a9753cd30aa7252a00cd114e4109992ef}} 
+\index{SamplesManager@{SamplesManager}!event@{event}}
+\index{event@{event}!SamplesManager@{SamplesManager}}
+\doxysubsubsection{\texorpdfstring{event()}{event()}}
+{\footnotesize\ttfamily void Samples\+Manager\+::event (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{angle,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classObserver}{Observer}}$<$ \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} $>$ $>$}]{obs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSamplesManager_ab60931056b93d1b2749b9dcd2313df49}\label{classSamplesManager_ab60931056b93d1b2749b9dcd2313df49}} 
+\index{SamplesManager@{SamplesManager}!update@{update}}
+\index{update@{update}!SamplesManager@{SamplesManager}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Samples\+Manager\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{Sample\+Data}} \&}]{data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSamplesManager_a7dbb0999493d7c4decfe9c926c5007e7}\label{classSamplesManager_a7dbb0999493d7c4decfe9c926c5007e7}} 
+\index{SamplesManager@{SamplesManager}!notifyqueue@{notifyqueue}}
+\index{notifyqueue@{notifyqueue}!SamplesManager@{SamplesManager}}
+\doxysubsubsection{\texorpdfstring{notifyqueue}{notifyqueue}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUniqueQueue}{Unique\+Queue}}$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Samples\+Manager\+::notifyqueue\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSamplesManager_a3e162f85a0dfb4f59dbd345e0b2ab025}\label{classSamplesManager_a3e162f85a0dfb4f59dbd345e0b2ab025}} 
+\index{SamplesManager@{SamplesManager}!registeredangles@{registeredangles}}
+\index{registeredangles@{registeredangles}!SamplesManager@{SamplesManager}}
+\doxysubsubsection{\texorpdfstring{registeredangles}{registeredangles}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$int32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSamplesGroup}{Samples\+Group}}$>$ $>$ Samples\+Manager\+::registeredangles\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{samples_8hpp}{samples.\+hpp}}\item 
+src/\mbox{\hyperlink{samples_8cpp}{samples.\+cpp}}\end{DoxyCompactItemize}

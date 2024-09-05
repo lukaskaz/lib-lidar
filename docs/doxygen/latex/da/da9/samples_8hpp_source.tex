@@ -26,33 +26,31 @@
 \DoxyCodeLine{22     \textcolor{keywordtype}{double} \mbox{\hyperlink{classSample_a1417e1cd3f020662e6ad87c5e9df1755}{getverified}}(\textcolor{keywordtype}{double}) \textcolor{keyword}{const};}
 \DoxyCodeLine{23 \};}
 \DoxyCodeLine{24 }
-\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classSamplesGroup}{SamplesGroup}}}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classSamplesGroup}{SamplesGroup}} : \textcolor{keyword}{public} \mbox{\hyperlink{classObservable}{Observable}}<SampleData>}
 \DoxyCodeLine{26 \{}
 \DoxyCodeLine{27   \textcolor{keyword}{public}:}
 \DoxyCodeLine{28     \mbox{\hyperlink{classSamplesGroup_af363b7fe11d082cacdd0117c974566b0}{SamplesGroup}}(int32\_t);}
 \DoxyCodeLine{29     \mbox{\hyperlink{classSamplesGroup_af363b7fe11d082cacdd0117c974566b0}{SamplesGroup}}(int32\_t, int32\_t);}
 \DoxyCodeLine{30 }
-\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{classSamplesGroup_a2744c78019ee5b07ecbef84cf6cf27c2}{addnotifier}}(\mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}}\&\& func);}
-\DoxyCodeLine{32     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classSamplesGroup_ae218745ef01d4f34e21d9aefd3698351}{addsampletonotify}}(\mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{SampleData}});}
-\DoxyCodeLine{33     \textcolor{keywordtype}{void} \mbox{\hyperlink{classSamplesGroup_a4cd31be8dcac913443a71b16a77bd0d2}{notifyandcleanup}}();}
-\DoxyCodeLine{34     std::vector<int32\_t> \mbox{\hyperlink{classSamplesGroup_a5b28e258d32cbc400dbf01774d39aca0}{getangles}}() \textcolor{keyword}{const};}
-\DoxyCodeLine{35 }
-\DoxyCodeLine{36   \textcolor{keyword}{private}:}
-\DoxyCodeLine{37     \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{classSamplesGroup_a3aaeeae4fec5a407c5501717d29acef0}{supportangles}};}
-\DoxyCodeLine{38     std::map<int32\_t, int32\_t> \mbox{\hyperlink{classSamplesGroup_a67a8ea83ebaa38844793a1a3fbed7b82}{angleswithprio}};}
-\DoxyCodeLine{39     std::map<int32\_t, Sample> \mbox{\hyperlink{classSamplesGroup_ad30f4388714994acaa62cafac2308377}{samplestonotify}};}
-\DoxyCodeLine{40     std::vector<NotifyFunc> \mbox{\hyperlink{classSamplesGroup_a32801220ceff417c3936799f0671ae1e}{notifiers}};}
-\DoxyCodeLine{41 \};}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{43 \textcolor{keyword}{class }\mbox{\hyperlink{classObserver}{Observer}}}
-\DoxyCodeLine{44 \{}
-\DoxyCodeLine{45   \textcolor{keyword}{public}:}
-\DoxyCodeLine{46     \textcolor{keywordtype}{void} \mbox{\hyperlink{classObserver_a7b2f5b3c9f5255b84cc33e89c8bedaf5}{event}}(int32\_t, \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}});}
-\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{classObserver_aac799382a7809d8c9062df0126c88765}{update}}(\textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{SampleData}}\& data);}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49   \textcolor{keyword}{private}:}
-\DoxyCodeLine{50     std::unordered\_map<int32\_t, std::shared\_ptr<SamplesGroup>> \mbox{\hyperlink{classObserver_a531e3a05b65bfcbabf38af803375ffec}{registeredangles}};}
-\DoxyCodeLine{51     \mbox{\hyperlink{classUniqueQueue}{UniqueQueue<std::shared\_ptr<SamplesGroup>}}> \mbox{\hyperlink{classObserver_a8f3a02fea7d427c00af0d8b7b88f402a}{notifyqueue}};}
-\DoxyCodeLine{52 \};}
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classSamplesGroup_ae218745ef01d4f34e21d9aefd3698351}{addsampletonotify}}(\mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{SampleData}});}
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} \mbox{\hyperlink{classSamplesGroup_a4cd31be8dcac913443a71b16a77bd0d2}{notifyandcleanup}}();}
+\DoxyCodeLine{33     std::vector<int32\_t> \mbox{\hyperlink{classSamplesGroup_a5b28e258d32cbc400dbf01774d39aca0}{getangles}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35   \textcolor{keyword}{private}:}
+\DoxyCodeLine{36     \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{classSamplesGroup_a3aaeeae4fec5a407c5501717d29acef0}{supportangles}};}
+\DoxyCodeLine{37     std::map<int32\_t, int32\_t> \mbox{\hyperlink{classSamplesGroup_a67a8ea83ebaa38844793a1a3fbed7b82}{angleswithprio}};}
+\DoxyCodeLine{38     std::map<int32\_t, Sample> \mbox{\hyperlink{classSamplesGroup_ad30f4388714994acaa62cafac2308377}{samplestonotify}};}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{class }\mbox{\hyperlink{classSamplesManager}{SamplesManager}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43   \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{classSamplesManager_a9753cd30aa7252a00cd114e4109992ef}{event}}(int32\_t, std::shared\_ptr<\mbox{\hyperlink{classObserver}{Observer<SampleData>}}>);}
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} \mbox{\hyperlink{classSamplesManager_ab60931056b93d1b2749b9dcd2313df49}{update}}(\textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a64c6395fe8e42db83241eb3d1e6886ba}{SampleData}}\&);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47   \textcolor{keyword}{private}:}
+\DoxyCodeLine{48     std::unordered\_map<int32\_t, std::shared\_ptr<SamplesGroup>> \mbox{\hyperlink{classSamplesManager_a3e162f85a0dfb4f59dbd345e0b2ab025}{registeredangles}};}
+\DoxyCodeLine{49     \mbox{\hyperlink{classUniqueQueue}{UniqueQueue<std::shared\_ptr<SamplesGroup>}}> \mbox{\hyperlink{classSamplesManager_a7dbb0999493d7c4decfe9c926c5007e7}{notifyqueue}};}
+\DoxyCodeLine{50 \};}
 
 \end{DoxyCode}

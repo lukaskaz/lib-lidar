@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notifyfunc_0',['NotifyFunc',['../d8/d61/interfaces_2samples_8hpp.html#a237c6fd1eca75ded98ac95ea062bc12c',1,'samples.hpp']]]
+  ['measurement_0',['Measurement',['../de/dc0/scan_8hpp.html#a55f8d28128e7f55c7aeadd82d6ca2d24',1,'scan.hpp']]]
 ];

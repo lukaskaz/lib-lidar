@@ -4,38 +4,39 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
 \DoxyCodeLine{2 }
-\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2samples_8hpp}{interfaces/samples.hpp}}"{}}}
-\DoxyCodeLine{4 }
-\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <cstdint>}}
-\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <string>}}
-\DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{keyword}{enum class} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}}
-\DoxyCodeLine{9 \{}
-\DoxyCodeLine{10     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}{normal}},}
-\DoxyCodeLine{11     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}{express}}}
-\DoxyCodeLine{12 \};}
-\DoxyCodeLine{13 }
-\DoxyCodeLine{14 \textcolor{keyword}{enum class} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}}}
-\DoxyCodeLine{15 \{}
-\DoxyCodeLine{16     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}{none}},}
-\DoxyCodeLine{17     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}{legacy}},}
-\DoxyCodeLine{18     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}{dense}}}
-\DoxyCodeLine{19 \};}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{classScanIf}{ScanIf}}}
-\DoxyCodeLine{22 \{}
-\DoxyCodeLine{23   \textcolor{keyword}{public}:}
-\DoxyCodeLine{24     \textcolor{keyword}{virtual} \mbox{\hyperlink{classScanIf_a61587a6cc88a26b39ec9983f63d88565}{\string~ScanIf}}()}
-\DoxyCodeLine{25     \{\}}
-\DoxyCodeLine{26     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a61c0f089ed82d893a106e29df34a97fd}{run}}() = 0;}
-\DoxyCodeLine{27     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a8d5686a1ee829b0c77d1dae067581ab3}{stop}}() = 0;}
-\DoxyCodeLine{28     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a8a11df5b39778cc275af03b685feaafb}{addangle}}(int32\_t, \textcolor{keyword}{const} \mbox{\hyperlink{interfaces_2samples_8hpp_a237c6fd1eca75ded98ac95ea062bc12c}{NotifyFunc}}\&) = 0;}
-\DoxyCodeLine{29     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_aa71d063f06f2edf7baf20037e7fa28b0}{delangle}}(int32\_t) = 0;}
-\DoxyCodeLine{30     \textcolor{keyword}{virtual} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScanIf_a66a60bbc9a844531d016124158d36b2e}{gettype}}() \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{31     \textcolor{keyword}{virtual} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScanIf_a8784427b74dd3061c97177343f49966b}{getsubtype}}() \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{32     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{classScanIf_ade6a063ba725e911e9a3f65294f1e95d}{gettypename}}() \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{33     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{classScanIf_a008aaf82abe00bdd9b0f0c7886269e2d}{getsubtypename}}() \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{34     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classScanIf_acd140edeb9b335a3aecfedc61ce7b478}{isrunning}}() \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{35 \};}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{helpers_8hpp}{helpers.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{interfaces_2samples_8hpp}{interfaces/samples.hpp}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{enum class} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00afea087517c26fadd409bd4b9dc642555}{normal}},}
+\DoxyCodeLine{12     \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00a4ca65a8bdbeae8b6ee400801a8a8f812}{express}}}
+\DoxyCodeLine{13 \};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{enum class} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a334c4a4c42fdb79d7ebc3e73b517e6f8}{none}},}
+\DoxyCodeLine{18     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a228c70bfc5589c58c044e03fff0e17eb}{legacy}},}
+\DoxyCodeLine{19     \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6a0eccef1fe0100f85b12e6eabe08eaff6}{dense}}}
+\DoxyCodeLine{20 \};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{classScanIf}{ScanIf}}}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24   \textcolor{keyword}{public}:}
+\DoxyCodeLine{25     \textcolor{keyword}{virtual} \mbox{\hyperlink{classScanIf_a61587a6cc88a26b39ec9983f63d88565}{\string~ScanIf}}()}
+\DoxyCodeLine{26     \{\}}
+\DoxyCodeLine{27     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a61c0f089ed82d893a106e29df34a97fd}{run}}() = 0;}
+\DoxyCodeLine{28     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a8d5686a1ee829b0c77d1dae067581ab3}{stop}}() = 0;}
+\DoxyCodeLine{29     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_a84e9ae46467db3cbe250f6ab3d4976a2}{addangle}}(int32\_t, std::shared\_ptr<\mbox{\hyperlink{classObserver}{Observer<SampleData>}}>) = 0;}
+\DoxyCodeLine{30     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScanIf_aa71d063f06f2edf7baf20037e7fa28b0}{delangle}}(int32\_t) = 0;}
+\DoxyCodeLine{31     \textcolor{keyword}{virtual} \mbox{\hyperlink{interfaces_2scan_8hpp_a84b9c78370140c6fde71ad3a2ef5ca00}{scan\_t}} \mbox{\hyperlink{classScanIf_a66a60bbc9a844531d016124158d36b2e}{gettype}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{32     \textcolor{keyword}{virtual} \mbox{\hyperlink{interfaces_2scan_8hpp_a0ec01fd57ba46263000e6150ba939aa6}{scansub\_t}} \mbox{\hyperlink{classScanIf_a8784427b74dd3061c97177343f49966b}{getsubtype}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{33     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{classScanIf_ade6a063ba725e911e9a3f65294f1e95d}{gettypename}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{classScanIf_a008aaf82abe00bdd9b0f0c7886269e2d}{getsubtypename}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{35     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classScanIf_acd140edeb9b335a3aecfedc61ce7b478}{isrunning}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{36 \};}
 
 \end{DoxyCode}

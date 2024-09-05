@@ -20,7 +20,7 @@ class Scan : public ScanIf, public std::enable_shared_from_this<Scan>
 
     void run() override;
     void stop() override;
-    void addangle(int32_t, const NotifyFunc&) override;
+    void addangle(int32_t, std::shared_ptr<Observer<SampleData>>) override;
     void delangle(int32_t) override;
 
     scan_t gettype() const override;
@@ -31,7 +31,7 @@ class Scan : public ScanIf, public std::enable_shared_from_this<Scan>
     bool isrunning() const override;
 
   protected:
-    Observer observer;
+    SamplesManager samplesmanager;
     const scan_t type;
     const scansub_t subtype;
     std::atomic<bool> running{false};

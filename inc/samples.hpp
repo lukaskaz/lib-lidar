@@ -22,13 +22,12 @@ class Sample
     double getverified(double) const;
 };
 
-class SamplesGroup
+class SamplesGroup : public Observable<SampleData>
 {
   public:
     SamplesGroup(int32_t);
     SamplesGroup(int32_t, int32_t);
 
-    void addnotifier(NotifyFunc&& func);
     bool addsampletonotify(SampleData);
     void notifyandcleanup();
     std::vector<int32_t> getangles() const;
@@ -37,14 +36,13 @@ class SamplesGroup
     static const int32_t supportangles;
     std::map<int32_t, int32_t> angleswithprio;
     std::map<int32_t, Sample> samplestonotify;
-    std::vector<NotifyFunc> notifiers;
 };
 
-class Observer
+class SamplesManager
 {
   public:
-    void event(int32_t, NotifyFunc);
-    void update(const SampleData& data);
+    void event(int32_t, std::shared_ptr<Observer<SampleData>>);
+    void update(const SampleData&);
 
   private:
     std::unordered_map<int32_t, std::shared_ptr<SamplesGroup>> registeredangles;

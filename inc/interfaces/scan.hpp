@@ -1,5 +1,6 @@
 #pragma once
 
+#include "helpers.hpp"
 #include "interfaces/samples.hpp"
 
 #include <cstdint>
@@ -25,7 +26,7 @@ class ScanIf
     {}
     virtual void run() = 0;
     virtual void stop() = 0;
-    virtual void addangle(int32_t, const NotifyFunc&) = 0;
+    virtual void addangle(int32_t, std::shared_ptr<Observer<SampleData>>) = 0;
     virtual void delangle(int32_t) = 0;
     virtual scan_t gettype() const = 0;
     virtual scansub_t getsubtype() const = 0;

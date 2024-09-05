@@ -440,7 +440,8 @@ TEST_F(TestScan, RunningNormalScanWithProperData_NotifierCalledOnWatchedAngle)
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::normal);
@@ -459,7 +460,8 @@ TEST_F(TestScan, RunningNormalScanWithPacketSizeMismatch_DataInterpreterThrows)
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::normal);
@@ -478,7 +480,8 @@ TEST_F(TestScan,
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
@@ -497,7 +500,8 @@ TEST_F(TestScan,
     EXPECT_CALL(*serialMock, write(_, _)).Times(3);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
@@ -516,7 +520,8 @@ TEST_F(TestScan,
     EXPECT_CALL(*serialMock, write(_, _)).Times(4);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_NE(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);
@@ -535,7 +540,8 @@ TEST_F(TestScan,
     EXPECT_CALL(*serialMock, write(_, _)).Times(4);
     auto lidar = LidarFinder::run(serialMock);
     lidar->watchangle(observedangle,
-                      [&receiveddata](auto data) { receiveddata = data; });
+                      Observer<SampleData>::create(
+                          [&receiveddata](auto data) { receiveddata = data; }));
 
     ASSERT_EQ(receiveddata, expecteddata);
     lidar->runscan(scan_t::express);

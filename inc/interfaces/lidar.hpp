@@ -1,5 +1,6 @@
 #pragma once
 
+#include "helpers.hpp"
 #include "interfaces/scan.hpp"
 #include "serial.hpp"
 
@@ -64,7 +65,7 @@ class LidarScanIf
     virtual ~LidarScanIf()
     {}
 
-    virtual void watchangle(int32_t, const NotifyFunc&) = 0;
+    virtual void watchangle(int32_t, std::shared_ptr<Observer<SampleData>>) = 0;
     virtual void runscan(scan_t) = 0;
     virtual void stopscan() = 0;
     virtual std::pair<std::string, std::string> getscaninfo(scan_t) const = 0;

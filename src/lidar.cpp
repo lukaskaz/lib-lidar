@@ -74,10 +74,10 @@ std::string Lidar::getname()
     return name;
 }
 
-void Lidar::watchangle(int32_t angle, const NotifyFunc& notifier)
+void Lidar::watchangle(int32_t angle, std::shared_ptr<Observer<SampleData>> obs)
 {
-    getscan(scan_t::normal)->addangle(angle, notifier);
-    getscan(scan_t::express)->addangle(angle, notifier);
+    getscan(scan_t::normal)->addangle(angle, obs);
+    getscan(scan_t::express)->addangle(angle, obs);
 }
 
 std::tuple<std::string, std::string, std::string, std::string>

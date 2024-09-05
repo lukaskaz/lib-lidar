@@ -1,13 +1,13 @@
-Start testing: Sep 05 03:38 CEST
+Start testing: Sep 05 04:29 CEST
 ----------------------------------------------------------
 1/1 Testing: lidar-ut
 1/1 Test: lidar-ut
 Command: "/home/lukasz/git/lib-lidar/tests/build/lidar-ut"
 Directory: /home/lukasz/git/lib-lidar/tests/build
-"lidar-ut" start time: Sep 05 03:38 CEST
+"lidar-ut" start time: Sep 05 04:29 CEST
 Output:
 ----------------------------------------------------------
-[==========] Running 57 tests from 11 test suites.
+[==========] Running 58 tests from 11 test suites.
 [----------] Global test environment set-up.
 [----------] 4 tests from TestLidarFactory
 [ RUN      ] TestLidarFactory.CreatedAseries_GettingAseriesIdSucceeded
@@ -104,7 +104,7 @@ Output:
 [       OK ] TestHelpers.CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue (0 ms)
 [----------] 6 tests from TestHelpers (0 ms total)
 
-[----------] 7 tests from TestHelpersObserver
+[----------] 8 tests from TestHelpersObserver
 [ RUN      ] TestHelpersObserver.SubscribeTwiceSameObserver_ObservableThrows
 [       OK ] TestHelpersObserver.SubscribeTwiceSameObserver_ObservableThrows (0 ms)
 [ RUN      ] TestHelpersObserver.UnsubscribeAbsentObserver_ObservableThrows
@@ -119,7 +119,9 @@ Output:
 [       OK ] TestHelpersObserver.SubscribedObserverNotifiedOnce_ObserverIsCalledOnce (0 ms)
 [ RUN      ] TestHelpersObserver.SubscribeObserverAndNotifyTwice_ObserverIsCalledTwice
 [       OK ] TestHelpersObserver.SubscribeObserverAndNotifyTwice_ObserverIsCalledTwice (0 ms)
-[----------] 7 tests from TestHelpersObserver (0 ms total)
+[ RUN      ] TestHelpersObserver.SubscribeTwoObserversAndNotifyThemOnce_BothObserversAreCalledOnce
+[       OK ] TestHelpersObserver.SubscribeTwoObserversAndNotifyThemOnce_BothObserversAreCalledOnce (0 ms)
+[----------] 8 tests from TestHelpersObserver (0 ms total)
 
 [----------] 4 tests from TestLidarInfo
 [ RUN      ] TestLidarInfo.GettingNameFromLidar_ProperNameReturned
@@ -145,7 +147,7 @@ Output:
 [       OK ] TestScan.RunningExpressDenseScanWithProperData_NotifierCalledOnWatchedAngle (10 ms)
 [ RUN      ] TestScan.RunningExpressDenseScanWithPacketSizeMismatch_DataInterpreterThrows
 [       OK ] TestScan.RunningExpressDenseScanWithPacketSizeMismatch_DataInterpreterThrows (10 ms)
-[----------] 6 tests from TestScan (64 ms total)
+[----------] 6 tests from TestScan (63 ms total)
 
 [----------] 3 tests from _/TestLidarState
 [ RUN      ] _/TestLidarState.GettingStateFromLidar_ProperStateReturned/0
@@ -157,14 +159,14 @@ Output:
 [----------] 3 tests from _/TestLidarState (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 57 tests from 11 test suites ran. (69 ms total)
-[  PASSED  ] 57 tests.
+[==========] 58 tests from 11 test suites ran. (67 ms total)
+[  PASSED  ] 58 tests.
 <end of output>
-Test time =   0.09 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"lidar-ut" end time: Sep 05 03:38 CEST
+"lidar-ut" end time: Sep 05 04:29 CEST
 "lidar-ut" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 05 03:38 CEST
+End testing: Sep 05 04:29 CEST

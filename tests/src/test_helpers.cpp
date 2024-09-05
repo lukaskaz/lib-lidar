@@ -212,3 +212,18 @@ TEST_F(TestHelpersObserver,
     data.notify(data);
     EXPECT_THAT(counter, Eq(2));
 }
+
+TEST_F(TestHelpersObserver,
+       SubscribeTwoObserversAndNotifyThemOnce_BothObserversAreCalledOnce)
+{
+    auto counters = std::make_pair<uint32_t, uint32_t>({}, {});
+    Data data;
+    data.subscribe(Observer<Data>::create(
+        [&counters]([[maybe_unused]] auto data) { counters.first++; }));
+    data.subscribe(Observer<Data>::create(
+        [&counters]([[maybe_unused]] auto data) { counters.second++; }));
+
+    ASSERT_THAT(counters, Eq(std::pair<uint32_t, uint32_t>{0, 0}));
+    data.notify(data);
+    EXPECT_THAT(counters, Eq(std::pair<uint32_t, uint32_t>{1, 1}));
+}

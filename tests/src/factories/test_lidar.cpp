@@ -1,10 +1,11 @@
-#include "lidarfactory.hpp"
+#include "lidar/factory.hpp"
 #include "mocks/mock_serial.hpp"
 
 #include "gtest/gtest.h"
 
 using namespace testing;
 using namespace std::string_literals;
+using namespace Lidar;
 
 class TestLidarFactory : public testing::Test
 {
@@ -30,7 +31,7 @@ class TestLidarFactory : public testing::Test
 
 TEST_F(TestLidarFactory, CreatedAseries_GettingAseriesIdSucceeded)
 {
-    auto lidar = LidarFactory::createAseries();
+    auto lidar = Factory::create<seriesid::amodel>();
     EXPECT_EQ(lidar->getseries(), seriesid::amodel);
     EXPECT_EQ(lidar->getspeed(), (speed_t)B115200);
 }
@@ -38,13 +39,13 @@ TEST_F(TestLidarFactory, CreatedAseries_GettingAseriesIdSucceeded)
 TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)
 {
     simulateSeries(seriesid::amodel);
-    auto lidar = LidarFactory::createAseries();
+    auto lidar = Factory::create<seriesid::amodel>();
 
     ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
-        firstscaninfo = lidar->getscaninfo(scan_t::normal),
-        secondscaninfo = lidar->getscaninfo(scan_t::express);
+        firstscaninfo = lidar->getscaninfo(Scan::scan_t::normal),
+        secondscaninfo = lidar->getscaninfo(Scan::scan_t::express);
     }));
 
     EXPECT_EQ(firstscaninfo, std::make_pair("normal"s, ""s));
@@ -53,7 +54,7 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)
 
 TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesIdSucceeded)
 {
-    auto lidar = LidarFactory::createCseries();
+    auto lidar = Factory::create<seriesid::cmodel>();
     EXPECT_EQ(lidar->getseries(), seriesid::cmodel);
     EXPECT_EQ(lidar->getspeed(), (speed_t)B460800);
 }
@@ -61,13 +62,13 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesIdSucceeded)
 TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesScansSucceeded)
 {
     simulateSeries(seriesid::cmodel);
-    auto lidar = LidarFactory::createCseries();
+    auto lidar = Factory::create<seriesid::cmodel>();
 
     ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
-        firstscaninfo = lidar->getscaninfo(scan_t::normal),
-        secondscaninfo = lidar->getscaninfo(scan_t::express);
+        firstscaninfo = lidar->getscaninfo(Scan::scan_t::normal),
+        secondscaninfo = lidar->getscaninfo(Scan::scan_t::express);
     }));
 
     EXPECT_EQ(firstscaninfo, std::make_pair("normal"s, ""s));
@@ -88,7 +89,7 @@ TEST_F(TestLidarFinder, FindingAvailableLidar_GettingAseriesLidarSucceeded)
 {
     simulateSeries(seriesid::amodel);
     ASSERT_NO_THROW(({
-        auto lidar = LidarFinder::run(serialMock);
+        auto lidar = Finder::run(serialMock);
         EXPECT_EQ(lidar->getseries(), seriesid::amodel);
     }));
 }
@@ -97,7 +98,7 @@ TEST_F(TestLidarFinder, FindingAvailableLidar_GettingCseriesLidarSucceeded)
 {
     simulateSeries(seriesid::cmodel);
     ASSERT_NO_THROW(({
-        auto lidar = LidarFinder::run(serialMock);
+        auto lidar = Finder::run(serialMock);
         EXPECT_EQ(lidar->getseries(), seriesid::cmodel);
     }));
 }
@@ -105,5 +106,5 @@ TEST_F(TestLidarFinder, FindingAvailableLidar_GettingCseriesLidarSucceeded)
 TEST_F(TestLidarFinder, FindingAvailableLidar_NotGettingLidarThrows)
 {
     simulateSeries(seriesid::unknown);
-    EXPECT_THROW(auto lidar = LidarFinder::run(serialMock), std::runtime_error);
+    EXPECT_THROW(auto lidar = Finder::run(serialMock), std::runtime_error);
 }

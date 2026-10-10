@@ -1,4 +1,4 @@
-#include "samples.hpp"
+#include "samples/samples.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -8,11 +8,17 @@
 
 #define MAXANGLEPERSCAN 360
 
-Sample::Sample(SampleData data) :
+namespace Lidar
+{
+
+namespace Samples
+{
+
+Sample::Sample(Data data) :
     angle{data.first}, distance{getverified(data.second)}
 {}
 
-SampleData Sample::get() const
+Data Sample::get() const
 {
     return {angle, distance};
 }
@@ -30,12 +36,12 @@ double Sample::getverified(double distance) const
     return distance < invaliddistance ? invalid : distance;
 }
 
-SamplesGroup::SamplesGroup(int32_t angle) : SamplesGroup(angle, supportangles)
+Group::Group(int32_t angle) : Group(angle, supportangles)
 {}
 
-const int32_t SamplesGroup::supportangles{2};
+const int32_t Group::supportangles{2};
 
-SamplesGroup::SamplesGroup(int32_t mainangle, int32_t supportangles)
+Group::Group(int32_t mainangle, int32_t supportangles)
 {
     int32_t prio{1};
     angleswithprio.emplace(mainangle, prio++);
@@ -52,7 +58,7 @@ SamplesGroup::SamplesGroup(int32_t mainangle, int32_t supportangles)
     }
 }
 
-bool SamplesGroup::addsampletonotify(SampleData data)
+bool Group::addsampletonotify(Data data)
 {
     Sample sample{data};
     if (sample.isvalid())
@@ -65,7 +71,7 @@ bool SamplesGroup::addsampletonotify(SampleData data)
     return false;
 }
 
-void SamplesGroup::notifyandcleanup()
+void Group::notifyandcleanup()
 {
     if (!samplestonotify.empty())
     {
@@ -75,14 +81,13 @@ void SamplesGroup::notifyandcleanup()
     }
 }
 
-std::vector<int32_t> SamplesGroup::getangles() const
+std::vector<int32_t> Group::getangles() const
 {
     auto angles = std::views::keys(angleswithprio);
     return {angles.begin(), angles.end()};
 }
 
-void SamplesManager::event(int32_t angle,
-                           std::shared_ptr<Observer<SampleData>> obs)
+void Manager::event(int32_t angle, std::shared_ptr<Helpers::Observer<Data>> obs)
 {
     if (registeredangles.contains(angle))
     {
@@ -91,7 +96,7 @@ void SamplesManager::event(int32_t angle,
     }
     else
     {
-        auto group = std::make_shared<SamplesGroup>(angle);
+        auto group = std::make_shared<Group>(angle);
         std::ranges::for_each(group->getangles(), [this, group](auto angle) {
             if (registeredangles.contains(angle))
             {
@@ -104,7 +109,7 @@ void SamplesManager::event(int32_t angle,
     }
 }
 
-void SamplesManager::update(const SampleData& data)
+void Manager::update(const Data& data)
 {
     auto [angle, _] = data;
     if (registeredangles.contains(angle))
@@ -124,3 +129,7 @@ void SamplesManager::update(const SampleData& data)
         }
     }
 }
+
+} // namespace Samples
+
+} // namespace Lidar

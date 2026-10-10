@@ -1,10 +1,12 @@
-#include "lidarfactory.hpp"
+#include "lidar/factory.hpp"
+#include "lidar/lidar.hpp"
 #include "mocks/mock_serial.hpp"
 
 #include "gtest/gtest.h"
 
 using namespace testing;
 using namespace std::string_literals;
+using namespace Lidar;
 
 class TestLidarInfo : public testing::Test
 {
@@ -121,7 +123,7 @@ class TestLidarInfo : public testing::Test
 TEST_F(TestLidarInfo, GettingNameFromLidar_ProperNameReturned)
 {
     simulateInfo();
-    auto lidar = LidarFinder::run(serialMock);
+    auto lidar = Finder::run(serialMock);
 
     EXPECT_CALL(*serialMock, write(_, _)).Times(1);
     EXPECT_EQ(lidar->getname(), "C1M1");
@@ -132,7 +134,7 @@ TEST_F(TestLidarInfo, GettingFwInfoFromLidar_ProperFwInfoReturned)
     simulateInfo();
     auto expected = std::make_tuple("0x41"s, "1.1"s, "0x12"s,
                                     "8932e1f4c2e398c4bcea9af37e9482"s);
-    auto lidar = LidarFinder::run(serialMock);
+    auto lidar = Finder::run(serialMock);
 
     EXPECT_CALL(*serialMock, write(_, _)).Times(1);
     auto received = lidar->getfwinfo();
@@ -143,7 +145,7 @@ TEST_F(TestLidarInfo, GettingSamplerateFromLidar_ProperSampleratesReturned)
 {
     simulateSamplerate();
     std::pair<uint16_t, uint16_t> expected(500, 250);
-    auto lidar = LidarFinder::run(serialMock);
+    auto lidar = Finder::run(serialMock);
 
     EXPECT_CALL(*serialMock, write(_, _)).Times(1);
     auto received = lidar->getsamplerate();
@@ -157,7 +159,7 @@ TEST_F(TestLidarInfo, GettingConfigurationFromLidar_ProperConfigurationReturned)
                            .typical = 0,
                            .modes = {{0, "Standard", 500, 2000, 12, 0x81},
                                      {1, "Express", 250, 4000, 12, 0x82}}};
-    auto lidar = LidarFinder::run(serialMock);
+    auto lidar = Finder::run(serialMock);
 
     EXPECT_CALL(*serialMock, write(_, _)).Times(10);
     auto received = lidar->getconfiguration();
@@ -199,7 +201,7 @@ TEST_P(TestLidarState, GettingStateFromLidar_ProperStateReturned)
     auto expectedstate = GetParam();
     simulateSeries(seriesid::amodel);
     simulateState(expectedstate);
-    auto lidar = LidarFinder::run(serialMock);
+    auto lidar = Finder::run(serialMock);
 
     EXPECT_CALL(*serialMock, write(_, _)).Times(1);
     auto [receivedstate, _] = lidar->getstate();

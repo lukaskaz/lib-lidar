@@ -1,11 +1,14 @@
-#include "lidar.hpp"
+#include "lidar/lidar.hpp"
 
-#include "helpers.hpp"
+#include "helpers/helpers.hpp"
 
 #include <algorithm>
 #include <sstream>
 #include <stdexcept>
 #include <unordered_map>
+
+namespace Lidar
+{
 
 constexpr auto SCANSTARTFLAG = 0xA5;
 constexpr auto SCANGETINFOCMD = 0x50;
@@ -74,10 +77,11 @@ std::string Lidar::getname()
     return name;
 }
 
-void Lidar::watchangle(int32_t angle, std::shared_ptr<Observer<SampleData>> obs)
+void Lidar::watchangle(int32_t angle,
+                       std::shared_ptr<Helpers::Observer<Samples::Data>> obs)
 {
-    getscan(scan_t::normal)->addangle(angle, obs);
-    getscan(scan_t::express)->addangle(angle, obs);
+    getscan(Scan::scan_t::normal)->addangle(angle, obs);
+    getscan(Scan::scan_t::express)->addangle(angle, obs);
 }
 
 std::tuple<std::string, std::string, std::string, std::string>
@@ -198,7 +202,7 @@ std::pair<std::string, std::string> Lidar::getconninfo()
     return {serialIf->getdevice(), serialIf->getbaud()};
 }
 
-void Lidar::runscan(scan_t type)
+void Lidar::runscan(Scan::scan_t type)
 {
     getscan(type)->run();
 }
@@ -213,7 +217,7 @@ void Lidar::stopscan()
     });
 }
 
-std::pair<std::string, std::string> Lidar::getscaninfo(scan_t type) const
+std::pair<std::string, std::string> Lidar::getscaninfo(Scan::scan_t type) const
 {
     const auto scan = getscan(type);
     return {scan->gettypename(), scan->getsubtypename()};
@@ -262,13 +266,13 @@ void Lidar::getpacket(std::vector<uint8_t>&& req, std::vector<uint8_t>& resp,
 {
     if (chsum)
     {
-        req.push_back(getchecksum(req));
+        req.push_back(Helpers::getchecksum(req));
     }
     serialIf->write(req);
     serialIf->read(resp, size);
 }
 
-std::shared_ptr<ScanIf> Lidar::getscan(scan_t type) const
+std::shared_ptr<Scan::Interface::Scan> Lidar::getscan(Scan::scan_t type) const
 {
     if (auto scan = std::ranges::find_if(
             scans, [type](auto scan) { return scan->gettype() == type; });
@@ -278,3 +282,5 @@ std::shared_ptr<ScanIf> Lidar::getscan(scan_t type) const
     }
     throw std::runtime_error("No scan for given type");
 }
+
+} // namespace Lidar

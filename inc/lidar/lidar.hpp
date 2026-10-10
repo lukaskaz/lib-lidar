@@ -1,9 +1,17 @@
 #pragma once
 
-#include "interfaces/lidar.hpp"
+#include "lidar/interface/lidar.hpp"
 #include "serial.hpp"
 
-class Lidar : public LidarIf
+namespace Lidar
+{
+
+class Factory;
+
+using scansinittype = std::vector<std::shared_ptr<Scan::Interface::Scan>>;
+using scansinitfunc = std::function<scansinittype(std::shared_ptr<serial>)>;
+
+class Lidar : public Interface::Lidar
 {
   public:
     bool setup(std::shared_ptr<serial>) override;
@@ -18,26 +26,28 @@ class Lidar : public LidarIf
     Configuration getconfiguration() override;
     std::pair<std::string, std::string> getconninfo() override;
 
-    void watchangle(int32_t, std::shared_ptr<Observer<SampleData>>) override;
-    void runscan(scan_t) override;
+    void watchangle(int32_t,
+                    std::shared_ptr<Helpers::Observer<Samples::Data>>) override;
+    void runscan(Scan::scan_t) override;
     void stopscan() override;
-    std::pair<std::string, std::string> getscaninfo(scan_t) const override;
+    std::pair<std::string, std::string>
+        getscaninfo(Scan::scan_t) const override;
 
   protected:
-    using scansinittype = std::vector<std::shared_ptr<ScanIf>>;
-    using scansinitfunc = std::function<scansinittype(std::shared_ptr<serial>)>;
     const seriesid series;
     const speed_t baud;
     const scansinitfunc initscans;
     std::shared_ptr<serial> serialIf;
-    std::vector<std::shared_ptr<ScanIf>> scans;
+    std::vector<std::shared_ptr<Scan::Interface::Scan>> scans;
 
   private:
-    friend class LidarFactory;
+    friend class Factory;
     Lidar(seriesid, speed_t, scansinitfunc&&);
 
     seriesid getseries(std::shared_ptr<serial>);
     void getpacket(std::vector<uint8_t>&&, std::vector<uint8_t>&, uint8_t,
                    bool);
-    std::shared_ptr<ScanIf> getscan(scan_t) const;
+    std::shared_ptr<Scan::Interface::Scan> getscan(Scan::scan_t) const;
 };
+
+} // namespace Lidar

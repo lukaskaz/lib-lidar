@@ -1,4 +1,4 @@
-#include "helpers.hpp"
+#include "helpers/helpers.hpp"
 
 #include <algorithm>
 #include <limits>
@@ -8,6 +8,7 @@
 #include "gtest/gtest.h"
 
 using namespace testing;
+using namespace Lidar;
 
 class TestHelpers : public testing::Test
 {
@@ -21,7 +22,7 @@ class TestHelpers : public testing::Test
 
 TEST_F(TestHelpers, RequestTimeAndDayDetails_ProvidedStringNotEmpty)
 {
-    auto timeandday = gettimestr();
+    auto timeandday = Helpers::gettimestr();
     EXPECT_FALSE(timeandday.empty());
 }
 
@@ -34,7 +35,7 @@ TEST_F(TestHelpers, CreatedDataPacketNeedingChecksum_ProvidedChecksumCorrect)
     std::vector<uint8_t> packet(100);
 
     std::ranges::for_each(packet, [&](auto& byte) { byte = dist(rd); });
-    uint8_t receivedchsum{getchecksum(packet)};
+    uint8_t receivedchsum{Helpers::getchecksum(packet)};
     uint8_t expectedchsum{};
     for (const auto& byte : packet)
     {
@@ -46,14 +47,14 @@ TEST_F(TestHelpers, CreatedDataPacketNeedingChecksum_ProvidedChecksumCorrect)
 
 TEST_F(TestHelpers, CreatedUniqueQueueAndTryGetFromEmpty_QueueThrows)
 {
-    UniqueQueue<int32_t> testqueue;
+    Helpers::UniqueQueue<int32_t> testqueue;
     EXPECT_THROW(testqueue.get(), std::runtime_error);
 }
 
 TEST_F(TestHelpers, CreatedUniqueQueueAndPutGetOneElem_ElemPutAndRetrieved)
 {
     int32_t userelem = 123;
-    UniqueQueue<decltype(userelem)> testqueue;
+    Helpers::UniqueQueue<decltype(userelem)> testqueue;
     testqueue.put(userelem);
     auto recivedelem = testqueue.get();
 
@@ -64,7 +65,7 @@ TEST_F(TestHelpers,
        CreatedUniqueQueueAndPutGetSeveralElems_ElemsPutAndRetrieved)
 {
     std::vector<uint32_t> userelems{56, 12, 205};
-    UniqueQueue<decltype(userelems)::value_type> testqueue;
+    Helpers::UniqueQueue<decltype(userelems)::value_type> testqueue;
 
     for (const auto& elem : userelems)
     {
@@ -84,7 +85,7 @@ TEST_F(TestHelpers,
        CreatedUniqueQueueAndPutTwoSameElems_SingleElemStoredInQueue)
 {
     int32_t userelem = 123;
-    UniqueQueue<decltype(userelem)> testqueue;
+    Helpers::UniqueQueue<decltype(userelem)> testqueue;
     testqueue.put(userelem);
     testqueue.put(userelem);
 
@@ -104,7 +105,7 @@ class TestHelpersObserver : public testing::Test
     void TearDown() override
     {}
 
-    struct Data : Observable<Data>
+    struct Data : Helpers::Observable<Data>
     {
         explicit Data() : Data({}, {})
         {}
@@ -124,7 +125,7 @@ TEST_F(TestHelpersObserver, SubscribeTwiceSameObserver_ObservableThrows)
 {
     uint32_t counter{};
     Data observed;
-    auto obs = Observer<Data>::create(
+    auto obs = Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto in) { counter++; });
 
     ASSERT_NO_THROW(observed.subscribe(obs));
@@ -135,7 +136,7 @@ TEST_F(TestHelpersObserver, UnsubscribeAbsentObserver_ObservableThrows)
 {
     uint32_t counter{};
     Data observed;
-    auto obs = Observer<Data>::create(
+    auto obs = Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto in) { counter++; });
 
     EXPECT_THROW(observed.unsubscribe(obs), std::runtime_error);
@@ -145,7 +146,7 @@ TEST_F(TestHelpersObserver, UnsubscribeTwiceSameObserver_ObservableThrows)
 {
     uint32_t counter{};
     Data observed;
-    auto obs = Observer<Data>::create(
+    auto obs = Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto in) { counter++; });
 
     ASSERT_NO_THROW(({
@@ -159,7 +160,7 @@ TEST_F(TestHelpersObserver,
        SubscribedObserverNotifiedByData_ObserverGotProperData)
 {
     Data observed, given(5, 1.7), received;
-    observed.subscribe(Observer<Data>::create(
+    observed.subscribe(Helpers::Observer<Data>::create(
         [&received]([[maybe_unused]] auto in) { received = in; }));
 
     ASSERT_THAT(given, Ne(received));
@@ -172,7 +173,7 @@ TEST_F(TestHelpersObserver,
 {
     uint32_t counter{};
     Data observed;
-    auto obs = Observer<Data>::create(
+    auto obs = Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto in) { counter++; });
 
     observed.subscribe(obs);
@@ -190,7 +191,7 @@ TEST_F(TestHelpersObserver, SubscribedObserverNotifiedOnce_ObserverIsCalledOnce)
 {
     uint32_t counter{};
     Data observed;
-    observed.subscribe(Observer<Data>::create(
+    observed.subscribe(Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto in) { counter++; }));
 
     ASSERT_THAT(counter, Eq(0));
@@ -203,7 +204,7 @@ TEST_F(TestHelpersObserver,
 {
     uint32_t counter{};
     Data data;
-    data.subscribe(Observer<Data>::create(
+    data.subscribe(Helpers::Observer<Data>::create(
         [&counter]([[maybe_unused]] auto data) { counter++; }));
 
     ASSERT_THAT(counter, Eq(0));
@@ -218,9 +219,9 @@ TEST_F(TestHelpersObserver,
 {
     auto counters = std::make_pair<uint32_t, uint32_t>({}, {});
     Data data;
-    data.subscribe(Observer<Data>::create(
+    data.subscribe(Helpers::Observer<Data>::create(
         [&counters]([[maybe_unused]] auto data) { counters.first++; }));
-    data.subscribe(Observer<Data>::create(
+    data.subscribe(Helpers::Observer<Data>::create(
         [&counters]([[maybe_unused]] auto data) { counters.second++; }));
 
     ASSERT_THAT(counters, Eq(std::pair<uint32_t, uint32_t>{0, 0}));

@@ -1,5 +1,6 @@
 build/
 /doxygen/
 tests/build/
+tests/coverage-checker/
 .vscode/
 

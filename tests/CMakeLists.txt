@@ -16,11 +16,11 @@ if(COVERAGE)
 endif()
 
 include_directories(../inc)
-file(GLOB APP_SOURCES "../src/*.cpp" "../src/*/*.cpp")
+file(GLOB_RECURSE APP_SOURCES "../src/*.cpp")
 list(FILTER APP_SOURCES EXCLUDE REGEX "^.*/(main)\\.cpp$")
 
 include_directories(inc)
-file(GLOB TEST_SOURCES "src/*.cpp" "src/*/*.cpp")
+file(GLOB_RECURSE TEST_SOURCES "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${APP_SOURCES} ${TEST_SOURCES})
 

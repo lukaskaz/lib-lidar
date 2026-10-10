@@ -1,4 +1,5 @@
 #include "lidar/factory.hpp"
+#include "lidar/finder.hpp"
 #include "mocks/mock_serial.hpp"
 
 #include "gtest/gtest.h"

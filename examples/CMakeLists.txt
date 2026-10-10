@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-option(ADD_BASIC "Creates example basic" OFF)
+option(ADD_BASIC "Creates example basic" ON)
 
 if(ADD_BASIC)
     add_subdirectory(basic_scan)

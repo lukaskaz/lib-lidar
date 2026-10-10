@@ -1,4 +1,4 @@
-#include "lidar/factory.hpp"
+#include "lidar/finder.hpp"
 #include "serial.hpp"
 
 #include <iostream>

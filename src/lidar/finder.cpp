@@ -1,5 +1,6 @@
-#include "lidar/factory.hpp"
+#include "lidar/finder.hpp"
 
+#include "lidar/factory.hpp"
 #include "lidar/lidar.hpp"
 #include "scan/factory.hpp"
 

@@ -1,4 +1,4 @@
-#include "lidar/factory.hpp"
+#include "lidar/finder.hpp"
 #include "lidar/lidar.hpp"
 #include "mocks/mock_serial.hpp"
 #include "samples/data.hpp"

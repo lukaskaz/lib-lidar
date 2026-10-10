@@ -12,10 +12,4 @@ class Factory
     static std::shared_ptr<Interface::Lidar> create();
 };
 
-class Finder
-{
-  public:
-    static std::shared_ptr<Interface::Lidar> run(std::shared_ptr<serial>);
-};
-
 } // namespace Lidar

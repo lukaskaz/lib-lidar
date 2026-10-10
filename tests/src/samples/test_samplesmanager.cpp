@@ -1,6 +1,10 @@
-#include "samples.hpp"
+#include "helpers/helpers.hpp"
+#include "samples/samples.hpp"
 
 #include "gtest/gtest.h"
+
+using namespace Lidar;
+using namespace Lidar::Samples;
 
 class TestSamplesManager : public testing::Test
 {
@@ -12,16 +16,16 @@ class TestSamplesManager : public testing::Test
     {}
 
   protected:
-    SamplesManager samplesmanager;
+    Manager samplesmanager;
     const int32_t angle{30};
     const double validdistance{55.f};
     const double invaliddistance{.5f};
-    const SampleData validdata{angle, validdistance};
-    const SampleData invaliddata{angle, invaliddistance};
+    const Data validdata{angle, validdistance};
+    const Data invaliddata{angle, invaliddistance};
     int32_t notifycounter{};
-    SampleData notifieddata;
+    Data notifieddata;
 
-    Observer<SampleData>::Func defaultfunc{[this](auto& data) {
+    Helpers::Observer<Data>::Func defaultfunc{[this](auto& data) {
         notifycounter++;
         notifieddata = data;
     }};
@@ -31,27 +35,29 @@ TEST_F(TestSamplesManager,
        AddedTwoEventsForNotOverlappingAngles_ObserverNotThrow)
 {
     EXPECT_NO_THROW(({
-        samplesmanager.event(angle, Observer<SampleData>::create(defaultfunc));
+        samplesmanager.event(angle,
+                             Helpers::Observer<Data>::create(defaultfunc));
         samplesmanager.event(angle + 3,
-                             Observer<SampleData>::create(defaultfunc));
+                             Helpers::Observer<Data>::create(defaultfunc));
     }));
 }
 
 TEST_F(TestSamplesManager, AddedTwoEventsForOverlappingAngles_ObserverThrows)
 {
-    EXPECT_THROW(({
-                     samplesmanager.event(
-                         angle, Observer<SampleData>::create(defaultfunc));
-                     samplesmanager.event(
-                         angle + 2, Observer<SampleData>::create(defaultfunc));
-                 }),
-                 std::runtime_error);
+    EXPECT_THROW(
+        ({
+            samplesmanager.event(angle,
+                                 Helpers::Observer<Data>::create(defaultfunc));
+            samplesmanager.event(angle + 2,
+                                 Helpers::Observer<Data>::create(defaultfunc));
+        }),
+        std::runtime_error);
 }
 
 TEST_F(TestSamplesManager, AddedSingleEventForSingleGroupAndUpdated_EventCalled)
 {
-    auto updatetrigger = SampleData{angle + 2, 0.f};
-    samplesmanager.event(angle, Observer<SampleData>::create(defaultfunc));
+    auto updatetrigger = Data{angle + 2, 0.f};
+    samplesmanager.event(angle, Helpers::Observer<Data>::create(defaultfunc));
     samplesmanager.update(validdata);
     ASSERT_NE(notifieddata, validdata);
     samplesmanager.update(updatetrigger);
@@ -62,11 +68,11 @@ TEST_F(TestSamplesManager,
        AddedTwoEventsForSingleGroupAndUpdated_BothEventsCalled)
 {
     int32_t notifycountersecond{};
-    auto updatetrigger = SampleData{angle + 2, 0.f};
+    auto updatetrigger = Data{angle + 2, 0.f};
 
-    samplesmanager.event(angle, Observer<SampleData>::create(defaultfunc));
+    samplesmanager.event(angle, Helpers::Observer<Data>::create(defaultfunc));
     samplesmanager.event(
-        angle, Observer<SampleData>::create(
+        angle, Helpers::Observer<Data>::create(
                    [&notifycountersecond]([[maybe_unused]] auto& data) {
                        notifycountersecond++;
                    }));
@@ -85,8 +91,8 @@ TEST_F(TestSamplesManager,
 TEST_F(TestSamplesManager,
        AddedSingleEventForSingleGroupAndNotUpdated_EventNotCalled)
 {
-    auto updatetrigger = SampleData{angle + 2, 0.f};
-    samplesmanager.event(angle, Observer<SampleData>::create(defaultfunc));
+    auto updatetrigger = Data{angle + 2, 0.f};
+    samplesmanager.event(angle, Helpers::Observer<Data>::create(defaultfunc));
     ASSERT_EQ(notifycounter, 0);
     samplesmanager.update(updatetrigger);
     EXPECT_EQ(notifycounter, 0);
@@ -95,11 +101,12 @@ TEST_F(TestSamplesManager,
 TEST_F(TestSamplesManager,
        AddedSingleEventForSingleGroupAndUpdatedTwice_EventCalledOnce)
 {
-    SampleData datafirst{50, 20.5f}, datasecond{51, 57.2f};
+    Data datafirst{50, 20.5f}, datasecond{51, 57.2f};
     auto [mainangle, _] = datafirst;
-    auto updatetrigger = SampleData{mainangle + 2, 0.f};
+    auto updatetrigger = Data{mainangle + 2, 0.f};
 
-    samplesmanager.event(mainangle, Observer<SampleData>::create(defaultfunc));
+    samplesmanager.event(mainangle,
+                         Helpers::Observer<Data>::create(defaultfunc));
     samplesmanager.update(datafirst);
     samplesmanager.update(datasecond);
 
@@ -111,14 +118,15 @@ TEST_F(TestSamplesManager,
 TEST_F(TestSamplesManager,
        AddedTwoEventsForSeparateGroupsAndUpdatedBoth_BothEventsCalled)
 {
-    SampleData datafirst{50, 20.5f}, datasecond{53, 57.2f};
+    Data datafirst{50, 20.5f}, datasecond{53, 57.2f};
     auto [firstangle, _1] = datafirst;
     auto [secondangle, _2] = datasecond;
-    auto updatetrigger = SampleData{secondangle + 2, 0.f};
+    auto updatetrigger = Data{secondangle + 2, 0.f};
 
-    samplesmanager.event(firstangle, Observer<SampleData>::create(defaultfunc));
+    samplesmanager.event(firstangle,
+                         Helpers::Observer<Data>::create(defaultfunc));
     samplesmanager.event(secondangle,
-                         Observer<SampleData>::create(defaultfunc));
+                         Helpers::Observer<Data>::create(defaultfunc));
     samplesmanager.update(datafirst);
     samplesmanager.update(datasecond);
 

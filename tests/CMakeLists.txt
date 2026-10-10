@@ -16,11 +16,11 @@ if(COVERAGE)
 endif()
 
 include_directories(../inc)
-file(GLOB APP_SOURCES "../src/*.cpp" "../src/*/*.cpp")
+file(GLOB_RECURSE APP_SOURCES "../src/*.cpp")
 list(FILTER APP_SOURCES EXCLUDE REGEX "^.*/(main)\\.cpp$")
 
 include_directories(inc)
-file(GLOB TEST_SOURCES "src/*.cpp" "src/*/*.cpp")
+file(GLOB_RECURSE TEST_SOURCES "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${APP_SOURCES} ${TEST_SOURCES})
 
@@ -60,7 +60,7 @@ add_custom_command(TARGET coverage
 add_custom_command(TARGET coverage
     COMMENT "Collecting data ${SOURCES_PATH}/inc/*"
     COMMAND lcov --capture --rc lcov_branch_coverage=1 --directory ${OBJECTS_DIR}
-        --output-file coverage.info
+        --output-file coverage.info  --ignore-errors mismatch 
     COMMAND lcov --extract coverage.info '${SOURCES_PATH}/src/*'
         '${SOURCES_PATH}/inc/*' --output-file coverage.info
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

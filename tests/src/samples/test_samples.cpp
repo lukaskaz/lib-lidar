@@ -1,8 +1,10 @@
-#include "samples.hpp"
+#include "samples/samples.hpp"
 
 #include <cmath>
 
 #include "gtest/gtest.h"
+
+using namespace Lidar::Samples;
 
 class TestSample : public testing::Test
 {
@@ -10,8 +12,8 @@ class TestSample : public testing::Test
     const int32_t angle{30};
     const double validdistance{55.f};
     const double invaliddistance{.5f};
-    const SampleData validdata{angle, validdistance};
-    const SampleData invaliddata{angle, invaliddistance};
+    const Data validdata{angle, validdistance};
+    const Data invaliddata{angle, invaliddistance};
 
     void SetUp() override
     {}
@@ -19,7 +21,7 @@ class TestSample : public testing::Test
     void TearDown() override
     {}
 
-    SampleData getData(double distance)
+    Data getData(double distance)
     {
         return {this->angle, distance};
     }

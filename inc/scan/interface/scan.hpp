@@ -1,32 +1,31 @@
 #pragma once
 
-#include "helpers.hpp"
-#include "interfaces/samples.hpp"
+#include "helpers/helpers.hpp"
+#include "samples/data.hpp"
+#include "scan/enums.hpp"
 
 #include <cstdint>
 #include <string>
 
-enum class scan_t
+namespace Lidar
 {
-    normal,
-    express
-};
 
-enum class scansub_t
+namespace Scan
 {
-    none,
-    legacy,
-    dense
-};
 
-class ScanIf
+namespace Interface
+{
+
+class Scan
 {
   public:
-    virtual ~ScanIf()
+    virtual ~Scan()
     {}
     virtual void run() = 0;
     virtual void stop() = 0;
-    virtual void addangle(int32_t, std::shared_ptr<Observer<SampleData>>) = 0;
+    virtual void
+        addangle(int32_t,
+                 std::shared_ptr<Helpers::Observer<Samples::Data>>) = 0;
     virtual void delangle(int32_t) = 0;
     virtual scan_t gettype() const = 0;
     virtual scansub_t getsubtype() const = 0;
@@ -34,3 +33,9 @@ class ScanIf
     virtual std::string getsubtypename() const = 0;
     virtual bool isrunning() const = 0;
 };
+
+} // namespace Interface
+
+} // namespace Scan
+
+} // namespace Lidar

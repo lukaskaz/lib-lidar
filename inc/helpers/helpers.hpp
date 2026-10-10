@@ -4,10 +4,17 @@
 #include <functional>
 #include <memory>
 #include <queue>
+#include <ranges>
 #include <stdexcept>
 #include <string>
 #include <unordered_set>
 #include <vector>
+
+namespace Lidar
+{
+
+namespace Helpers
+{
 
 std::string gettimestr();
 uint8_t getchecksum(const std::vector<uint8_t>&);
@@ -98,3 +105,7 @@ class Observable
   private:
     std::unordered_set<std::shared_ptr<Observer<T>>> observers;
 };
+
+} // namespace Helpers
+
+} // namespace Lidar

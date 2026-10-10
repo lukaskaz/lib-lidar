@@ -1,30 +1,34 @@
-#include "samples.hpp"
+#include "helpers/helpers.hpp"
+#include "samples/samples.hpp"
 
 #include "gtest/gtest.h"
+
+using namespace Lidar;
 
 class TestSamplesGroup : public testing::Test
 {
   protected:
     void SetUp() override
     {
-        samplesgroup = std::make_shared<SamplesGroup>(angle);
-        samplesgroup->subscribe(Observer<SampleData>::create(defaultfunc));
+        samplesgroup = std::make_shared<Samples::Group>(angle);
+        samplesgroup->subscribe(
+            Helpers::Observer<Samples::Data>::create(defaultfunc));
     }
 
     void TearDown() override
     {}
 
   protected:
-    std::shared_ptr<SamplesGroup> samplesgroup;
+    std::shared_ptr<Samples::Group> samplesgroup;
     const int32_t angle{30};
     const double validdistance{55.f};
     const double invaliddistance{.5f};
-    const SampleData validdata{angle, validdistance};
-    const SampleData invaliddata{angle, invaliddistance};
+    const Samples::Data validdata{angle, validdistance};
+    const Samples::Data invaliddata{angle, invaliddistance};
     int32_t notifycounter{};
-    SampleData notifieddata{};
+    Samples::Data notifieddata{};
 
-    Observer<SampleData>::Func defaultfunc{[this](auto& data) {
+    Helpers::Observer<Samples::Data>::Func defaultfunc{[this](auto& data) {
         notifycounter++;
         notifieddata = data;
     }};
@@ -42,8 +46,8 @@ TEST_F(TestSamplesGroup, DefaultAnglesGroupCreated_AllAnglesPresent)
 
 TEST_F(TestSamplesGroup, UpdatedThreeValidSamplesOfGroup_NotifierCalledOnce)
 {
-    SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
-    SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
+    Samples::Data datasuppprev(validdata.first - 1, validdata.second + 1);
+    Samples::Data datasuppnext(validdata.first + 1, validdata.second + 2);
     samplesgroup->addsampletonotify(datasuppnext);
     samplesgroup->addsampletonotify(validdata);
     samplesgroup->addsampletonotify(datasuppprev);
@@ -54,8 +58,8 @@ TEST_F(TestSamplesGroup, UpdatedThreeValidSamplesOfGroup_NotifierCalledOnce)
 
 TEST_F(TestSamplesGroup, UpdatedThreeInvalidSamplesOfGroup_NotifierNotCalled)
 {
-    SampleData datasuppprev(invaliddata.first - 1, invaliddata.second);
-    SampleData datasuppnext(invaliddata.first + 1, invaliddata.second);
+    Samples::Data datasuppprev(invaliddata.first - 1, invaliddata.second);
+    Samples::Data datasuppnext(invaliddata.first + 1, invaliddata.second);
     samplesgroup->addsampletonotify(datasuppnext);
     samplesgroup->addsampletonotify(invaliddata);
     samplesgroup->addsampletonotify(datasuppprev);
@@ -66,8 +70,8 @@ TEST_F(TestSamplesGroup, UpdatedThreeInvalidSamplesOfGroup_NotifierNotCalled)
 TEST_F(TestSamplesGroup,
        UpdatedThreeValidSamplesOfGroup_NotifierCalledForHighestPrio)
 {
-    SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
-    SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
+    Samples::Data datasuppprev(validdata.first - 1, validdata.second + 1);
+    Samples::Data datasuppnext(validdata.first + 1, validdata.second + 2);
     samplesgroup->addsampletonotify(datasuppnext);
     samplesgroup->addsampletonotify(validdata);
     samplesgroup->addsampletonotify(datasuppprev);
@@ -79,8 +83,8 @@ TEST_F(TestSamplesGroup,
 TEST_F(TestSamplesGroup,
        UpdatedTwoValidSupporingSamplesOfGroup_NotifierCalledForHighestPrio)
 {
-    SampleData datasuppprev(validdata.first - 1, validdata.second + 1);
-    SampleData datasuppnext(validdata.first + 1, validdata.second + 2);
+    Samples::Data datasuppprev(validdata.first - 1, validdata.second + 1);
+    Samples::Data datasuppnext(validdata.first + 1, validdata.second + 2);
     samplesgroup->addsampletonotify(datasuppnext);
     samplesgroup->addsampletonotify(datasuppprev);
     ASSERT_NE(notifieddata, datasuppprev);
@@ -91,7 +95,7 @@ TEST_F(TestSamplesGroup,
 TEST_F(TestSamplesGroup,
        UpdatedOneValidSupporingSampleOfGroup_NotifierCalledForHighestPrio)
 {
-    SampleData datasuppnext(validdata.first + 1, validdata.second + 5);
+    Samples::Data datasuppnext(validdata.first + 1, validdata.second + 5);
     samplesgroup->addsampletonotify(datasuppnext);
     ASSERT_NE(notifieddata, datasuppnext);
     samplesgroup->notifyandcleanup();
@@ -101,11 +105,11 @@ TEST_F(TestSamplesGroup,
 TEST_F(TestSamplesGroup, AddedSeveralNotifiersForGroup_AllNotifiersCalled)
 {
     int32_t notifycountersecond{}, notifycounterthird{};
-    samplesgroup->subscribe(Observer<SampleData>::create(
+    samplesgroup->subscribe(Helpers::Observer<Samples::Data>::create(
         [&notifycountersecond]([[maybe_unused]] auto& data) {
             notifycountersecond++;
         }));
-    samplesgroup->subscribe(Observer<SampleData>::create(
+    samplesgroup->subscribe(Helpers::Observer<Samples::Data>::create(
         [&notifycounterthird]([[maybe_unused]] auto& data) {
             notifycounterthird++;
         }));

@@ -1,7 +1,13 @@
-#include "helpers.hpp"
+#include "helpers/helpers.hpp"
 
 #include <algorithm>
 #include <ctime>
+
+namespace Lidar
+{
+
+namespace Helpers
+{
 
 std::string gettimestr()
 {
@@ -20,3 +26,7 @@ uint8_t getchecksum(const std::vector<uint8_t>& data)
                           [&chsum](const uint8_t byte) { chsum ^= byte; });
     return chsum;
 }
+
+} // namespace Helpers
+
+} // namespace Lidar

@@ -14,7 +14,7 @@ template <>
 std::shared_ptr<Interface::Lidar> Factory::create<seriesid::amodel>()
 {
     return std::shared_ptr<Lidar>(new Lidar(
-        seriesid::amodel, B115200,
+        seriesid::amodel, B256000,
         [](std::shared_ptr<serial> serial) -> scansinittype {
             return {Scan::Factory::create<Scan::scan_t::normal,
                                           Scan::scansub_t::none>(serial),

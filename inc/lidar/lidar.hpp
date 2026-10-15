@@ -3,6 +3,8 @@
 #include "lidar/interface/lidar.hpp"
 #include "serial.hpp"
 
+#include <optional>
+
 namespace Lidar
 {
 
@@ -39,12 +41,16 @@ class Lidar : public Interface::Lidar
     const scansinitfunc initscans;
     std::shared_ptr<serial> serialIf;
     std::vector<std::shared_ptr<Scan::Interface::Scan>> scans;
+    uint8_t modelId{};
+    std::optional<uint16_t> motorPwm;
 
   private:
     friend class Factory;
     Lidar(seriesid, speed_t, scansinitfunc&&);
 
     seriesid getseries(std::shared_ptr<serial>);
+    void startmotor();
+    void stopmotor();
     void getpacket(std::vector<uint8_t>&&, std::vector<uint8_t>&, uint8_t,
                    bool);
     std::shared_ptr<Scan::Interface::Scan> getscan(Scan::scan_t) const;

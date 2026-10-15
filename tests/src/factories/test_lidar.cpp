@@ -34,7 +34,7 @@ TEST_F(TestLidarFactory, CreatedAseries_GettingAseriesIdSucceeded)
 {
     auto lidar = Factory::create<seriesid::amodel>();
     EXPECT_EQ(lidar->getseries(), seriesid::amodel);
-    EXPECT_EQ(lidar->getspeed(), (speed_t)B115200);
+    EXPECT_EQ(lidar->getspeed(), (speed_t)B256000);
 }
 
 TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)

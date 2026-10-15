@@ -28,17 +28,18 @@ class TestLidarInfo : public testing::Test
             0x1,  0x12, 0x89, 0x32, 0xe1, 0xf4, 0xc2, 0xe3, 0x98,
             0xc4, 0xbc, 0xea, 0x9a, 0xf3, 0x7,  0xe9, 0x48, 0x2};
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
-            .Times(3)
+            .Times(4)
             .WillRepeatedly(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
     }
 
     void simulateSamplerate()
     {
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x2c;
         auto& firstcall =
             EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
-                .WillOnce(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
+                .Times(2)
+                .WillRepeatedly(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
 
         std::vector<uint8_t> rawsamplerate = {0xa5, 0x5a, 0x4, 0x0,  0x0, 0x0,
                                               0x15, 0xf4, 0x1, 0xfa, 0x00};
@@ -51,9 +52,10 @@ class TestLidarInfo : public testing::Test
     {
         InSequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x2c;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
-            .WillOnce(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
+            .Times(2)
+            .WillRepeatedly(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
 
         std::vector<uint8_t> rawmodecounts = {0xa5, 0x5a, 0x6,  0x0, 0x0,
                                               0x0,  0x20, 0x70, 0x0, 0x0,
@@ -179,10 +181,10 @@ class TestLidarState : public TestWithParam<state>
     void TearDown() override
     {}
 
-    void simulateSeries(seriesid series)
+    void simulateModel(uint8_t model)
     {
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)series << 4;
+        rawfwinfo[7] = model;
         ON_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .WillByDefault(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
     }
@@ -199,7 +201,7 @@ class TestLidarState : public TestWithParam<state>
 TEST_P(TestLidarState, GettingStateFromLidar_ProperStateReturned)
 {
     auto expectedstate = GetParam();
-    simulateSeries(seriesid::amodel);
+    simulateModel(0x2c);
     simulateState(expectedstate);
     auto lidar = Finder::run(serialMock);
 

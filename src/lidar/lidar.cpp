@@ -21,7 +21,7 @@ constexpr auto SCANGETCONFCMD = 0x84;
 bool Lidar::setup(std::shared_ptr<serial> tmpserial)
 {
     tmpserial->setBaud(getspeed());
-    if (series == getseries(tmpserial))
+    if (id == getid(tmpserial))
     {
         serialIf = tmpserial;
         scans = initscans(serialIf);
@@ -30,9 +30,9 @@ bool Lidar::setup(std::shared_ptr<serial> tmpserial)
     return false;
 }
 
-seriesid Lidar::getseries()
+id_t Lidar::getid()
 {
-    return series;
+    return id;
 }
 
 speed_t Lidar::getspeed()
@@ -207,7 +207,7 @@ std::pair<std::string, std::string> Lidar::getconninfo()
 void Lidar::runscan(Scan::scan_t type)
 {
     const auto scan = getscan(type);
-    if (series == seriesid::amodel)
+    if (id == id_t{seriesid::amodel, 2, 12})
     {
         startmotor();
     }
@@ -234,7 +234,7 @@ void Lidar::stopscan()
             }
         }
     }
-    if (series == seriesid::amodel)
+    if (id == id_t{seriesid::amodel, 2, 12})
     {
         try
         {
@@ -260,44 +260,51 @@ std::pair<std::string, std::string> Lidar::getscaninfo(Scan::scan_t type) const
     return {scan->gettypename(), scan->getsubtypename()};
 }
 
-Lidar::Lidar(seriesid series, speed_t baud, scansinitfunc&& initscans) :
-    series{series}, baud{baud}, initscans{std::move(initscans)}
+Lidar::Lidar(id_t id, speed_t baud, scansinitfunc&& initscans) :
+    id{id}, baud{baud}, initscans{std::move(initscans)}
 {}
 
-seriesid Lidar::getseries(std::shared_ptr<serial> serialIf)
+id_t Lidar::getid(std::shared_ptr<serial> serialIf)
 {
-    seriesid series{seriesid::unknown};
+    id_t id{seriesid::unknown, 0xFF, 0xFF};
     serialIf->write({SCANSTARTFLAG, SCANGETINFOCMD});
     std::vector<uint8_t> resp;
     if (serialIf->read(resp, 27))
     {
         uint8_t modelid = resp[7];
-        modelId = modelid;
-        uint8_t majormodelid = (modelid >> 4) & 0x0F;
+        uint8_t majorid = (modelid >> 4) & 0x0F;
+        uint8_t subid = modelid & 0x0F;
 
-        if (majormodelid >= (uint8_t)seriesid::mmodel)
+        auto series = seriesid::unknown;
+        auto offset = (uint8_t)0xFF;
+        if (majorid >= (uint8_t)seriesid::mmodel)
         {
             series = seriesid::mmodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::tmodel)
+        else if (majorid >= (uint8_t)seriesid::tmodel)
         {
             series = seriesid::tmodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::smodel)
+        else if (majorid >= (uint8_t)seriesid::smodel)
         {
             series = seriesid::smodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::cmodel)
+        else if (majorid >= (uint8_t)seriesid::cmodel)
         {
             series = seriesid::cmodel;
         }
         else
         {
             series = seriesid::amodel;
+            offset = 0;
         }
+
+        offset = offset ? (uint8_t)series - 1 : offset;
+        const auto mainid = (uint8_t)(majorid - offset);
+        id = {series, mainid, subid};
     }
 
-    return series;
+    return id;
 }
 
 void Lidar::startmotor()
@@ -309,7 +316,7 @@ void Lidar::startmotor()
     static constexpr uint16_t fallbackPwm = 600;
 
     motorPwm.reset();
-    if ((modelId >> 4) >= 2)
+    if (id.model >= 2)
     {
         std::vector<uint8_t> request{
             SCANSTARTFLAG, accessoryBoardCommand, 4, 0, 0, 0, 0};

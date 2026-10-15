@@ -11,10 +11,11 @@ namespace Lidar
 {
 
 template <>
-std::shared_ptr<Interface::Lidar> Factory::create<seriesid::cmodel>()
+std::shared_ptr<Interface::Lidar>
+    Factory::create<id_t{seriesid::cmodel, 1, 1}>()
 {
     return std::shared_ptr<Lidar>(new Lidar(
-        seriesid::cmodel, B460800,
+        {seriesid::cmodel, 1, 1}, B460800,
         [](std::shared_ptr<serial> serial) -> scansinittype {
             return {Scan::Factory::create<Scan::scan_t::normal,
                                           Scan::scansub_t::none>(serial),

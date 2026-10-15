@@ -20,7 +20,7 @@ class LidarInfo
     virtual ~LidarInfo()
     {}
 
-    virtual seriesid getseries() = 0;
+    virtual id_t getid() = 0;
     virtual speed_t getspeed() = 0;
     virtual std::string getname() = 0;
     virtual std::tuple<std::string, std::string, std::string, std::string>

@@ -8,8 +8,46 @@ using namespace testing;
 using namespace std::string_literals;
 using namespace Lidar;
 
+constexpr Lidar::id_t a1m8{seriesid::amodel, 1, 8};
+constexpr Lidar::id_t a2m12{seriesid::amodel, 2, 12};
+constexpr Lidar::id_t c1m1{seriesid::cmodel, 1, 1};
+
+using LidarFactoryParam =
+    std::tuple<Lidar::id_t, speed_t,
+               std::shared_ptr<::Lidar::Interface::Lidar> (*)()>;
+
 class TestLidarFactory : public testing::Test
 {
+  public:
+    static std::string to_string(const Lidar::id_t& id)
+    {
+        std::string series;
+        switch (id.series)
+        {
+            case seriesid::amodel:
+                series = "A";
+                break;
+            case seriesid::cmodel:
+                series = "C";
+                break;
+            case seriesid::smodel:
+                series = "S";
+                break;
+            case seriesid::tmodel:
+                series = "T";
+                break;
+            case seriesid::mmodel:
+                series = "M";
+                break;
+            default:
+                series = "Unknown";
+                break;
+        }
+
+        return series + std::to_string(id.model) + "M" +
+               std::to_string(id.submodel);
+    }
+
   protected:
     std::shared_ptr<NiceMock<SerialMock>> serialMock =
         std::make_shared<NiceMock<SerialMock>>();
@@ -21,27 +59,45 @@ class TestLidarFactory : public testing::Test
     void TearDown() override
     {}
 
-    void simulateSeries(seriesid series)
+    void simulateModel(uint8_t model)
     {
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)series << 4;
+        rawfwinfo[7] = model;
         ON_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .WillByDefault(DoAll(SetArgReferee<0>(rawfwinfo), Return(true)));
     }
 };
 
-TEST_F(TestLidarFactory, CreatedAseries_GettingAseriesIdSucceeded)
+class TestAseriesLidarFactory :
+    public TestLidarFactory,
+    public testing::WithParamInterface<LidarFactoryParam>
+{};
+
+class TestCseriesLidarFactory :
+    public TestLidarFactory,
+    public testing::WithParamInterface<LidarFactoryParam>
+{};
+
+TEST_P(TestAseriesLidarFactory, CreatedWithExpectedIdAndSpeed)
 {
-    auto lidar = Factory::create<seriesid::amodel>();
-    EXPECT_EQ(lidar->getseries(), seriesid::amodel);
-    EXPECT_EQ(lidar->getspeed(), (speed_t)B115200);
+    const auto& [expectedId, expectedSpeed, create] = GetParam();
+    const auto lidar = create();
+
+    ASSERT_NE(lidar, nullptr);
+    EXPECT_EQ(lidar->getid(), expectedId);
+    EXPECT_EQ(lidar->getspeed(), expectedSpeed);
 }
 
-TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)
+TEST_P(TestAseriesLidarFactory, CreatedWithExpectedAseriesScans)
 {
-    simulateSeries(seriesid::amodel);
-    auto lidar = Factory::create<seriesid::amodel>();
+    const auto& params = GetParam();
+    const auto& expectedId = std::get<0>(params);
+    const auto modelId =
+        (uint8_t)((expectedId.model << 4) | expectedId.submodel);
+    const auto lidar = std::get<2>(params)();
 
+    simulateModel(modelId);
+    ASSERT_NE(lidar, nullptr);
     ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
@@ -53,18 +109,32 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingAseriesScansSucceeded)
     EXPECT_EQ(secondscaninfo, std::make_pair("express"s, "legacy"s));
 }
 
-TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesIdSucceeded)
+INSTANTIATE_TEST_SUITE_P(
+    Aseries, TestAseriesLidarFactory,
+    Values(std::make_tuple(a1m8, static_cast<speed_t>(B115200),
+                           &Factory::create<a1m8>),
+           std::make_tuple(a2m12, static_cast<speed_t>(B256000),
+                           &Factory::create<a2m12>)),
+    [](const testing::TestParamInfo<LidarFactoryParam>& info) {
+        return TestLidarFactory::to_string(std::get<0>(info.param));
+    });
+
+TEST_P(TestCseriesLidarFactory, CreatedWithExpectedIdAndSpeed)
 {
-    auto lidar = Factory::create<seriesid::cmodel>();
-    EXPECT_EQ(lidar->getseries(), seriesid::cmodel);
-    EXPECT_EQ(lidar->getspeed(), (speed_t)B460800);
+    const auto& [expectedId, expectedSpeed, create] = GetParam();
+    const auto lidar = create();
+
+    ASSERT_NE(lidar, nullptr);
+    EXPECT_EQ(lidar->getid(), expectedId);
+    EXPECT_EQ(lidar->getspeed(), expectedSpeed);
 }
 
-TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesScansSucceeded)
+TEST_P(TestCseriesLidarFactory, CreatedWithExpectedCseriesScans)
 {
-    simulateSeries(seriesid::cmodel);
-    auto lidar = Factory::create<seriesid::cmodel>();
+    simulateModel(0x41);
+    const auto lidar = std::get<2>(GetParam())();
 
+    ASSERT_NE(lidar, nullptr);
     ASSERT_TRUE(lidar->setup(serialMock));
     std::pair<std::string, std::string> firstscaninfo, secondscaninfo;
     ASSERT_NO_THROW(({
@@ -76,36 +146,47 @@ TEST_F(TestLidarFactory, CreatedCseries_GettingCseriesScansSucceeded)
     EXPECT_EQ(secondscaninfo, std::make_pair("express"s, "dense"s));
 }
 
+INSTANTIATE_TEST_SUITE_P(
+    Cseries, TestCseriesLidarFactory,
+    Values(std::make_tuple(c1m1, static_cast<speed_t>(B460800),
+                           &Factory::create<c1m1>)),
+    [](const testing::TestParamInfo<LidarFactoryParam>& info) {
+        return TestLidarFactory::to_string(std::get<0>(info.param));
+    });
+
 class TestLidarFinder : public TestLidarFactory
-{
-  protected:
-    void SetUp() override
-    {}
+{};
 
-    void TearDown() override
-    {}
-};
+class TestLidarFinderParam :
+    public TestLidarFactory,
+    public testing::WithParamInterface<Lidar::id_t>
+{};
 
-TEST_F(TestLidarFinder, FindingAvailableLidar_GettingAseriesLidarSucceeded)
+TEST_P(TestLidarFinderParam, FindingAvailableLidarWithExpectedId)
 {
-    simulateSeries(seriesid::amodel);
+    const auto expectedId = GetParam();
+    const auto offset = expectedId.series == seriesid::amodel
+                            ? 0
+                            : (uint8_t)expectedId.series - 1;
+    const auto majorId = (uint8_t)(expectedId.model + offset);
+    const auto modelId = (uint8_t)((majorId << 4) | expectedId.submodel);
+
+    simulateModel(modelId);
     ASSERT_NO_THROW(({
         auto lidar = Finder::run(serialMock);
-        EXPECT_EQ(lidar->getseries(), seriesid::amodel);
+        ASSERT_NE(lidar, nullptr);
+        EXPECT_EQ(lidar->getid(), expectedId);
     }));
 }
 
-TEST_F(TestLidarFinder, FindingAvailableLidar_GettingCseriesLidarSucceeded)
-{
-    simulateSeries(seriesid::cmodel);
-    ASSERT_NO_THROW(({
-        auto lidar = Finder::run(serialMock);
-        EXPECT_EQ(lidar->getseries(), seriesid::cmodel);
-    }));
-}
+INSTANTIATE_TEST_SUITE_P(SupportedModels, TestLidarFinderParam,
+                         Values(a1m8, a2m12, c1m1),
+                         [](const testing::TestParamInfo<Lidar::id_t>& info) {
+                             return TestLidarFactory::to_string(info.param);
+                         });
 
 TEST_F(TestLidarFinder, FindingAvailableLidar_NotGettingLidarThrows)
 {
-    simulateSeries(seriesid::unknown);
+    simulateModel(0xFF);
     EXPECT_THROW(auto lidar = Finder::run(serialMock), std::runtime_error);
 }

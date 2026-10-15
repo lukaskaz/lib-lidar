@@ -25,7 +25,7 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x18;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .InSequence(seq)
             .WillOnce(
@@ -93,7 +93,7 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x18;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .InSequence(seq)
             .WillOnce(
@@ -131,7 +131,7 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x18;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .InSequence(seq)
             .WillOnce(
@@ -234,7 +234,7 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::amodel << 4;
+        rawfwinfo[7] = 0x18;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
             .InSequence(seq)
             .WillOnce(
@@ -284,9 +284,9 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::cmodel << 4;
+        rawfwinfo[7] = 0x41;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
-            .Times(2)
+            .Times(3)
             .InSequence(seq)
             .WillRepeatedly(
                 DoAll(SetArgReferee<0>(rawfwinfo), Return(rawfwinfo.size())));
@@ -386,9 +386,9 @@ class TestScan : public testing::Test
     {
         Sequence seq;
         std::vector<uint8_t> rawfwinfo(27, 0);
-        rawfwinfo[7] = (uint8_t)seriesid::cmodel << 4;
+        rawfwinfo[7] = 0x41;
         EXPECT_CALL(*serialMock, read(_, rawfwinfo.size(), _))
-            .Times(2)
+            .Times(3)
             .InSequence(seq)
             .WillRepeatedly(
                 DoAll(SetArgReferee<0>(rawfwinfo), Return(rawfwinfo.size())));
@@ -520,7 +520,7 @@ TEST_F(TestScan,
     Samples::Data receiveddata;
     Samples::Data expecteddata{observedangle, 25.2};
     simulateProperExpressDenseData();
-    EXPECT_CALL(*serialMock, write(_, _)).Times(4);
+    EXPECT_CALL(*serialMock, write(_, _)).Times(5);
     auto lidar = Finder::run(serialMock);
     lidar->watchangle(observedangle,
                       Helpers::Observer<Samples::Data>::create(
@@ -540,7 +540,7 @@ TEST_F(TestScan,
     Samples::Data receiveddata;
     Samples::Data expecteddata{0, 0.f};
     simulateWrongSizeExpressDenseData();
-    EXPECT_CALL(*serialMock, write(_, _)).Times(4);
+    EXPECT_CALL(*serialMock, write(_, _)).Times(5);
     auto lidar = Finder::run(serialMock);
     lidar->watchangle(observedangle,
                       Helpers::Observer<Samples::Data>::create(

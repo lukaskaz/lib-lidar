@@ -3,8 +3,10 @@
 #include "helpers/helpers.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <sstream>
 #include <stdexcept>
+#include <thread>
 #include <unordered_map>
 
 namespace Lidar
@@ -19,7 +21,7 @@ constexpr auto SCANGETCONFCMD = 0x84;
 bool Lidar::setup(std::shared_ptr<serial> tmpserial)
 {
     tmpserial->setBaud(getspeed());
-    if (series == getseries(tmpserial))
+    if (id == getid(tmpserial))
     {
         serialIf = tmpserial;
         scans = initscans(serialIf);
@@ -28,9 +30,9 @@ bool Lidar::setup(std::shared_ptr<serial> tmpserial)
     return false;
 }
 
-seriesid Lidar::getseries()
+id_t Lidar::getid()
 {
-    return series;
+    return id;
 }
 
 speed_t Lidar::getspeed()
@@ -204,17 +206,52 @@ std::pair<std::string, std::string> Lidar::getconninfo()
 
 void Lidar::runscan(Scan::scan_t type)
 {
-    getscan(type)->run();
+    const auto scan = getscan(type);
+    if (id == id_t{seriesid::amodel, 2, 12})
+    {
+        startmotor();
+    }
+    scan->run();
 }
 
 void Lidar::stopscan()
 {
-    std::ranges::for_each(scans, [](auto scan) {
+    std::exception_ptr stopError;
+    for (const auto& scan : scans)
+    {
         if (scan->isrunning())
         {
-            scan->stop();
+            try
+            {
+                scan->stop();
+            }
+            catch (...)
+            {
+                if (!stopError)
+                {
+                    stopError = std::current_exception();
+                }
+            }
         }
-    });
+    }
+    if (id == id_t{seriesid::amodel, 2, 12})
+    {
+        try
+        {
+            stopmotor();
+        }
+        catch (...)
+        {
+            if (!stopError)
+            {
+                stopError = std::current_exception();
+            }
+        }
+    }
+    if (stopError)
+    {
+        std::rethrow_exception(stopError);
+    }
 }
 
 std::pair<std::string, std::string> Lidar::getscaninfo(Scan::scan_t type) const
@@ -223,42 +260,165 @@ std::pair<std::string, std::string> Lidar::getscaninfo(Scan::scan_t type) const
     return {scan->gettypename(), scan->getsubtypename()};
 }
 
-Lidar::Lidar(seriesid series, speed_t baud, scansinitfunc&& initscans) :
-    series{series}, baud{baud}, initscans{std::move(initscans)}
+Lidar::Lidar(id_t id, speed_t baud, scansinitfunc&& initscans) :
+    id{id}, baud{baud}, initscans{std::move(initscans)}
 {}
 
-seriesid Lidar::getseries(std::shared_ptr<serial> serialIf)
+id_t Lidar::getid(std::shared_ptr<serial> serialIf)
 {
-    seriesid series{seriesid::unknown};
+    id_t id{seriesid::unknown, 0xFF, 0xFF};
     serialIf->write({SCANSTARTFLAG, SCANGETINFOCMD});
     std::vector<uint8_t> resp;
     if (serialIf->read(resp, 27))
     {
         uint8_t modelid = resp[7];
-        uint8_t majormodelid = (modelid >> 4) & 0x0F;
+        uint8_t majorid = (modelid >> 4) & 0x0F;
+        uint8_t subid = modelid & 0x0F;
 
-        if (majormodelid >= (uint8_t)seriesid::mmodel)
+        auto series = seriesid::unknown;
+        auto offset = (uint8_t)0xFF;
+        if (majorid >= (uint8_t)seriesid::mmodel)
         {
             series = seriesid::mmodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::tmodel)
+        else if (majorid >= (uint8_t)seriesid::tmodel)
         {
             series = seriesid::tmodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::smodel)
+        else if (majorid >= (uint8_t)seriesid::smodel)
         {
             series = seriesid::smodel;
         }
-        else if (majormodelid >= (uint8_t)seriesid::cmodel)
+        else if (majorid >= (uint8_t)seriesid::cmodel)
         {
             series = seriesid::cmodel;
         }
         else
         {
             series = seriesid::amodel;
+            offset = 0;
+        }
+
+        offset = offset ? (uint8_t)series - 1 : offset;
+        const auto mainid = (uint8_t)(majorid - offset);
+        id = {series, mainid, subid};
+    }
+
+    return id;
+}
+
+void Lidar::startmotor()
+{
+    static constexpr uint8_t accessoryBoardCommand = 0xFF;
+    static constexpr uint8_t setMotorPwmCommand = 0xF0;
+    static constexpr uint8_t getLidarConfigCommand = 0x84;
+    static constexpr uint16_t desiredRotationFrequency = 0x0001;
+    static constexpr uint16_t fallbackPwm = 600;
+
+    motorPwm.reset();
+    if (id.model >= 2)
+    {
+        std::vector<uint8_t> request{
+            SCANSTARTFLAG, accessoryBoardCommand, 4, 0, 0, 0, 0};
+        request.push_back(Helpers::getchecksum(request));
+        if (serialIf->write(request) != request.size())
+        {
+            throw std::runtime_error(
+                "Cannot query A2 accessory-board motor support");
+        }
+
+        std::vector<uint8_t> response;
+        const auto responseSize = serialIf->read(response, 11, 500);
+        if (responseSize == 11)
+        {
+            if (response[0] != 0xA5 || response[1] != 0x5A ||
+                response[2] != 4 || response[6] != accessoryBoardCommand)
+            {
+                throw std::runtime_error(
+                    "Invalid A2 accessory-board motor-support response");
+            }
+
+            const uint32_t supportFlags =
+                static_cast<uint32_t>(response[7]) |
+                (static_cast<uint32_t>(response[8]) << 8) |
+                (static_cast<uint32_t>(response[9]) << 16) |
+                (static_cast<uint32_t>(response[10]) << 24);
+            if (supportFlags & 0x01)
+            {
+                std::vector<uint8_t> configRequest{
+                    SCANSTARTFLAG,
+                    getLidarConfigCommand,
+                    4,
+                    static_cast<uint8_t>(desiredRotationFrequency),
+                    0,
+                    0,
+                    0};
+                configRequest.push_back(Helpers::getchecksum(configRequest));
+                if (serialIf->write(configRequest) != configRequest.size())
+                {
+                    throw std::runtime_error(
+                        "Cannot query the A2 motor PWM setting");
+                }
+
+                std::vector<uint8_t> configResponse;
+                const auto configSize = serialIf->read(configResponse, 15, 500);
+                if (configSize != 0 && configSize != 15)
+                {
+                    throw std::runtime_error(
+                        "Incomplete A2 motor PWM configuration response");
+                }
+                uint16_t pwm = fallbackPwm;
+                if (configSize == 15 && configResponse[0] == 0xA5 &&
+                    configResponse[1] == 0x5A && configResponse[6] == 0x20 &&
+                    configResponse[2] == 8 &&
+                    configResponse[7] == desiredRotationFrequency &&
+                    configResponse[8] == 0 && configResponse[9] == 0 &&
+                    configResponse[10] == 0)
+                {
+                    const auto configuredPwm = static_cast<uint16_t>(
+                        static_cast<uint16_t>(configResponse[13]) |
+                        (static_cast<uint16_t>(configResponse[14]) << 8));
+                    if (configuredPwm != 0)
+                    {
+                        pwm = configuredPwm;
+                    }
+                }
+
+                std::vector<uint8_t> pwmCommand{
+                    SCANSTARTFLAG, setMotorPwmCommand, 2,
+                    static_cast<uint8_t>(pwm & 0xFF),
+                    static_cast<uint8_t>(pwm >> 8)};
+                pwmCommand.push_back(Helpers::getchecksum(pwmCommand));
+                if (serialIf->write(pwmCommand) != pwmCommand.size())
+                {
+                    throw std::runtime_error("Cannot start the A2 motor");
+                }
+                motorPwm = pwm;
+                std::this_thread::sleep_for(std::chrono::milliseconds{10});
+                return;
+            }
+        }
+        else if (responseSize != 0)
+        {
+            throw std::runtime_error(
+                "Incomplete A2 accessory-board motor-support response");
         }
     }
-    return series;
+}
+
+void Lidar::stopmotor()
+{
+    if (motorPwm)
+    {
+        std::vector<uint8_t> pwmCommand{SCANSTARTFLAG, 0xF0, 2, 0, 0};
+        pwmCommand.push_back(Helpers::getchecksum(pwmCommand));
+        if (serialIf->write(pwmCommand) != pwmCommand.size())
+        {
+            throw std::runtime_error("Cannot stop the A2 motor");
+        }
+        motorPwm.reset();
+        return;
+    }
 }
 
 void Lidar::getpacket(std::vector<uint8_t>&& req, std::vector<uint8_t>& resp,
